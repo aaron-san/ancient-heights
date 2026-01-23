@@ -5,18 +5,18 @@ body,
 .jp-NotebookPanel,
 .jp-Notebook {
   height: 100%;
-  margin: 4rem 1rem;
+  /* margin: 6rem 1rem 4rem 1rem; */
   padding: 0;
   position: relative;
-  background: url("https://t4.ftcdn.net/jpg/03/41/36/71/360_F_341367111_Cghn2q0TSlcsr4IwXmRYxbTJSE6oLLBN.jpg")
-    no-repeat center center fixed !important;
-  background-size: cover !important;
+  /* background: url("https://t4.ftcdn.net/jpg/03/41/36/71/360_F_341367111_Cghn2q0TSlcsr4IwXmRYxbTJSE6oLLBN.jpg");
+  repeat-y center / cover; */
+  /* background: url("images/Painted White.jpg"); */
 }
 
 /* Optional: remove padding around output wrapper */
-.jp-MarkdownOutput {
+/* .jp-MarkdownOutput {
   background: transparent !important;
-}
+} */
 
 /* ----- UNIVERSAL MARKDOWN BACKGROUND ----- */
 .jp-MarkdownOutput .jp-RenderedHTMLCommon,
@@ -31,19 +31,35 @@ div.text_cell_render,
 .cell.markdown .output,
 .output-html,
 .output-markdown {
-  background: rgba(0, 0, 0, 0.1) !important;
+  /* background: rgba(0, 0, 0, 0.1) !/important; */
+  background: white;
   color: black !important;
-  padding: 12px !important;
+  /* padding: 12px !important; */
   border-radius: 0 !important;
 }
 
 /* --- Output area background --- */
 .jp-Cell-outputWrapper div div {
-  /* background-color: white !important; */
+  /* background-color: red !important; */
   color: white !important;
   /* padding: 10px; 
     overflow: hidden; */
 }
+
+#cell-id=45282e3e {
+    margin-top: 12rem;
+}
+
+main {
+    width: 80%;
+    margin: 8rem auto 0 auto;
+    background: white;
+    border: 1px solid rgb(210, 210, 210);
+    /* position: relative;
+    z-index: 10; */
+    /* background: url("images/Painted White.jpg"); */
+}
+
 
 /* --- Toggle button --- */
 .toggle-btn {
@@ -80,23 +96,30 @@ body {
 
 img {
   width: 600px;
-  margin-left: 1rem;
 }
+
 #img1-container {
   position: absolute; /* or fixed */
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: -130px;
+  left: -100px;
+  width: 150%;
   height: 200px;
   overflow: hidden;
-  z-index: -1; /* optional, behind other content */
+
 }
 
 #img1 {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  opacity: 0.4;
+  /* object-fit: cover; */
+  opacity: 0.8;
+  position: relative;
+  z-index: -1;
+}
+
+
+div:has(.jp-Cell-outputWrapper) {
+    padding: 1.4rem;
 }
 
 .panel-container {
@@ -110,15 +133,17 @@ img {
 .panel {
     display: flex;
     flex-direction: column;
-  background: linear-gradient(to right bottom, rgb(55, 55, 55), rgb(84, 84, 84));
-  background-color: rgba(87, 87, 87, 0.7);
-  color: white;
+  /* background: linear-gradient(to right bottom, rgb(55, 55, 55), rgb(84, 84, 84)); */
+  /* background-color: rgba(87, 87, 87, 0.7); */
+  /* color: white; */
+  color: #333;
   padding: 0.5rem 1.2rem;
   border-radius: 4px;
   border: 1px solid white;
   max-width: 280px;
-  box-shadow: 1px 1px 1px #222;
+  box-shadow: 3px 3px 10px 0px #999;
   justify-content: center;
+  margin-top: 4px;
 }
 
 .panel-green {
@@ -136,22 +161,22 @@ img {
 .panel-red {
     background: linear-gradient(to right bottom, rgb(95, 55, 55), rgb(200, 84, 84));
 }
-.subpanel-green {
+/* .subpanel-green {
     border: 1px solid white;
     min-width: 80px;
     max-width: 100px;
     padding: 0.4rem 0.6rem;
     border-radius: 4px;
     background: linear-gradient(to right bottom, rgb(55, 95, 55), rgb(84, 199, 84));
-}
-.subpanel-red {
+} */
+/* .subpanel-red {
     border: 1px solid white;
     min-width: 80px;
     max-width: 100px;
     padding: 0.4rem 0.6rem;
     border-radius: 4px;
     background: linear-gradient(to right bottom, rgb(95, 55, 55), rgb(200, 84, 84));
-}
+} */
 
 .panel-brown {
     background: linear-gradient(to right bottom, rgb(70, 57, 26), rgb(162, 134, 67));
@@ -161,13 +186,17 @@ img {
   font-decoration: bold;
   text-align: center;
   font-size: 1.2rem;
+  line-height: 1.2em;
+  margin-bottom: 10px;
+  /* max-width: 160px; */
 }
 
-sup {
-    font-size: 1rem;
+.panel-title > sup {
+    font-size: 0.8rem;
 }
 .panel-date {
-    color: #c0bebe;
+    /* color: #c0bebe; */
+    color: #555;
     text-align: center;
 }
 .panel-subtitle,
@@ -179,7 +208,7 @@ sup {
     text-align: center;
 }
 .panel-group-subtitle {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #999;
 }
 .panel-subtitle div {
     text-align: center;
@@ -236,23 +265,24 @@ sup {
 
 
 
-
-
-
-
-
-
-
-
 .jp-CodeCell .jp-Cell-inputWrapper
 {
     display: none !important;
 }
 
 .jp-CodeCell > .jp-Cell-outputWrapper img {
-    border: 2px solid #999;
+    /* border: 2px solid #999; */
     border-radius: 5px;
+    box-shadow: 0px 0px 14px 0px #999;
 }
+
+div > div.jp-InputArea.jp-Cell-inputArea > div.jp-RenderedHTMLCommon.jp-RenderedMarkdown.jp-MarkdownOutput p img {
+    border-radius: 5px;
+    margin-top: 4px;
+    box-shadow: 3px 3px 8px 0px #999;
+}
+
+
 .jp-Cell .jp-CodeCell, .jp-mod-noOutputs {
     display: none !important;
     
@@ -270,3 +300,8 @@ sup {
   border-radius: 6px;
   margin: 8px 0;
 } */
+
+
+.jp-Notebook-cell.celltag_remove_cell {
+    display: none !important;
+}
