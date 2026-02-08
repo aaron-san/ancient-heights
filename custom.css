@@ -271,6 +271,7 @@ div:has(.jp-Cell-outputWrapper) {
 .panel-values {
     display: flex;
     gap: 1rem;
+    align-items: end;
 }
 
 .panel-value,
@@ -300,7 +301,7 @@ div:has(.jp-Cell-outputWrapper) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     margin: 0.5rem 0;
 }
 
@@ -380,4 +381,32 @@ div:has(.jp-Cell-outputWrapper) {
 
 .jp-Notebook-cell.celltag_remove_cell {
     display: none !important;
+}
+
+.note {
+    background: rgb(240,240,240);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgb(180,180,180);
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.note-title {
+    position: absolute;
+    top: -1.1rem;
+    left: 0.5rem;
+    background: rgb(200,20,240);
+    border: 1px solid rgb(180,180,180);
+    border-radius: 4px;
+    padding: 0.1rem 0.5rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: rgb(90, 90, 90);
+}
+
+.note-body {
+    font-size: 0.75rem;
+    color: rgb(70, 70, 70);
+    line-height: 1.4em;
 }
