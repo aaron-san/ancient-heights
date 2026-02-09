@@ -350,7 +350,6 @@ div:has(.jp-Cell-outputWrapper) {
     margin-top: 4px;
     box-shadow: 2px 2px 8px 0px #999;
     /* max-width: 98%; */
-} */
 
 .jp-RenderedHTMLCommon {
     padding-right: 5px;
@@ -370,6 +369,10 @@ div:has(.jp-Cell-outputWrapper) {
     margin-left: 0 !important;
 }
             
+jp-OutputPrompt.jp-OutputArea-prompt {
+    display: none;
+}
+
             /*
 
 .jp-Cell.jp-CodeCell.jp-Notebook-cell {
@@ -390,23 +393,38 @@ div:has(.jp-Cell-outputWrapper) {
     border: 1px solid rgb(180,180,180);
     margin: 1.5rem 0;
     position: relative;
+    /* max-width: 500px; */
 }
 
 .note-title {
     position: absolute;
-    top: -1.1rem;
-    left: 0.5rem;
-    background: rgb(200,20,240);
+    top: -1.25rem;
+    left: 0.4rem;
+    background: rgb(220, 220, 220);
     border: 1px solid rgb(180,180,180);
-    border-radius: 4px;
-    padding: 0.1rem 0.5rem;
+    border-radius: 6px 6px 0 0;
+    padding: 0.1rem 0.8rem;
     font-weight: bold;
-    font-size: 0.8rem;
-    color: rgb(90, 90, 90);
+    font-size: 0.6rem;
+    color: rgb(64, 64, 64);
 }
 
 .note-body {
     font-size: 0.75rem;
     color: rgb(70, 70, 70);
     line-height: 1.4em;
+}
+
+.jp-Notebook.jp-Cell:not(.jp-mod-active).jp-OutputPrompt {
+    display: none;
+}
+.jp-OutputPrompt, .jp-OutputArea-prompt {
+    display: none important!;
+}
+div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div > div.jp-OutputPrompt.jp-OutputArea-prompt {
+    display: none;
+}
+
+div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div.jp-OutputArea-child.jp-OutputArea-executeResult > div.jp-RenderedHTMLCommon.jp-RenderedHTML.jp-OutputArea-output.jp-OutputArea-executeResult table {
+    overflow: auto;
 }
