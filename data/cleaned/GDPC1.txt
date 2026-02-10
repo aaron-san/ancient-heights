@@ -1,0 +1,1 @@
+Dates changed to end-of-quarter. Computed quarterly figures and trailing twelve month figures.
