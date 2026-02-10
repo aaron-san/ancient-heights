@@ -426,5 +426,5 @@ div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div > div.jp-
 }
 
 div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div.jp-OutputArea-child.jp-OutputArea-executeResult > div.jp-RenderedHTMLCommon.jp-RenderedHTML.jp-OutputArea-output.jp-OutputArea-executeResult table {
-    overflow: auto;
+    overflow: scroll;
 }
