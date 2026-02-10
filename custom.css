@@ -437,6 +437,7 @@ table {
     width: 100%;              /* Table width expands */
     min-width: 600px;         /* Minimum width for large tables */
     table-layout: auto;       /* Allow auto-layout for cells */
+    width: max-content;
 }
 
     
