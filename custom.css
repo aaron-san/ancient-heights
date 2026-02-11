@@ -443,8 +443,11 @@ table {
 
     
 
-.table-wrapper {
+div:has(table) {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+
 }
+/* .table-wrapper {
+} */
