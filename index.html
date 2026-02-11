@@ -7528,7 +7528,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -7588,7 +7588,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># from IPython.display import HTML, display</span>
@@ -7631,7 +7631,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># from IPython.display import HTML</span>
@@ -7664,7 +7664,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <link href="custom.css" rel="stylesheet"/>
 <script defer="" src="custom.js"></script>
@@ -7689,7 +7689,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># %load_ext autoreload</span>
@@ -7736,7 +7736,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># "knox_county_pop": "TNKNOX5POP",</span>
@@ -7766,13 +7766,19 @@ a.anchor-link {
 <span class="n">df_metadata</span> <span class="o">=</span> <span class="n">case</span><span class="o">.</span><span class="n">snake_to_title_case</span><span class="p">(</span><span class="n">df_metadata</span><span class="p">)</span>
 
 <span class="c1"># df_metadata = df_metadata.replace(r"\r", " ", regex=True)</span>
+
+<span class="c1"># print(df_metadata)</span>
 <span class="n">min_widths</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"Notes"</span><span class="p">:</span> <span class="s2">"400px"</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <span class="n">tables</span><span class="o">.</span><span class="n">pretty_table</span><span class="p">(</span>
-    <span class="n">df_metadata</span><span class="p">,</span> <span class="n">min_widths</span><span class="o">=</span><span class="n">min_widths</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="s2">"12px"</span><span class="p">,</span> <span class="n">show_index</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">df_metadata</span><span class="p">,</span>
+    <span class="n">min_widths</span><span class="o">=</span><span class="n">min_widths</span><span class="p">,</span>
+    <span class="n">max_width</span><span class="o">=</span><span class="s2">"200px"</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="s2">"12px"</span><span class="p">,</span>
+    <span class="n">show_index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># df_metadata.to_excel("../data/fred_series_metadata.xlsx", index=False)</span>
@@ -7786,24 +7792,24 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_47c53 table {
+#T_7ba1f table {
   table-layout: auto;
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
-#T_47c53 th {
+#T_7ba1f th {
   font-size: 12px;
   text-align: left;
   padding: 8px;
   white-space: normal;
   box-sizing: border-box;
 }
-#T_47c53 td {
+#T_7ba1f td {
   font-size: 12px;
   text-align: left;
   padding: 6px;
@@ -7811,13 +7817,15 @@ a.anchor-link {
   word-break: break-word;
   box-sizing: border-box;
 }
-#T_47c53_row0_col0, #T_47c53_row0_col1, #T_47c53_row0_col2, #T_47c53_row0_col3, #T_47c53_row0_col4, #T_47c53_row0_col5, #T_47c53_row0_col6, #T_47c53_row0_col7, #T_47c53_row1_col0, #T_47c53_row1_col1, #T_47c53_row1_col2, #T_47c53_row1_col3, #T_47c53_row1_col4, #T_47c53_row1_col5, #T_47c53_row1_col6, #T_47c53_row1_col7, #T_47c53_row2_col0, #T_47c53_row2_col1, #T_47c53_row2_col2, #T_47c53_row2_col3, #T_47c53_row2_col4, #T_47c53_row2_col5, #T_47c53_row2_col6, #T_47c53_row2_col7, #T_47c53_row3_col0, #T_47c53_row3_col1, #T_47c53_row3_col2, #T_47c53_row3_col3, #T_47c53_row3_col4, #T_47c53_row3_col5, #T_47c53_row3_col6, #T_47c53_row3_col7, #T_47c53_row4_col0, #T_47c53_row4_col1, #T_47c53_row4_col2, #T_47c53_row4_col3, #T_47c53_row4_col4, #T_47c53_row4_col5, #T_47c53_row4_col6, #T_47c53_row4_col7, #T_47c53_row5_col0, #T_47c53_row5_col1, #T_47c53_row5_col2, #T_47c53_row5_col3, #T_47c53_row5_col4, #T_47c53_row5_col5, #T_47c53_row5_col6, #T_47c53_row5_col7, #T_47c53_row6_col0, #T_47c53_row6_col1, #T_47c53_row6_col2, #T_47c53_row6_col3, #T_47c53_row6_col4, #T_47c53_row6_col5, #T_47c53_row6_col6, #T_47c53_row6_col7, #T_47c53_row7_col0, #T_47c53_row7_col1, #T_47c53_row7_col2, #T_47c53_row7_col3, #T_47c53_row7_col4, #T_47c53_row7_col5, #T_47c53_row7_col6, #T_47c53_row7_col7 {
+#T_7ba1f_row0_col0, #T_7ba1f_row0_col1, #T_7ba1f_row0_col2, #T_7ba1f_row0_col3, #T_7ba1f_row0_col4, #T_7ba1f_row0_col5, #T_7ba1f_row0_col6, #T_7ba1f_row0_col7, #T_7ba1f_row1_col0, #T_7ba1f_row1_col1, #T_7ba1f_row1_col2, #T_7ba1f_row1_col3, #T_7ba1f_row1_col4, #T_7ba1f_row1_col5, #T_7ba1f_row1_col6, #T_7ba1f_row1_col7, #T_7ba1f_row2_col0, #T_7ba1f_row2_col1, #T_7ba1f_row2_col2, #T_7ba1f_row2_col3, #T_7ba1f_row2_col4, #T_7ba1f_row2_col5, #T_7ba1f_row2_col6, #T_7ba1f_row2_col7, #T_7ba1f_row3_col0, #T_7ba1f_row3_col1, #T_7ba1f_row3_col2, #T_7ba1f_row3_col3, #T_7ba1f_row3_col4, #T_7ba1f_row3_col5, #T_7ba1f_row3_col6, #T_7ba1f_row3_col7, #T_7ba1f_row4_col0, #T_7ba1f_row4_col1, #T_7ba1f_row4_col2, #T_7ba1f_row4_col3, #T_7ba1f_row4_col4, #T_7ba1f_row4_col5, #T_7ba1f_row4_col6, #T_7ba1f_row4_col7, #T_7ba1f_row5_col0, #T_7ba1f_row5_col1, #T_7ba1f_row5_col2, #T_7ba1f_row5_col3, #T_7ba1f_row5_col4, #T_7ba1f_row5_col5, #T_7ba1f_row5_col6, #T_7ba1f_row5_col7, #T_7ba1f_row6_col0, #T_7ba1f_row6_col1, #T_7ba1f_row6_col2, #T_7ba1f_row6_col3, #T_7ba1f_row6_col4, #T_7ba1f_row6_col5, #T_7ba1f_row6_col6, #T_7ba1f_row6_col7, #T_7ba1f_row7_col0, #T_7ba1f_row7_col1, #T_7ba1f_row7_col2, #T_7ba1f_row7_col3, #T_7ba1f_row7_col4, #T_7ba1f_row7_col5, #T_7ba1f_row7_col6, #T_7ba1f_row7_col7 {
+  max-width: 200px;
   min-width: 80px;
   white-space: normal;
   word-break: break-word;
   line-height: 1.3;
 }
-#T_47c53_row0_col8, #T_47c53_row1_col8, #T_47c53_row2_col8, #T_47c53_row3_col8, #T_47c53_row4_col8, #T_47c53_row5_col8, #T_47c53_row6_col8, #T_47c53_row7_col8 {
+#T_7ba1f_row0_col8, #T_7ba1f_row1_col8, #T_7ba1f_row2_col8, #T_7ba1f_row3_col8, #T_7ba1f_row4_col8, #T_7ba1f_row5_col8, #T_7ba1f_row6_col8, #T_7ba1f_row7_col8 {
+  max-width: 200px;
   min-width: 80px;
   white-space: normal;
   word-break: break-word;
@@ -7825,120 +7833,120 @@ a.anchor-link {
   min-width: 400px;
 }
 </style>
-<table id="T_47c53">
+<table id="T_7ba1f">
 <thead>
 <tr>
-<th class="col_heading level0 col0" id="T_47c53_level0_col0">Series Id</th>
-<th class="col_heading level0 col1" id="T_47c53_level0_col1">Title</th>
-<th class="col_heading level0 col2" id="T_47c53_level0_col2">Units</th>
-<th class="col_heading level0 col3" id="T_47c53_level0_col3">Frequency</th>
-<th class="col_heading level0 col4" id="T_47c53_level0_col4">Seasonal Adjustment</th>
-<th class="col_heading level0 col5" id="T_47c53_level0_col5">Last Updated</th>
-<th class="col_heading level0 col6" id="T_47c53_level0_col6">Start Date</th>
-<th class="col_heading level0 col7" id="T_47c53_level0_col7">End Date</th>
-<th class="col_heading level0 col8" id="T_47c53_level0_col8">Notes</th>
+<th class="col_heading level0 col0" id="T_7ba1f_level0_col0">Series Id</th>
+<th class="col_heading level0 col1" id="T_7ba1f_level0_col1">Title</th>
+<th class="col_heading level0 col2" id="T_7ba1f_level0_col2">Units</th>
+<th class="col_heading level0 col3" id="T_7ba1f_level0_col3">Frequency</th>
+<th class="col_heading level0 col4" id="T_7ba1f_level0_col4">Seasonal Adjustment</th>
+<th class="col_heading level0 col5" id="T_7ba1f_level0_col5">Last Updated</th>
+<th class="col_heading level0 col6" id="T_7ba1f_level0_col6">Start Date</th>
+<th class="col_heading level0 col7" id="T_7ba1f_level0_col7">End Date</th>
+<th class="col_heading level0 col8" id="T_7ba1f_level0_col8">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="data row0 col0" id="T_47c53_row0_col0">POPTHM</td>
-<td class="data row0 col1" id="T_47c53_row0_col1">Population</td>
-<td class="data row0 col2" id="T_47c53_row0_col2">Thousands</td>
-<td class="data row0 col3" id="T_47c53_row0_col3">Monthly</td>
-<td class="data row0 col4" id="T_47c53_row0_col4">Not Seasonally Adjusted</td>
-<td class="data row0 col5" id="T_47c53_row0_col5">2026-01-22 10:29:41-06</td>
-<td class="data row0 col6" id="T_47c53_row0_col6">1959-01-01</td>
-<td class="data row0 col7" id="T_47c53_row0_col7">2025-11-01</td>
-<td class="data row0 col8" id="T_47c53_row0_col8">Population includes resident population plus armed forces overseas. The monthly estimate is the average of estimates for the first of the month and the first of the following month.
+<td class="data row0 col0" id="T_7ba1f_row0_col0">POPTHM</td>
+<td class="data row0 col1" id="T_7ba1f_row0_col1">Population</td>
+<td class="data row0 col2" id="T_7ba1f_row0_col2">Thousands</td>
+<td class="data row0 col3" id="T_7ba1f_row0_col3">Monthly</td>
+<td class="data row0 col4" id="T_7ba1f_row0_col4">Not Seasonally Adjusted</td>
+<td class="data row0 col5" id="T_7ba1f_row0_col5">2026-01-22 10:29:41-06</td>
+<td class="data row0 col6" id="T_7ba1f_row0_col6">1959-01-01</td>
+<td class="data row0 col7" id="T_7ba1f_row0_col7">2025-11-01</td>
+<td class="data row0 col8" id="T_7ba1f_row0_col8">Population includes resident population plus armed forces overseas. The monthly estimate is the average of estimates for the first of the month and the first of the following month.
 BEA Account Code: B230RC
 A Guide to the National Income and Product Accounts of the United States (NIPA) - (http://www.bea.gov/national/pdf/nipaguid.pdf)</td>
 </tr>
 <tr>
-<td class="data row1 col0" id="T_47c53_row1_col0">TNKNOX5POP</td>
-<td class="data row1 col1" id="T_47c53_row1_col1">Resident Population in Knox County, TN</td>
-<td class="data row1 col2" id="T_47c53_row1_col2">Thousands of Persons</td>
-<td class="data row1 col3" id="T_47c53_row1_col3">Annual</td>
-<td class="data row1 col4" id="T_47c53_row1_col4">Not Seasonally Adjusted</td>
-<td class="data row1 col5" id="T_47c53_row1_col5">2025-03-14 11:43:58-05</td>
-<td class="data row1 col6" id="T_47c53_row1_col6">1970-01-01</td>
-<td class="data row1 col7" id="T_47c53_row1_col7">2024-01-01</td>
-<td class="data row1 col8" id="T_47c53_row1_col8">Data for "Resident Population" are estimates as of July 1. Data for 1970, 1980, 1990, and 2000 are annual census.
+<td class="data row1 col0" id="T_7ba1f_row1_col0">TNKNOX5POP</td>
+<td class="data row1 col1" id="T_7ba1f_row1_col1">Resident Population in Knox County, TN</td>
+<td class="data row1 col2" id="T_7ba1f_row1_col2">Thousands of Persons</td>
+<td class="data row1 col3" id="T_7ba1f_row1_col3">Annual</td>
+<td class="data row1 col4" id="T_7ba1f_row1_col4">Not Seasonally Adjusted</td>
+<td class="data row1 col5" id="T_7ba1f_row1_col5">2025-03-14 11:43:58-05</td>
+<td class="data row1 col6" id="T_7ba1f_row1_col6">1970-01-01</td>
+<td class="data row1 col7" id="T_7ba1f_row1_col7">2024-01-01</td>
+<td class="data row1 col8" id="T_7ba1f_row1_col8">Data for "Resident Population" are estimates as of July 1. Data for 1970, 1980, 1990, and 2000 are annual census.
 
 Population estimates are updated annually using current data on births, deaths, and migration to calculate population change since the most recent decennial census. The annual time series of estimates begins with the most recent decennial census data and extends to the vintage year. Each vintage of estimates includes all years since the most recent decennial census.</td>
 </tr>
 <tr>
-<td class="data row2 col0" id="T_47c53_row2_col0">ATNHPIUS47093A</td>
-<td class="data row2 col1" id="T_47c53_row2_col1">All-Transactions House Price Index for Knox County, TN</td>
-<td class="data row2 col2" id="T_47c53_row2_col2">Index 2000=100</td>
-<td class="data row2 col3" id="T_47c53_row2_col3">Annual</td>
-<td class="data row2 col4" id="T_47c53_row2_col4">Not Seasonally Adjusted</td>
-<td class="data row2 col5" id="T_47c53_row2_col5">2025-03-25 09:28:53-05</td>
-<td class="data row2 col6" id="T_47c53_row2_col6">1975-01-01</td>
-<td class="data row2 col7" id="T_47c53_row2_col7">2024-01-01</td>
-<td class="data row2 col8" id="T_47c53_row2_col8">As stated by the source, these annual county indexes should be considered developmental. As with the standard FHFA HPIs, revisions to these indexes may reflect the impact of new data or technical adjustments. Indexes are calibrated using appraisal values and sales prices for mortgages bought or guaranteed by Fannie Mae and Freddie Mac. As discussed in the Working Paper 16-01, in cases where sample sizes are small for the county area, an index is either not reported if recording has not started or a missing value is reported with a period (.). Index values always reflect the native county index, i.e. they are not made with data from another area or year.
+<td class="data row2 col0" id="T_7ba1f_row2_col0">ATNHPIUS47093A</td>
+<td class="data row2 col1" id="T_7ba1f_row2_col1">All-Transactions House Price Index for Knox County, TN</td>
+<td class="data row2 col2" id="T_7ba1f_row2_col2">Index 2000=100</td>
+<td class="data row2 col3" id="T_7ba1f_row2_col3">Annual</td>
+<td class="data row2 col4" id="T_7ba1f_row2_col4">Not Seasonally Adjusted</td>
+<td class="data row2 col5" id="T_7ba1f_row2_col5">2025-03-25 09:28:53-05</td>
+<td class="data row2 col6" id="T_7ba1f_row2_col6">1975-01-01</td>
+<td class="data row2 col7" id="T_7ba1f_row2_col7">2024-01-01</td>
+<td class="data row2 col8" id="T_7ba1f_row2_col8">As stated by the source, these annual county indexes should be considered developmental. As with the standard FHFA HPIs, revisions to these indexes may reflect the impact of new data or technical adjustments. Indexes are calibrated using appraisal values and sales prices for mortgages bought or guaranteed by Fannie Mae and Freddie Mac. As discussed in the Working Paper 16-01, in cases where sample sizes are small for the county area, an index is either not reported if recording has not started or a missing value is reported with a period (.). Index values always reflect the native county index, i.e. they are not made with data from another area or year.
 
  For tracking and feedback purposes, please cite Working Paper 16-01 when using these data. A suggested form is: Bogin, A., Doerner, W. and Larson, W. (2016). Local House Price Dynamics: New Indices and Stylized Facts. Federal Housing Finance Agency, Working Paper 16-01. The working paper is accessible at http://www.fhfa.gov/papers/wp1601.aspx.</td>
 </tr>
 <tr>
-<td class="data row3 col0" id="T_47c53_row3_col0">USSTHPI</td>
-<td class="data row3 col1" id="T_47c53_row3_col1">All-Transactions House Price Index for the United States</td>
-<td class="data row3 col2" id="T_47c53_row3_col2">Index 1980:Q1=100</td>
-<td class="data row3 col3" id="T_47c53_row3_col3">Quarterly</td>
-<td class="data row3 col4" id="T_47c53_row3_col4">Not Seasonally Adjusted</td>
-<td class="data row3 col5" id="T_47c53_row3_col5">2025-11-25 09:05:09-06</td>
-<td class="data row3 col6" id="T_47c53_row3_col6">1975-01-01</td>
-<td class="data row3 col7" id="T_47c53_row3_col7">2025-07-01</td>
-<td class="data row3 col8" id="T_47c53_row3_col8">Estimated using sales prices and appraisal data.</td>
+<td class="data row3 col0" id="T_7ba1f_row3_col0">USSTHPI</td>
+<td class="data row3 col1" id="T_7ba1f_row3_col1">All-Transactions House Price Index for the United States</td>
+<td class="data row3 col2" id="T_7ba1f_row3_col2">Index 1980:Q1=100</td>
+<td class="data row3 col3" id="T_7ba1f_row3_col3">Quarterly</td>
+<td class="data row3 col4" id="T_7ba1f_row3_col4">Not Seasonally Adjusted</td>
+<td class="data row3 col5" id="T_7ba1f_row3_col5">2025-11-25 09:05:09-06</td>
+<td class="data row3 col6" id="T_7ba1f_row3_col6">1975-01-01</td>
+<td class="data row3 col7" id="T_7ba1f_row3_col7">2025-07-01</td>
+<td class="data row3 col8" id="T_7ba1f_row3_col8">Estimated using sales prices and appraisal data.</td>
 </tr>
 <tr>
-<td class="data row4 col0" id="T_47c53_row4_col0">REALGDPALL47093</td>
-<td class="data row4 col1" id="T_47c53_row4_col1">Real Gross Domestic Product: All Industries in Knox County, TN</td>
-<td class="data row4 col2" id="T_47c53_row4_col2">Thousands of Chained 2017 U.S. Dollars</td>
-<td class="data row4 col3" id="T_47c53_row4_col3">Annual</td>
-<td class="data row4 col4" id="T_47c53_row4_col4">Not Seasonally Adjusted</td>
-<td class="data row4 col5" id="T_47c53_row4_col5">2026-02-05 08:59:59-06</td>
-<td class="data row4 col6" id="T_47c53_row4_col6">2001-01-01</td>
-<td class="data row4 col7" id="T_47c53_row4_col7">2024-01-01</td>
-<td class="data row4 col8" id="T_47c53_row4_col8">GDP by county is a measure of the market value of final goods and services produced within a county area in a particular period. While other measures of county economies rely mainly on labor market data, these statistics incorporate multiple data sources that capture trends in labor, revenue, and value of production. As a result, the capital-intensive industries are captured more fully than when measured solely by labor data.</td>
+<td class="data row4 col0" id="T_7ba1f_row4_col0">REALGDPALL47093</td>
+<td class="data row4 col1" id="T_7ba1f_row4_col1">Real Gross Domestic Product: All Industries in Knox County, TN</td>
+<td class="data row4 col2" id="T_7ba1f_row4_col2">Thousands of Chained 2017 U.S. Dollars</td>
+<td class="data row4 col3" id="T_7ba1f_row4_col3">Annual</td>
+<td class="data row4 col4" id="T_7ba1f_row4_col4">Not Seasonally Adjusted</td>
+<td class="data row4 col5" id="T_7ba1f_row4_col5">2026-02-05 08:59:59-06</td>
+<td class="data row4 col6" id="T_7ba1f_row4_col6">2001-01-01</td>
+<td class="data row4 col7" id="T_7ba1f_row4_col7">2024-01-01</td>
+<td class="data row4 col8" id="T_7ba1f_row4_col8">GDP by county is a measure of the market value of final goods and services produced within a county area in a particular period. While other measures of county economies rely mainly on labor market data, these statistics incorporate multiple data sources that capture trends in labor, revenue, and value of production. As a result, the capital-intensive industries are captured more fully than when measured solely by labor data.</td>
 </tr>
 <tr>
-<td class="data row5 col0" id="T_47c53_row5_col0">GDPC1</td>
-<td class="data row5 col1" id="T_47c53_row5_col1">Real Gross Domestic Product</td>
-<td class="data row5 col2" id="T_47c53_row5_col2">Billions of Chained 2017 Dollars</td>
-<td class="data row5 col3" id="T_47c53_row5_col3">Quarterly</td>
-<td class="data row5 col4" id="T_47c53_row5_col4">Seasonally Adjusted Annual Rate</td>
-<td class="data row5 col5" id="T_47c53_row5_col5">2026-01-22 07:46:36-06</td>
-<td class="data row5 col6" id="T_47c53_row5_col6">1947-01-01</td>
-<td class="data row5 col7" id="T_47c53_row5_col7">2025-07-01</td>
-<td class="data row5 col8" id="T_47c53_row5_col8">BEA Account Code: A191RX
+<td class="data row5 col0" id="T_7ba1f_row5_col0">GDPC1</td>
+<td class="data row5 col1" id="T_7ba1f_row5_col1">Real Gross Domestic Product</td>
+<td class="data row5 col2" id="T_7ba1f_row5_col2">Billions of Chained 2017 Dollars</td>
+<td class="data row5 col3" id="T_7ba1f_row5_col3">Quarterly</td>
+<td class="data row5 col4" id="T_7ba1f_row5_col4">Seasonally Adjusted Annual Rate</td>
+<td class="data row5 col5" id="T_7ba1f_row5_col5">2026-01-22 07:46:36-06</td>
+<td class="data row5 col6" id="T_7ba1f_row5_col6">1947-01-01</td>
+<td class="data row5 col7" id="T_7ba1f_row5_col7">2025-07-01</td>
+<td class="data row5 col8" id="T_7ba1f_row5_col8">BEA Account Code: A191RX
 
 Real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States.For more information see the Guide to the National Income and Product Accounts of the United States (NIPA). For more information, please visit the Bureau of Economic Analysis (http://www.bea.gov/national/pdf/nipaguid.pdf).</td>
 </tr>
 <tr>
-<td class="data row6 col0" id="T_47c53_row6_col0">MEDLISPRI47093</td>
-<td class="data row6 col1" id="T_47c53_row6_col1">Housing Inventory: Median Listing Price in Knox County, TN</td>
-<td class="data row6 col2" id="T_47c53_row6_col2">U.S. Dollars</td>
-<td class="data row6 col3" id="T_47c53_row6_col3">Monthly</td>
-<td class="data row6 col4" id="T_47c53_row6_col4">Not Seasonally Adjusted</td>
-<td class="data row6 col5" id="T_47c53_row6_col5">2026-02-06 17:24:43-06</td>
-<td class="data row6 col6" id="T_47c53_row6_col6">2016-07-01</td>
-<td class="data row6 col7" id="T_47c53_row6_col7">2026-01-01</td>
-<td class="data row6 col8" id="T_47c53_row6_col8">The median listing price in a given market during the specified month.
+<td class="data row6 col0" id="T_7ba1f_row6_col0">MEDLISPRI47093</td>
+<td class="data row6 col1" id="T_7ba1f_row6_col1">Housing Inventory: Median Listing Price in Knox County, TN</td>
+<td class="data row6 col2" id="T_7ba1f_row6_col2">U.S. Dollars</td>
+<td class="data row6 col3" id="T_7ba1f_row6_col3">Monthly</td>
+<td class="data row6 col4" id="T_7ba1f_row6_col4">Not Seasonally Adjusted</td>
+<td class="data row6 col5" id="T_7ba1f_row6_col5">2026-02-06 17:24:43-06</td>
+<td class="data row6 col6" id="T_7ba1f_row6_col6">2016-07-01</td>
+<td class="data row6 col7" id="T_7ba1f_row6_col7">2026-01-01</td>
+<td class="data row6 col8" id="T_7ba1f_row6_col8">The median listing price in a given market during the specified month.
 
 With the release of its September 2022 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology updates and improves the calculation of time on market and improves handling of duplicate listings. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since October 2022 will not be directly comparable with previous data releases (files downloaded before October 2022) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).
 
 With the release of its November 2021 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology uses the latest and most accurate data mapping of listing statuses to yield a cleaner and more consistent measurement of active listings at both the national and local level. The methodology has also been adjusted to better account for missing data in some fields including square footage. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since December 2021 will not be directly comparable with previous data releases (files downloaded before December 2021) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).</td>
 </tr>
 <tr>
-<td class="data row7 col0" id="T_47c53_row7_col0">MEDLISPRIUS</td>
-<td class="data row7 col1" id="T_47c53_row7_col1">Housing Inventory: Median Listing Price in the United States</td>
-<td class="data row7 col2" id="T_47c53_row7_col2">U.S. Dollars</td>
-<td class="data row7 col3" id="T_47c53_row7_col3">Monthly</td>
-<td class="data row7 col4" id="T_47c53_row7_col4">Not Seasonally Adjusted</td>
-<td class="data row7 col5" id="T_47c53_row7_col5">2026-02-06 17:11:49-06</td>
-<td class="data row7 col6" id="T_47c53_row7_col6">2016-07-01</td>
-<td class="data row7 col7" id="T_47c53_row7_col7">2026-01-01</td>
-<td class="data row7 col8" id="T_47c53_row7_col8">The median listing price in a given market during the specified month.
+<td class="data row7 col0" id="T_7ba1f_row7_col0">MEDLISPRIUS</td>
+<td class="data row7 col1" id="T_7ba1f_row7_col1">Housing Inventory: Median Listing Price in the United States</td>
+<td class="data row7 col2" id="T_7ba1f_row7_col2">U.S. Dollars</td>
+<td class="data row7 col3" id="T_7ba1f_row7_col3">Monthly</td>
+<td class="data row7 col4" id="T_7ba1f_row7_col4">Not Seasonally Adjusted</td>
+<td class="data row7 col5" id="T_7ba1f_row7_col5">2026-02-06 17:11:49-06</td>
+<td class="data row7 col6" id="T_7ba1f_row7_col6">2016-07-01</td>
+<td class="data row7 col7" id="T_7ba1f_row7_col7">2026-01-01</td>
+<td class="data row7 col8" id="T_7ba1f_row7_col8">The median listing price in a given market during the specified month.
 
 With the release of its September 2022 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology updates and improves the calculation of time on market and improves handling of duplicate listings. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since October 2022 will not be directly comparable with previous data releases (files downloaded before October 2022) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).
 
@@ -7955,7 +7963,7 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># df.reset_index(names="Date", inplace=True)</span>
@@ -8006,7 +8014,7 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="sd">"""Data Cleaning"""</span>
@@ -8129,11 +8137,10 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [71]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># df_pop = df.loc["2018":, ["knox_county_pop", "us_pop"]].dropna()</span>
-<span class="c1"># # print(df_pop)</span>
 <span class="c1"># df_table = df_pop.rename(</span>
 <span class="c1">#     columns={"knox_county_pop": "Knox County, TN", "us_pop": "U.S."}</span>
 <span class="c1"># )</span>
@@ -8143,7 +8150,6 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 <span class="c1"># pop_growth.dropna(inplace=True)</span>
 <span class="c1"># pop_growth = pop_growth.loc[:, ["variable", "pct_chg"]]</span>
 <span class="c1"># # pop_growth.filter([p])</span>
-<span class="c1"># # print(pop_growth)</span>
 <span class="c1"># pop_growth = pop_growth.pivot(columns="variable", values="pct_chg")</span>
 <span class="c1"># pop_growth.index.name = None</span>
 <span class="c1"># pop_growth.columns.name = "Date"</span>
@@ -8153,7 +8159,6 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">ht</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">tn</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="s2">"State"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Tennessee"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="c1"># print(tn)</span>
 
 <span class="n">city</span> <span class="o">=</span> <span class="n">ht</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">knox</span> <span class="o">=</span> <span class="n">city</span><span class="p">[</span><span class="n">city</span><span class="p">[</span><span class="s2">"Metropolitan Area"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Knoxville, TN"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -8187,85 +8192,23 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[71]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<style type="text/css">
-#T_6d1f5 table {
-  table-layout: auto;
-  width: 100%;
-  border-collapse: collapse;
-  font-family: Arial, sans-serif;
-  box-sizing: border-box;
-}
-#T_6d1f5 th {
-  font-size: 12px;
-  text-align: left;
-  padding: 8px;
-  white-space: normal;
-  box-sizing: border-box;
-}
-#T_6d1f5 td {
-  font-size: 12px;
-  text-align: left;
-  padding: 6px;
-  white-space: normal;
-  word-break: break-word;
-  box-sizing: border-box;
-}
-#T_6d1f5_row0_col0, #T_6d1f5_row0_col1, #T_6d1f5_row0_col2, #T_6d1f5_row1_col0, #T_6d1f5_row1_col1, #T_6d1f5_row1_col2, #T_6d1f5_row2_col0, #T_6d1f5_row2_col1, #T_6d1f5_row2_col2, #T_6d1f5_row3_col0, #T_6d1f5_row3_col1, #T_6d1f5_row3_col2, #T_6d1f5_row4_col0, #T_6d1f5_row4_col1, #T_6d1f5_row4_col2, #T_6d1f5_row5_col0, #T_6d1f5_row5_col1, #T_6d1f5_row5_col2, #T_6d1f5_row6_col0, #T_6d1f5_row6_col1, #T_6d1f5_row6_col2 {
-  min-width: 80px;
-  white-space: normal;
-  word-break: break-word;
-  line-height: 1.3;
-}
-</style>
-<table id="T_6d1f5">
-<thead>
-<tr>
-<th class="col_heading level0 col0" id="T_6d1f5_level0_col0">Location</th>
-<th class="col_heading level0 col1" id="T_6d1f5_level0_col1">variable</th>
-<th class="col_heading level0 col2" id="T_6d1f5_level0_col2">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="data row0 col0" id="T_6d1f5_row0_col0">Tennessee</td>
-<td class="data row0 col1" id="T_6d1f5_row0_col1">2020</td>
-<td class="data row0 col2" id="T_6d1f5_row0_col2">8.3%</td>
-</tr>
-<tr>
-<td class="data row1 col0" id="T_6d1f5_row1_col0">Tennessee</td>
-<td class="data row1 col1" id="T_6d1f5_row1_col1">2021</td>
-<td class="data row1 col2" id="T_6d1f5_row1_col2">7.4%</td>
-</tr>
-<tr>
-<td class="data row2 col0" id="T_6d1f5_row2_col0">Tennessee</td>
-<td class="data row2 col1" id="T_6d1f5_row2_col1">2022</td>
-<td class="data row2 col2" id="T_6d1f5_row2_col2">7.3%</td>
-</tr>
-<tr>
-<td class="data row3 col0" id="T_6d1f5_row3_col0">Tennessee</td>
-<td class="data row3 col1" id="T_6d1f5_row3_col1">2023</td>
-<td class="data row3 col2" id="T_6d1f5_row3_col2">7.8%</td>
-</tr>
-<tr>
-<td class="data row4 col0" id="T_6d1f5_row4_col0">Tennessee</td>
-<td class="data row4 col1" id="T_6d1f5_row4_col1">2024</td>
-<td class="data row4 col2" id="T_6d1f5_row4_col2">8.2%</td>
-</tr>
-<tr>
-<td class="data row5 col0" id="T_6d1f5_row5_col0">Knoxville, TN</td>
-<td class="data row5 col1" id="T_6d1f5_row5_col1">2023</td>
-<td class="data row5 col2" id="T_6d1f5_row5_col2">4.2%</td>
-</tr>
-<tr>
-<td class="data row6 col0" id="T_6d1f5_row6_col0">Knoxville, TN</td>
-<td class="data row6 col1" id="T_6d1f5_row6_col1">2024</td>
-<td class="data row6 col2" id="T_6d1f5_row6_col2">4.0%</td>
-</tr>
-</tbody>
-</table>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[16]</span><span class="ansi-green-fg">, line 18</span>
+<span class="ansi-green-fg">      1</span> <span style="color: rgb(95,135,135)"># df_pop = df.loc["2018":, ["knox_county_pop", "us_pop"]].dropna()</span>
+<span class="ansi-green-fg">      2</span> <span style="color: rgb(95,135,135)"># df_table = df_pop.rename(</span>
+<span class="ansi-green-fg">      3</span> <span style="color: rgb(95,135,135)">#     columns={"knox_county_pop": "Knox County, TN", "us_pop": "U.S."}</span>
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">     15</span> 
+<span class="ansi-green-fg">     16</span> <span style="color: rgb(95,135,135)"># ht = pd.read_html("https://www.doorloop.com/blog/rental-vacancy-statistics#rental-vacancy-rates-by-state")</span>
+<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">18</span> state = <span class="ansi-yellow-bg">ht</span>[<span class="ansi-green-fg">1</span>]
+<span class="ansi-green-fg">     19</span> tn = state[state[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">State</span><span class="ansi-yellow-fg">"</span>] == <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Tennessee</span><span class="ansi-yellow-fg">"</span>].copy()
+<span class="ansi-green-fg">     21</span> city = ht[<span class="ansi-green-fg">3</span>]
+
+<span class="ansi-red-fg">NameError</span>: name 'ht' is not defined</pre>
 </div>
 </div>
 </div>
@@ -8275,34 +8218,34 @@ With the release of its November 2021 housing trends report, Realtor.com® incor
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">long</span> <span class="o">=</span> <span class="n">df_pop</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># long = df_pop.melt(ignore_index=False)</span>
 
-<span class="n">long</span><span class="p">[</span><span class="s2">"pct_chg"</span><span class="p">]</span> <span class="o">=</span> <span class="n">long</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"variable"</span><span class="p">)[</span><span class="s2">"value"</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span>
-    <span class="n">periods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill_method</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
+<span class="c1"># long["pct_chg"] = long.groupby("variable")["value"].pct_change(</span>
+<span class="c1">#     periods=1, fill_method=None</span>
+<span class="c1"># )</span>
 
-<span class="c1"># Convert to wide format for plotting</span>
-<span class="n">wide</span> <span class="o">=</span> <span class="n">long</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">long</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"variable"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"pct_chg"</span><span class="p">)</span>
-<span class="n">wide</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># print(wide)</span>
+<span class="c1"># # Convert to wide format for plotting</span>
+<span class="c1"># wide = long.pivot_table(index=long.index, columns="variable", values="pct_chg")</span>
+<span class="c1"># wide.dropna(inplace=True)</span>
+<span class="c1"># # print(wide)</span>
 
-<span class="n">bar_plots</span><span class="o">.</span><span class="n">plot_bars</span><span class="p">(</span>
-    <span class="c1"># plot_bar_pct(</span>
-    <span class="n">df</span><span class="o">=</span><span class="n">wide</span><span class="p">,</span>
-    <span class="n">bar_width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-    <span class="n">hide_yaxis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">"knox_county_pop"</span><span class="p">,</span> <span class="s2">"us_pop"</span><span class="p">],</span>
-    <span class="n">footnote</span><span class="o">=</span><span class="s2">"FRED (KNXPOP, POPTHM)"</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s2">"Population Growth in Knox County, TN"</span><span class="p">,</span>
-    <span class="n">subtitle</span><span class="o">=</span><span class="s2">"Y/Y % Change"</span><span class="p">,</span>
-    <span class="n">legend_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Knox County, TN"</span><span class="p">,</span> <span class="s2">"U.S."</span><span class="p">],</span>
-    <span class="n">file_name</span><span class="o">=</span><span class="s2">"pop_growth"</span><span class="p">,</span>
-    <span class="c1"># period_shift=1,</span>
-    <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="c1"># bar_plots.plot_bars(</span>
+<span class="c1">#     # plot_bar_pct(</span>
+<span class="c1">#     df=wide,</span>
+<span class="c1">#     bar_width=0.8,</span>
+<span class="c1">#     hide_yaxis=True,</span>
+<span class="c1">#     y=["knox_county_pop", "us_pop"],</span>
+<span class="c1">#     footnote="FRED (KNXPOP, POPTHM)",</span>
+<span class="c1">#     title="Population Growth in Knox County, TN",</span>
+<span class="c1">#     subtitle="Y/Y % Change",</span>
+<span class="c1">#     legend_labels=["Knox County, TN", "U.S."],</span>
+<span class="c1">#     file_name="pop_growth",</span>
+<span class="c1">#     # period_shift=1,</span>
+<span class="c1">#     show=True,</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>

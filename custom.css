@@ -119,7 +119,7 @@ img {
   top: 0px;
   left: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
   overflow: hidden;
 
 }
@@ -135,7 +135,8 @@ img {
   /* filter: contrast(80%); */
   /* filter: opacity(70) grayscale(70%); */
   /* filter: saturate(80%) brightness(90%); */
-  filter: saturate(70%) blur(1px); // color intensity
+  filter: saturate(70%); // color intensity
+  /* filter: saturate(70%) blur(1px); // color intensity */
   /* filter: sepia(80%); // add a warm brown tone */
   
 }
