@@ -426,28 +426,21 @@ div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div > div.jp-
     display: none;
 }
 
-div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div.jp-OutputArea-child.jp-OutputArea-executeResult > div.jp-RenderedHTMLCommon.jp-RenderedHTML.jp-OutputArea-output.jp-OutputArea-executeResult:has(table) {
-    overflow-x: scroll;
-    .table-container {
-    width: 100%;              /* Full width */
-    overflow-x: auto;         /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch;  /* For smooth scrolling on iOS */
-}
 
-table {
-    width: 100%;              /* Table width expands */
-    min-width: 600px;         /* Minimum width for large tables */
-    table-layout: auto;       /* Allow auto-layout for cells */
-    width: max-content;
-}
-
-    
-
-div:has(table) {
-    width: 100%;
+.table-wrapper {
+    /* width: 100%; */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-
+    border: 1px solid gray;
 }
-/* .table-wrapper {
-} */
+
+/* Let the table grow naturally */
+.table-wrapper table {
+    width: max-content;   /* key fix */
+    min-width: 100%;      /* ensures it fills when small */
+    table-layout: auto;
+}
+
+.jp-OutputArea {
+    overflow-x: visible !important;
+}
