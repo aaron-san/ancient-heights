@@ -7717,6 +7717,7 @@ a.anchor-link {
 <span class="k">if</span> <span class="s2">".."</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">".."</span><span class="p">)</span>  <span class="c1"># Add parent directory to path</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">utils.logs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">logs</span>  <span class="c1"># log_change</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">utils.tables</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tables</span>  <span class="c1"># export_table</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">utils.line_plots</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">line_plots</span>  <span class="c1"># plot_line</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">utils.bar_plots</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bar_plots</span>  <span class="c1"># plot_bars</span>
@@ -7741,7 +7742,21 @@ a.anchor-link {
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># "knox_county_pop": "TNKNOX5POP",</span>
 <span class="c1"># "us_pop": "POPTHM",</span>
 
-<span class="n">series_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"POPTHM"</span><span class="p">,</span> <span class="s2">"TNKNOX5POP"</span><span class="p">]</span>
+<span class="n">series_ids</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"POPTHM"</span><span class="p">,</span>
+    <span class="s2">"TNKNOX5POP"</span><span class="p">,</span>
+    <span class="s2">"ATNHPIUS47093A"</span><span class="p">,</span>
+    <span class="s2">"USSTHPI"</span><span class="p">,</span>
+    <span class="s2">"REALGDPALL47093"</span><span class="p">,</span>
+    <span class="s2">"GDPC1"</span><span class="p">,</span>
+    <span class="s2">"MEDLISPRI47093"</span><span class="p">,</span>
+    <span class="s2">"MEDLISPRIUS"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">df_metadata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"../data/fred_series_metadata.xlsx"</span><span class="p">)</span>
+<span class="c1"># print(df_metadata)</span>
+
+<span class="c1"># df_metadata = df_metadata.loc[:, ~df_metadata.columns.str.startswith("Unnamed")]</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">df_metadata</span>
@@ -7760,7 +7775,7 @@ a.anchor-link {
     <span class="n">df_metadata</span><span class="p">,</span> <span class="n">min_widths</span><span class="o">=</span><span class="n">min_widths</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="s2">"12px"</span><span class="p">,</span> <span class="n">show_index</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 
-<span class="c1"># df_metadata.to_excel("../data/fred_series_metadata.xlsx")</span>
+<span class="c1"># df_metadata.to_excel("../data/fred_series_metadata.xlsx", index=False)</span>
 </pre></div>
 </div>
 </div>
@@ -7774,21 +7789,21 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_b2197 table {
+#T_47c53 table {
   table-layout: auto;
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
-#T_b2197 th {
+#T_47c53 th {
   font-size: 12px;
   text-align: left;
   padding: 8px;
   white-space: normal;
   box-sizing: border-box;
 }
-#T_b2197 td {
+#T_47c53 td {
   font-size: 12px;
   text-align: left;
   padding: 6px;
@@ -7796,13 +7811,13 @@ a.anchor-link {
   word-break: break-word;
   box-sizing: border-box;
 }
-#T_b2197_row0_col0, #T_b2197_row0_col1, #T_b2197_row0_col2, #T_b2197_row0_col3, #T_b2197_row0_col4, #T_b2197_row0_col5, #T_b2197_row0_col6, #T_b2197_row0_col7, #T_b2197_row1_col0, #T_b2197_row1_col1, #T_b2197_row1_col2, #T_b2197_row1_col3, #T_b2197_row1_col4, #T_b2197_row1_col5, #T_b2197_row1_col6, #T_b2197_row1_col7 {
+#T_47c53_row0_col0, #T_47c53_row0_col1, #T_47c53_row0_col2, #T_47c53_row0_col3, #T_47c53_row0_col4, #T_47c53_row0_col5, #T_47c53_row0_col6, #T_47c53_row0_col7, #T_47c53_row1_col0, #T_47c53_row1_col1, #T_47c53_row1_col2, #T_47c53_row1_col3, #T_47c53_row1_col4, #T_47c53_row1_col5, #T_47c53_row1_col6, #T_47c53_row1_col7, #T_47c53_row2_col0, #T_47c53_row2_col1, #T_47c53_row2_col2, #T_47c53_row2_col3, #T_47c53_row2_col4, #T_47c53_row2_col5, #T_47c53_row2_col6, #T_47c53_row2_col7, #T_47c53_row3_col0, #T_47c53_row3_col1, #T_47c53_row3_col2, #T_47c53_row3_col3, #T_47c53_row3_col4, #T_47c53_row3_col5, #T_47c53_row3_col6, #T_47c53_row3_col7, #T_47c53_row4_col0, #T_47c53_row4_col1, #T_47c53_row4_col2, #T_47c53_row4_col3, #T_47c53_row4_col4, #T_47c53_row4_col5, #T_47c53_row4_col6, #T_47c53_row4_col7, #T_47c53_row5_col0, #T_47c53_row5_col1, #T_47c53_row5_col2, #T_47c53_row5_col3, #T_47c53_row5_col4, #T_47c53_row5_col5, #T_47c53_row5_col6, #T_47c53_row5_col7, #T_47c53_row6_col0, #T_47c53_row6_col1, #T_47c53_row6_col2, #T_47c53_row6_col3, #T_47c53_row6_col4, #T_47c53_row6_col5, #T_47c53_row6_col6, #T_47c53_row6_col7, #T_47c53_row7_col0, #T_47c53_row7_col1, #T_47c53_row7_col2, #T_47c53_row7_col3, #T_47c53_row7_col4, #T_47c53_row7_col5, #T_47c53_row7_col6, #T_47c53_row7_col7 {
   min-width: 80px;
   white-space: normal;
   word-break: break-word;
   line-height: 1.3;
 }
-#T_b2197_row0_col8, #T_b2197_row1_col8 {
+#T_47c53_row0_col8, #T_47c53_row1_col8, #T_47c53_row2_col8, #T_47c53_row3_col8, #T_47c53_row4_col8, #T_47c53_row5_col8, #T_47c53_row6_col8, #T_47c53_row7_col8 {
   min-width: 80px;
   white-space: normal;
   word-break: break-word;
@@ -7810,46 +7825,124 @@ a.anchor-link {
   min-width: 400px;
 }
 </style>
-<table id="T_b2197">
+<table id="T_47c53">
 <thead>
 <tr>
-<th class="col_heading level0 col0" id="T_b2197_level0_col0">Series Id</th>
-<th class="col_heading level0 col1" id="T_b2197_level0_col1">Title</th>
-<th class="col_heading level0 col2" id="T_b2197_level0_col2">Units</th>
-<th class="col_heading level0 col3" id="T_b2197_level0_col3">Frequency</th>
-<th class="col_heading level0 col4" id="T_b2197_level0_col4">Seasonal Adjustment</th>
-<th class="col_heading level0 col5" id="T_b2197_level0_col5">Last Updated</th>
-<th class="col_heading level0 col6" id="T_b2197_level0_col6">Start Date</th>
-<th class="col_heading level0 col7" id="T_b2197_level0_col7">End Date</th>
-<th class="col_heading level0 col8" id="T_b2197_level0_col8">Notes</th>
+<th class="col_heading level0 col0" id="T_47c53_level0_col0">Series Id</th>
+<th class="col_heading level0 col1" id="T_47c53_level0_col1">Title</th>
+<th class="col_heading level0 col2" id="T_47c53_level0_col2">Units</th>
+<th class="col_heading level0 col3" id="T_47c53_level0_col3">Frequency</th>
+<th class="col_heading level0 col4" id="T_47c53_level0_col4">Seasonal Adjustment</th>
+<th class="col_heading level0 col5" id="T_47c53_level0_col5">Last Updated</th>
+<th class="col_heading level0 col6" id="T_47c53_level0_col6">Start Date</th>
+<th class="col_heading level0 col7" id="T_47c53_level0_col7">End Date</th>
+<th class="col_heading level0 col8" id="T_47c53_level0_col8">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="data row0 col0" id="T_b2197_row0_col0">POPTHM</td>
-<td class="data row0 col1" id="T_b2197_row0_col1">Population</td>
-<td class="data row0 col2" id="T_b2197_row0_col2">Thousands</td>
-<td class="data row0 col3" id="T_b2197_row0_col3">Monthly</td>
-<td class="data row0 col4" id="T_b2197_row0_col4">Not Seasonally Adjusted</td>
-<td class="data row0 col5" id="T_b2197_row0_col5">2026-01-22 10:29:41-06</td>
-<td class="data row0 col6" id="T_b2197_row0_col6">1959-01-01</td>
-<td class="data row0 col7" id="T_b2197_row0_col7">2025-11-01</td>
-<td class="data row0 col8" id="T_b2197_row0_col8">Population includes resident population plus armed forces overseas. The monthly estimate is the average of estimates for the first of the month and the first of the following month.
+<td class="data row0 col0" id="T_47c53_row0_col0">POPTHM</td>
+<td class="data row0 col1" id="T_47c53_row0_col1">Population</td>
+<td class="data row0 col2" id="T_47c53_row0_col2">Thousands</td>
+<td class="data row0 col3" id="T_47c53_row0_col3">Monthly</td>
+<td class="data row0 col4" id="T_47c53_row0_col4">Not Seasonally Adjusted</td>
+<td class="data row0 col5" id="T_47c53_row0_col5">2026-01-22 10:29:41-06</td>
+<td class="data row0 col6" id="T_47c53_row0_col6">1959-01-01</td>
+<td class="data row0 col7" id="T_47c53_row0_col7">2025-11-01</td>
+<td class="data row0 col8" id="T_47c53_row0_col8">Population includes resident population plus armed forces overseas. The monthly estimate is the average of estimates for the first of the month and the first of the following month.
 BEA Account Code: B230RC
 A Guide to the National Income and Product Accounts of the United States (NIPA) - (http://www.bea.gov/national/pdf/nipaguid.pdf)</td>
 </tr>
 <tr>
-<td class="data row1 col0" id="T_b2197_row1_col0">TNKNOX5POP</td>
-<td class="data row1 col1" id="T_b2197_row1_col1">Resident Population in Knox County, TN</td>
-<td class="data row1 col2" id="T_b2197_row1_col2">Thousands of Persons</td>
-<td class="data row1 col3" id="T_b2197_row1_col3">Annual</td>
-<td class="data row1 col4" id="T_b2197_row1_col4">Not Seasonally Adjusted</td>
-<td class="data row1 col5" id="T_b2197_row1_col5">2025-03-14 11:43:58-05</td>
-<td class="data row1 col6" id="T_b2197_row1_col6">1970-01-01</td>
-<td class="data row1 col7" id="T_b2197_row1_col7">2024-01-01</td>
-<td class="data row1 col8" id="T_b2197_row1_col8">Data for "Resident Population" are estimates as of July 1. Data for 1970, 1980, 1990, and 2000 are annual census.
+<td class="data row1 col0" id="T_47c53_row1_col0">TNKNOX5POP</td>
+<td class="data row1 col1" id="T_47c53_row1_col1">Resident Population in Knox County, TN</td>
+<td class="data row1 col2" id="T_47c53_row1_col2">Thousands of Persons</td>
+<td class="data row1 col3" id="T_47c53_row1_col3">Annual</td>
+<td class="data row1 col4" id="T_47c53_row1_col4">Not Seasonally Adjusted</td>
+<td class="data row1 col5" id="T_47c53_row1_col5">2025-03-14 11:43:58-05</td>
+<td class="data row1 col6" id="T_47c53_row1_col6">1970-01-01</td>
+<td class="data row1 col7" id="T_47c53_row1_col7">2024-01-01</td>
+<td class="data row1 col8" id="T_47c53_row1_col8">Data for "Resident Population" are estimates as of July 1. Data for 1970, 1980, 1990, and 2000 are annual census.
 
 Population estimates are updated annually using current data on births, deaths, and migration to calculate population change since the most recent decennial census. The annual time series of estimates begins with the most recent decennial census data and extends to the vintage year. Each vintage of estimates includes all years since the most recent decennial census.</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_47c53_row2_col0">ATNHPIUS47093A</td>
+<td class="data row2 col1" id="T_47c53_row2_col1">All-Transactions House Price Index for Knox County, TN</td>
+<td class="data row2 col2" id="T_47c53_row2_col2">Index 2000=100</td>
+<td class="data row2 col3" id="T_47c53_row2_col3">Annual</td>
+<td class="data row2 col4" id="T_47c53_row2_col4">Not Seasonally Adjusted</td>
+<td class="data row2 col5" id="T_47c53_row2_col5">2025-03-25 09:28:53-05</td>
+<td class="data row2 col6" id="T_47c53_row2_col6">1975-01-01</td>
+<td class="data row2 col7" id="T_47c53_row2_col7">2024-01-01</td>
+<td class="data row2 col8" id="T_47c53_row2_col8">As stated by the source, these annual county indexes should be considered developmental. As with the standard FHFA HPIs, revisions to these indexes may reflect the impact of new data or technical adjustments. Indexes are calibrated using appraisal values and sales prices for mortgages bought or guaranteed by Fannie Mae and Freddie Mac. As discussed in the Working Paper 16-01, in cases where sample sizes are small for the county area, an index is either not reported if recording has not started or a missing value is reported with a period (.). Index values always reflect the native county index, i.e. they are not made with data from another area or year.
+
+ For tracking and feedback purposes, please cite Working Paper 16-01 when using these data. A suggested form is: Bogin, A., Doerner, W. and Larson, W. (2016). Local House Price Dynamics: New Indices and Stylized Facts. Federal Housing Finance Agency, Working Paper 16-01. The working paper is accessible at http://www.fhfa.gov/papers/wp1601.aspx.</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_47c53_row3_col0">USSTHPI</td>
+<td class="data row3 col1" id="T_47c53_row3_col1">All-Transactions House Price Index for the United States</td>
+<td class="data row3 col2" id="T_47c53_row3_col2">Index 1980:Q1=100</td>
+<td class="data row3 col3" id="T_47c53_row3_col3">Quarterly</td>
+<td class="data row3 col4" id="T_47c53_row3_col4">Not Seasonally Adjusted</td>
+<td class="data row3 col5" id="T_47c53_row3_col5">2025-11-25 09:05:09-06</td>
+<td class="data row3 col6" id="T_47c53_row3_col6">1975-01-01</td>
+<td class="data row3 col7" id="T_47c53_row3_col7">2025-07-01</td>
+<td class="data row3 col8" id="T_47c53_row3_col8">Estimated using sales prices and appraisal data.</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_47c53_row4_col0">REALGDPALL47093</td>
+<td class="data row4 col1" id="T_47c53_row4_col1">Real Gross Domestic Product: All Industries in Knox County, TN</td>
+<td class="data row4 col2" id="T_47c53_row4_col2">Thousands of Chained 2017 U.S. Dollars</td>
+<td class="data row4 col3" id="T_47c53_row4_col3">Annual</td>
+<td class="data row4 col4" id="T_47c53_row4_col4">Not Seasonally Adjusted</td>
+<td class="data row4 col5" id="T_47c53_row4_col5">2026-02-05 08:59:59-06</td>
+<td class="data row4 col6" id="T_47c53_row4_col6">2001-01-01</td>
+<td class="data row4 col7" id="T_47c53_row4_col7">2024-01-01</td>
+<td class="data row4 col8" id="T_47c53_row4_col8">GDP by county is a measure of the market value of final goods and services produced within a county area in a particular period. While other measures of county economies rely mainly on labor market data, these statistics incorporate multiple data sources that capture trends in labor, revenue, and value of production. As a result, the capital-intensive industries are captured more fully than when measured solely by labor data.</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_47c53_row5_col0">GDPC1</td>
+<td class="data row5 col1" id="T_47c53_row5_col1">Real Gross Domestic Product</td>
+<td class="data row5 col2" id="T_47c53_row5_col2">Billions of Chained 2017 Dollars</td>
+<td class="data row5 col3" id="T_47c53_row5_col3">Quarterly</td>
+<td class="data row5 col4" id="T_47c53_row5_col4">Seasonally Adjusted Annual Rate</td>
+<td class="data row5 col5" id="T_47c53_row5_col5">2026-01-22 07:46:36-06</td>
+<td class="data row5 col6" id="T_47c53_row5_col6">1947-01-01</td>
+<td class="data row5 col7" id="T_47c53_row5_col7">2025-07-01</td>
+<td class="data row5 col8" id="T_47c53_row5_col8">BEA Account Code: A191RX
+
+Real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States.For more information see the Guide to the National Income and Product Accounts of the United States (NIPA). For more information, please visit the Bureau of Economic Analysis (http://www.bea.gov/national/pdf/nipaguid.pdf).</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_47c53_row6_col0">MEDLISPRI47093</td>
+<td class="data row6 col1" id="T_47c53_row6_col1">Housing Inventory: Median Listing Price in Knox County, TN</td>
+<td class="data row6 col2" id="T_47c53_row6_col2">U.S. Dollars</td>
+<td class="data row6 col3" id="T_47c53_row6_col3">Monthly</td>
+<td class="data row6 col4" id="T_47c53_row6_col4">Not Seasonally Adjusted</td>
+<td class="data row6 col5" id="T_47c53_row6_col5">2026-02-06 17:24:43-06</td>
+<td class="data row6 col6" id="T_47c53_row6_col6">2016-07-01</td>
+<td class="data row6 col7" id="T_47c53_row6_col7">2026-01-01</td>
+<td class="data row6 col8" id="T_47c53_row6_col8">The median listing price in a given market during the specified month.
+
+With the release of its September 2022 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology updates and improves the calculation of time on market and improves handling of duplicate listings. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since October 2022 will not be directly comparable with previous data releases (files downloaded before October 2022) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).
+
+With the release of its November 2021 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology uses the latest and most accurate data mapping of listing statuses to yield a cleaner and more consistent measurement of active listings at both the national and local level. The methodology has also been adjusted to better account for missing data in some fields including square footage. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since December 2021 will not be directly comparable with previous data releases (files downloaded before December 2021) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_47c53_row7_col0">MEDLISPRIUS</td>
+<td class="data row7 col1" id="T_47c53_row7_col1">Housing Inventory: Median Listing Price in the United States</td>
+<td class="data row7 col2" id="T_47c53_row7_col2">U.S. Dollars</td>
+<td class="data row7 col3" id="T_47c53_row7_col3">Monthly</td>
+<td class="data row7 col4" id="T_47c53_row7_col4">Not Seasonally Adjusted</td>
+<td class="data row7 col5" id="T_47c53_row7_col5">2026-02-06 17:11:49-06</td>
+<td class="data row7 col6" id="T_47c53_row7_col6">2016-07-01</td>
+<td class="data row7 col7" id="T_47c53_row7_col7">2026-01-01</td>
+<td class="data row7 col8" id="T_47c53_row7_col8">The median listing price in a given market during the specified month.
+
+With the release of its September 2022 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology updates and improves the calculation of time on market and improves handling of duplicate listings. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since October 2022 will not be directly comparable with previous data releases (files downloaded before October 2022) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).
+
+With the release of its November 2021 housing trends report, Realtor.com® incorporated a new and improved methodology for capturing and reporting housing inventory trends and metrics. The new methodology uses the latest and most accurate data mapping of listing statuses to yield a cleaner and more consistent measurement of active listings at both the national and local level. The methodology has also been adjusted to better account for missing data in some fields including square footage. Most areas across the country will see minor changes with a smaller handful of areas seeing larger updates. As a result of these changes, the data released since December 2021 will not be directly comparable with previous data releases (files downloaded before December 2021) and Realtor.com® economics blog posts. However, future data releases, including historical data, will consistently apply the new methodology. More details are available at the source's Real Estate Data Library (https://www.realtor.com/research/data/).</td>
 </tr>
 </tbody>
 </table>
@@ -7862,43 +7955,47 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># df.reset_index(names="Date", inplace=True)</span>
 <span class="c1"># df.to_csv("data/fred-data.csv", index=False)</span>
 
-
-<span class="c1"># fetch_data()</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">data_dict</span><span class="p">):</span>
-    <span class="n">series_list</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">series_id</span> <span class="ow">in</span> <span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="n">series_id</span><span class="p">)</span>
-        <span class="n">s</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="n">series_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">series_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data/fred-data.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">df</span>
-
+<span class="c1"># series_list = []</span>
+<span class="c1"># series_list.append(s)</span>
+<span class="c1"># df = pd.concat(series_list, axis=1)</span>
 
 <span class="n">fred</span> <span class="o">=</span> <span class="n">Fred</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"FRED_API_KEY"</span><span class="p">))</span>
 
 <span class="n">series_ids</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"knox_county_pop"</span><span class="p">:</span> <span class="s2">"TNKNOX5POP"</span><span class="p">,</span>
-    <span class="s2">"us_pop"</span><span class="p">:</span> <span class="s2">"POPTHM"</span><span class="p">,</span>
-    <span class="s2">"knox_county_trans_ind"</span><span class="p">:</span> <span class="s2">"ATNHPIUS47093A"</span><span class="p">,</span>
-    <span class="s2">"us_trans_ind"</span><span class="p">:</span> <span class="s2">"USSTHPI"</span><span class="p">,</span>
-    <span class="s2">"knox_county_gdp"</span><span class="p">:</span> <span class="s2">"REALGDPALL47093"</span><span class="p">,</span>
-    <span class="s2">"us_gdp"</span><span class="p">:</span> <span class="s2">"GDPC1"</span><span class="p">,</span>
-    <span class="s2">"median_list_price_knox_county"</span><span class="p">:</span> <span class="s2">"MEDLISPRI47093"</span><span class="p">,</span>
-    <span class="s2">"median_list_price_us"</span><span class="p">:</span> <span class="s2">"MEDLISPRIUS"</span><span class="p">,</span>
+    <span class="s2">"Population"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Population Knox County"</span><span class="p">:</span> <span class="s2">"TNKNOX5POP"</span><span class="p">,</span>
+        <span class="s2">"Population U.S."</span><span class="p">:</span> <span class="s2">"POPTHM"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="c1"># "Home Price Transaction Index": {</span>
+    <span class="c1">#     "Transaction Index Knox County": "ATNHPIUS47093A",</span>
+    <span class="c1">#     "Transaction Index U.S.": "USSTHPI",</span>
+    <span class="c1"># },</span>
+    <span class="s2">"GDP"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"GDP Knox County"</span><span class="p">:</span> <span class="s2">"REALGDPALL47093"</span><span class="p">,</span>
+        <span class="s2">"GDP U.S."</span><span class="p">:</span> <span class="s2">"GDPC1"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">"Median List Price"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Median List Price Knox County"</span><span class="p">:</span> <span class="s2">"MEDLISPRI47093"</span><span class="p">,</span>
+        <span class="s2">"Median List Price U.S."</span><span class="p">:</span> <span class="s2">"MEDLISPRIUS"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">"Mortage Rate"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"30-Year Mortgage Rate U.S."</span><span class="p">:</span> <span class="s2">"MORTGAGE30US"</span><span class="p">},</span>
 <span class="p">}</span>
 
-<span class="c1"># df = fetch_data(data_dict=series_ids)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">series_ids</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">ids</span> <span class="ow">in</span> <span class="n">series_ids</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">series</span> <span class="ow">in</span> <span class="n">ids</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="n">series</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">series</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/raw/</span><span class="si">{</span><span class="n">series</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">)</span>
+
+
+<span class="c1"># fetch_data(series_ids=series_ids)</span>
 </pre></div>
 </div>
 </div>
@@ -7909,24 +8006,65 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/fred-data.csv"</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
-<span class="c1"># Round dates: "2025-01-01" =&gt; "2024Q4" =&gt; "2024-12-31"</span>
-<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">)</span><span class="o">.</span><span class="n">to_timestamp</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="sd">"""Data Cleaning"""</span>
 
-<span class="c1"># print(pop.resample("Q").last().dropna())</span>
+<span class="sd">""" </span>
+<span class="sd">GDP </span>
+<span class="sd">"""</span>
 
-<span class="c1"># print(df.loc[:, ["knox_gdp", "us_gdp"]].dropna(how="all").tail())</span>
+<span class="c1"># REALGDPALL47093: not seasonally adjusted, annual</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="s2">"REALGDPALL47093"</span>
+<span class="n">gdp_knox</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/raw/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
 
-<span class="c1"># df["knox_gdp_ttm"] = df["knox_gdp"].rolling(4).sum()</span>
-<span class="c1"># df["us_gdp_ttm"] = df["us_gdp"].rolling(4).sum()</span>
-<span class="c1"># print(df.tail())</span>
+<span class="c1"># Change from January 1st (BOY) to December 31st (EOY)</span>
+<span class="n">gdp_knox</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gdp_knox</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">YearEnd</span><span class="p">()</span>
+<span class="n">gdp_knox</span><span class="p">[</span><span class="s2">"GDP Knox County TTM"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdp_knox</span><span class="p">[</span><span class="s2">"REALGDPALL47093"</span><span class="p">]</span>
+<span class="n">gdp_knox</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">)</span>
+
+<span class="n">logs</span><span class="o">.</span><span class="n">log_change</span><span class="p">(</span><span class="s2">"Dates changed to end-of-year."</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">)</span>
+
+<span class="c1"># GDPC1: seasonally adjusted, quarterly</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="s2">"GDPC1"</span>
+<span class="n">gdp_us</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/raw/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
+<span class="c1"># Adjust each date to the end of its quarter</span>
+<span class="n">gdp_us</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gdp_us</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterEnd</span><span class="p">()</span>
+<span class="c1"># us_gdp (GDPC1): seasonally adjusted annual (quarterly x 4), quarterly</span>
+<span class="n">gdp_us</span><span class="p">[</span><span class="s2">"GDP U.S. Quarterly"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdp_us</span><span class="p">[</span><span class="s2">"GDPC1"</span><span class="p">]</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">gdp_us</span><span class="p">[</span><span class="s2">"GDP U.S. TTM"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdp_us</span><span class="p">[</span><span class="s2">"GDP U.S. Quarterly"</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">gdp_us</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">)</span>
+<span class="n">logs</span><span class="o">.</span><span class="n">log_change</span><span class="p">(</span>
+    <span class="s2">"Dates changed to end-of-quarter. Computed quarterly figures and trailing twelve month figures."</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="sd">"""</span>
+<span class="sd">Population</span>
+<span class="sd">"""</span>
+
+<span class="c1"># TNKNOX5POP</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="s2">"TNKNOX5POP"</span>
+<span class="n">pop_knox</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/raw/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
+<span class="c1"># Change from January 1st (BOY) to December 31st (EOY)</span>
+<span class="n">pop_knox</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pop_knox</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">YearEnd</span><span class="p">()</span>
+<span class="n">pop_knox</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">)</span>
+<span class="n">logs</span><span class="o">.</span><span class="n">log_change</span><span class="p">(</span><span class="s2">"Dates changed to end-of-year."</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">)</span>
+
+
+<span class="c1"># POPTHM</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="s2">"POPTHM"</span>
+<span class="n">pop_us</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/raw/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
+<span class="c1"># Adjust each date to the end of month</span>
+<span class="n">pop_us</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pop_us</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">MonthEnd</span><span class="p">()</span>
+<span class="n">pop_us</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">)</span>
+<span class="n">logs</span><span class="o">.</span><span class="n">log_change</span><span class="p">(</span>
+    <span class="s2">"Dates changed to end-of-month."</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span>
+<span class="p">)</span>
+
 
 <span class="c1"># long = df.melt(ignore_index=False)</span>
 <span class="c1"># long = long.sort_values(["variable"])</span>
@@ -7939,11 +8077,8 @@ Population estimates are updated annually using current data on births, deaths, 
 <span class="c1">#     index=long.index, columns="variable", values="pct_chg"</span>
 <span class="c1"># ).dropna()</span>
 
-
 <span class="c1"># data = df.melt(id_vars="Date")</span>
-
 <span class="c1"># df_pct = df.loc[:, "knox_trans_ind"].pct_change()</span>
-
 
 <span class="c1"># long = plot_data.melt(ignore_index=False)</span>
 <span class="c1">#     long = long.sort_values(["variable", long.index.name])</span>
@@ -7989,162 +8124,148 @@ Population estimates are updated annually using current data on births, deaths, 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52881c68">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=be0338c9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [71]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># def plot_bar_pct(</span>
-<span class="c1">#     df=df,</span>
-<span class="c1">#     # start="2020",</span>
-<span class="c1">#     # end=None,</span>
-<span class="c1">#     # cols=None,</span>
-<span class="c1">#     title="",</span>
-<span class="c1">#     subtitle="",</span>
-<span class="c1">#     footnote="",</span>
-<span class="c1">#     legend_labels=None,</span>
-<span class="c1">#     file_name=None,</span>
-<span class="c1">#     show=False,</span>
-<span class="c1">#     period_shift=1,</span>
-<span class="c1"># ):</span>
-
-<span class="c1">#     import matplotlib.pyplot as plt</span>
-<span class="c1">#     import pandas as pd</span>
-
-<span class="c1">#     # if cols is None:</span>
-<span class="c1">#     #     cols = df.columns</span>
-
-<span class="c1">#     # if end is not None:</span>
-<span class="c1">#     #     plot_data = df.loc[:, cols].copy()</span>
-<span class="c1">#     #     plot_data = plot_data.loc[start:end, :].copy()</span>
-<span class="c1">#     # else:</span>
-<span class="c1">#     #     plot_data = df.loc[:, cols].copy()</span>
-<span class="c1">#     #     plot_data = plot_data.loc[start:, :].copy()</span>
-
-<span class="c1">#     # long = plot_data.melt(ignore_index=False)</span>
-<span class="c1">#     # long = long.sort_values(["variable", "index"])</span>
-<span class="c1">#     # long["pct_chg"] = long.groupby("variable")["value"].pct_change(</span>
-<span class="c1">#     #     periods=period_shift, fill_method=None</span>
-<span class="c1">#     # )</span>
-<span class="c1">#     # long = long.dropna().copy()</span>
-
-<span class="c1">#     # long = plot_data.melt(ignore_index=False)</span>
-<span class="c1">#     # long = long.sort_values(["variable"])</span>
-
-<span class="c1">#     # long["pct_chg"] = long.groupby("variable")["value"].pct_change(</span>
-<span class="c1">#     #     periods=period_shift, fill_method=None</span>
-<span class="c1">#     # )</span>
-
-<span class="c1">#     # # Convert to wide format for plotting</span>
-<span class="c1">#     # wide = long.pivot_table(</span>
-<span class="c1">#     #     index=long.index, columns="variable", values="pct_chg"</span>
-<span class="c1">#     # ).dropna()</span>
-
-<span class="c1">#     fig, ax = plt.subplots(figsize=(10, 4))</span>
-<span class="c1">#     ax.xaxis.set_major_locator(mdates.YearLocator())</span>
-<span class="c1">#     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))</span>
-<span class="c1">#     ax.set_position([0.08, 0.20, 0.90, 0.65])</span>
-<span class="c1">#     ax.set_ymargin(0.3)</span>
-<span class="c1">#     # fig.subplots_adjust(left=0.1, right=0.95, top=0.9, bottom=0.2)</span>
-<span class="c1">#     # fig.set_size_inches(11, 5)  # increases canvas, not plot density</span>
-
-<span class="c1">#     # Plot grouped bars</span>
-<span class="c1">#     bars = df.plot(kind="bar", ax=ax, width=0.8)</span>
-
-<span class="c1">#     # Format y-axis as percent</span>
-<span class="c1">#     ax.yaxis.set_major_formatter(lambda x, _: f"{x:.1%}")</span>
-
-<span class="c1">#     # X-axis labels</span>
-<span class="c1">#     ax.set_xticklabels(df.index.strftime("%Y-%m-%d"), rotation=0, ha="center")</span>
-
-<span class="c1">#     # Labels</span>
-<span class="c1">#     ax.set_xlabel("")</span>
-<span class="c1">#     ax.set_ylabel("")</span>
-<span class="c1">#     ax.spines["top"].set_visible(False)</span>
-<span class="c1">#     ax.spines["right"].set_visible(False)</span>
-
-<span class="c1">#     handles, labels = ax.get_legend_handles_labels()</span>
-
-<span class="c1">#     # Replace labels</span>
-<span class="c1">#     new_labels = legend_labels</span>
-
-<span class="c1">#     ax.legend(handles, new_labels)</span>
-
-<span class="c1">#     for container in bars.containers:</span>
-<span class="c1">#         ax.bar_label(</span>
-<span class="c1">#             container, labels=[f"{v*100:.1f}%" for v in container.datavalues], padding=3</span>
-<span class="c1">#         )</span>
-
-<span class="c1">#     # plt.tight_layout(pad=1)</span>
-<span class="c1">#     # plt.show()</span>
-<span class="c1">#     # Title</span>
-<span class="c1">#     fig.text(0.01, 1.05, title, fontsize=18, fontweight="bold", ha="left")</span>
-
-<span class="c1">#     # Subtitle</span>
-<span class="c1">#     fig.text(0.01, 0.99, subtitle, fontsize=14, ha="left", color="gray")</span>
-
-<span class="c1">#     # Footnote</span>
-<span class="c1">#     fig.text(0.09, -0.12, footnote, fontsize=12, ha="left", color="gray")</span>
-
-<span class="c1">#     ax.spines["top"].set_visible(False)</span>
-<span class="c1">#     ax.spines["right"].set_visible(False)</span>
-
-<span class="c1">#     plt.setp(ax.get_xticklabels(), rotation=45, ha="right")</span>
-<span class="c1">#     plt.tight_layout(pad=1.2)</span>
-
-<span class="c1">#     fig.savefig(f"plots/{file_name}.png", bbox_inches="tight", pad_inches=0.4, dpi=300)</span>
-
-<span class="c1">#     if show is True:</span>
-<span class="c1">#         plt.show()</span>
-<span class="c1">#     else:</span>
-<span class="c1">#         plt.close(fig)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=be0338c9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_pop</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2018"</span><span class="p">:,</span> <span class="p">[</span><span class="s2">"knox_county_pop"</span><span class="p">,</span> <span class="s2">"us_pop"</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="c1"># print(df_pop)</span>
-<span class="n">df_table</span> <span class="o">=</span> <span class="n">df_pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"knox_county_pop"</span><span class="p">:</span> <span class="s2">"Knox County, TN"</span><span class="p">,</span> <span class="s2">"us_pop"</span><span class="p">:</span> <span class="s2">"U.S."</span><span class="p">}</span>
-<span class="p">)</span>
-
-<span class="n">pop_growth</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">pop_growth</span><span class="p">[</span><span class="s2">"pct_chg"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pop_growth</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"variable"</span><span class="p">)[</span><span class="s2">"value"</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
-<span class="n">pop_growth</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pop_growth</span> <span class="o">=</span> <span class="n">pop_growth</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"variable"</span><span class="p">,</span> <span class="s2">"pct_chg"</span><span class="p">]]</span>
-<span class="c1"># pop_growth.filter([p])</span>
-<span class="c1"># print(pop_growth)</span>
-<span class="n">pop_growth</span> <span class="o">=</span> <span class="n">pop_growth</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"variable"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"pct_chg"</span><span class="p">)</span>
-<span class="n">pop_growth</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">pop_growth</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Date"</span>
-
-<span class="c1"># print(pop_growth.index)</span>
-<span class="c1"># tables.export_table(</span>
-<span class="c1"># local_export_table(</span>
-<span class="c1">#     df=pop_growth,</span>
-<span class="c1">#     file_name="population_growth",</span>
-<span class="c1">#     caption="Population Growth",</span>
-<span class="c1">#     # default_width="20px",</span>
-<span class="c1">#     col_widths={"Date": "80px", "Knox County, TN": "80px", "U.S.": "80px"},</span>
-<span class="c1">#     col_format={</span>
-<span class="c1">#         "Knox County, TN": lambda x: "{:.1f}%".format(x * 100),</span>
-<span class="c1">#         "U.S.": lambda x: "{:.1f}%".format(x * 100),</span>
-<span class="c1">#     },</span>
-<span class="c1">#     show=True,</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># df_pop = df.loc["2018":, ["knox_county_pop", "us_pop"]].dropna()</span>
+<span class="c1"># # print(df_pop)</span>
+<span class="c1"># df_table = df_pop.rename(</span>
+<span class="c1">#     columns={"knox_county_pop": "Knox County, TN", "us_pop": "U.S."}</span>
 <span class="c1"># )</span>
+
+<span class="c1"># pop_growth = df_table.melt(ignore_index=False)</span>
+<span class="c1"># pop_growth["pct_chg"] = pop_growth.groupby("variable")["value"].pct_change()</span>
+<span class="c1"># pop_growth.dropna(inplace=True)</span>
+<span class="c1"># pop_growth = pop_growth.loc[:, ["variable", "pct_chg"]]</span>
+<span class="c1"># # pop_growth.filter([p])</span>
+<span class="c1"># # print(pop_growth)</span>
+<span class="c1"># pop_growth = pop_growth.pivot(columns="variable", values="pct_chg")</span>
+<span class="c1"># pop_growth.index.name = None</span>
+<span class="c1"># pop_growth.columns.name = "Date"</span>
+
+
+<span class="c1"># ht = pd.read_html("https://www.doorloop.com/blog/rental-vacancy-statistics#rental-vacancy-rates-by-state")</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">ht</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">tn</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="s2">"State"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Tennessee"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># print(tn)</span>
+
+<span class="n">city</span> <span class="o">=</span> <span class="n">ht</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">knox</span> <span class="o">=</span> <span class="n">city</span><span class="p">[</span><span class="n">city</span><span class="p">[</span><span class="s2">"Metropolitan Area"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Knoxville, TN"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">tn</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"State"</span><span class="p">:</span> <span class="s2">"Location"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">knox</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"Metropolitan Area"</span><span class="p">:</span> <span class="s2">"Location"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">state_tn</span> <span class="o">=</span> <span class="n">ht</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="c1"># us= city[]</span>
+
+<span class="n">vacancy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tn</span><span class="p">,</span> <span class="n">knox</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">vacancy</span> <span class="o">=</span> <span class="n">vacancy</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="o">~</span><span class="n">vacancy</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Change"</span><span class="p">)]</span>
+<span class="n">long</span> <span class="o">=</span> <span class="n">vacancy</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s2">"Location"</span><span class="p">)</span>
+<span class="n">long</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">long</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Tennessee"</span><span class="p">,</span> <span class="s2">"2022"</span><span class="p">,</span> <span class="s2">"7.3%"</span><span class="p">]</span>
+<span class="n">long</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">long</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Tennessee"</span><span class="p">,</span> <span class="s2">"2021"</span><span class="p">,</span> <span class="s2">"7.4%"</span><span class="p">]</span>
+<span class="n">long</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">long</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Tennessee"</span><span class="p">,</span> <span class="s2">"2020"</span><span class="p">,</span> <span class="s2">"8.3%"</span><span class="p">]</span>
+<span class="n">long</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"Location"</span><span class="p">,</span> <span class="s2">"variable"</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">tables</span><span class="o">.</span><span class="n">pretty_table</span><span class="p">(</span>
+    <span class="n">long</span><span class="p">,</span>
+    <span class="c1"># min_widths=min_widths,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="s2">"12px"</span><span class="p">,</span>
+    <span class="n">show_index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[71]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<style type="text/css">
+#T_6d1f5 table {
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+#T_6d1f5 th {
+  font-size: 12px;
+  text-align: left;
+  padding: 8px;
+  white-space: normal;
+  box-sizing: border-box;
+}
+#T_6d1f5 td {
+  font-size: 12px;
+  text-align: left;
+  padding: 6px;
+  white-space: normal;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+#T_6d1f5_row0_col0, #T_6d1f5_row0_col1, #T_6d1f5_row0_col2, #T_6d1f5_row1_col0, #T_6d1f5_row1_col1, #T_6d1f5_row1_col2, #T_6d1f5_row2_col0, #T_6d1f5_row2_col1, #T_6d1f5_row2_col2, #T_6d1f5_row3_col0, #T_6d1f5_row3_col1, #T_6d1f5_row3_col2, #T_6d1f5_row4_col0, #T_6d1f5_row4_col1, #T_6d1f5_row4_col2, #T_6d1f5_row5_col0, #T_6d1f5_row5_col1, #T_6d1f5_row5_col2, #T_6d1f5_row6_col0, #T_6d1f5_row6_col1, #T_6d1f5_row6_col2 {
+  min-width: 80px;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.3;
+}
+</style>
+<table id="T_6d1f5">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_6d1f5_level0_col0">Location</th>
+<th class="col_heading level0 col1" id="T_6d1f5_level0_col1">variable</th>
+<th class="col_heading level0 col2" id="T_6d1f5_level0_col2">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_6d1f5_row0_col0">Tennessee</td>
+<td class="data row0 col1" id="T_6d1f5_row0_col1">2020</td>
+<td class="data row0 col2" id="T_6d1f5_row0_col2">8.3%</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_6d1f5_row1_col0">Tennessee</td>
+<td class="data row1 col1" id="T_6d1f5_row1_col1">2021</td>
+<td class="data row1 col2" id="T_6d1f5_row1_col2">7.4%</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_6d1f5_row2_col0">Tennessee</td>
+<td class="data row2 col1" id="T_6d1f5_row2_col1">2022</td>
+<td class="data row2 col2" id="T_6d1f5_row2_col2">7.3%</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_6d1f5_row3_col0">Tennessee</td>
+<td class="data row3 col1" id="T_6d1f5_row3_col1">2023</td>
+<td class="data row3 col2" id="T_6d1f5_row3_col2">7.8%</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_6d1f5_row4_col0">Tennessee</td>
+<td class="data row4 col1" id="T_6d1f5_row4_col1">2024</td>
+<td class="data row4 col2" id="T_6d1f5_row4_col2">8.2%</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_6d1f5_row5_col0">Knoxville, TN</td>
+<td class="data row5 col1" id="T_6d1f5_row5_col1">2023</td>
+<td class="data row5 col2" id="T_6d1f5_row5_col2">4.2%</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_6d1f5_row6_col0">Knoxville, TN</td>
+<td class="data row6 col1" id="T_6d1f5_row6_col1">2024</td>
+<td class="data row6 col2" id="T_6d1f5_row6_col2">4.0%</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -8154,7 +8275,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">long</span> <span class="o">=</span> <span class="n">df_pop</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -8171,6 +8292,8 @@ Population estimates are updated annually using current data on births, deaths, 
 <span class="n">bar_plots</span><span class="o">.</span><span class="n">plot_bars</span><span class="p">(</span>
     <span class="c1"># plot_bar_pct(</span>
     <span class="n">df</span><span class="o">=</span><span class="n">wide</span><span class="p">,</span>
+    <span class="n">bar_width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">hide_yaxis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">"knox_county_pop"</span><span class="p">,</span> <span class="s2">"us_pop"</span><span class="p">],</span>
     <span class="n">footnote</span><span class="o">=</span><span class="s2">"FRED (KNXPOP, POPTHM)"</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">"Population Growth in Knox County, TN"</span><span class="p">,</span>
@@ -8191,56 +8314,79 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
-<img alt="No description has been provided for this image" class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA44AAAH9CAYAAABV3iLSAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvwVt1zgAAAAlwSFlzAAAPYQAAD2EBqD+naQAAdjZJREFUeJzt3QmclfP7//GrfaFdJQptVKRFm9BKoZCEFGUp5aso0oLsS0KbrUL6SaVImySJUkiLlPJV0qJVSov2bf6P9+frPv/7nDlzNzPNnGlmXs/H4zQz59xzn/vc557Tfd3X9bk+WeLi4uIMAAAAAIAEZE3oAQAAAAAACBwBAAAAACdExhEAAAAAEIjAEQAAAAAQiMARAAAAABCIwBEAAAAAEIjAEQAAAAAQiMARAAAAABCIwBEAAAAAECi7JcHGjRutcePGUR/Lli2bZc+e3fLmzWvFihWzRo0a2R133GFFihSxjKB37942ceJE932tWrVs1KhRKbbuuLg4W758uVWuXDns/tdee81ef/119/3ZZ59tX331laUnhw4dslmzZtn06dPtt99+s+3bt9vBgwfttNNOs/POO88uueQSa9mypZUrV84ymj///NN9LV68eNj9F1xwQej7F1980b3+lKC/t02bNrnvu3TpYl27drXUpr/vBQsWnPD4/Prrr902HT16NHTfXXfd5f6mMrply5bZ5MmT3X7aunWrHThwwAoWLOiOA71nev/z5MljGU1Cn2mx4P9bSArv7/GHH36wdu3ahe6/7bbb7Kmnnor6O5988on16dMn9PPKlSuTudUAAGSijOOxY8dcoLBz5073n+dbb71lN954o/3+++8p9RQZ0qJFi+yWW26x/v37W0by7bff2jXXXGPdu3e3L774wtauXWv//POPHTlyxHbt2mU//fSTvfvuu3bdddfZSy+95I6fjGDfvn02aNAga9q0qa1bt84yu8WLF1u3bt3CgkadiGf0oHH//v328MMP280332wffPCBrVq1yvbs2eOO/7/++svmzZtnzzzzjDtOvOA7o8hon2njxo2zn3/+Oa03AwCA9JVxjKQsg266uqwTQwWN/pNlZV06d+5s06ZNs5w5c6bE9mYozz33XChzqSxmJO1b7/4zzjjD0gtlWHQV3h8M5sqVy8qUKWNZs2a1DRs2uJNoOX78uI0YMcKdaD/99NOW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ChbvueceO3bsmFWpUsU6derkgtI//vjDFi1a5AI/BXulSpWK91wKJhUMJlSeWbx4cRfcZcuWza1f4x61TpXXatzf+eef755b25UUL730kt144402bdo0u/32211wqRJVBcteKelHH31k119/vbtpX/hNmjTJ3Z89e8oVeJ533nnWvXt3GzVqlHuNsUbgCAAAAMAFehrTqCBNweCmTZui7hVl0pR1U6B30003WYUKFezHH390jymTqIxd3759rWzZsq6JjTJkK1asCI3nu//++91jjz/+uAs8W7RokeAYyt27/1fqW6BAgRO+Q1q/nufVV1+1WrVqWbly5VxAqiBWWdKk0DbdcMMN7jV27tzZ8ufP716jyku9bSlcuLDLdGofrF+/3mVaZe3ate57ZUlTmvZ71apV7dFHH7UDBw5YLBE4AgAAAHDjBYcPH25vvfWWC4gefvjhqKWWCvr81MBFJaWyatWqeNlBBZZaRuMURVk4ZQQViClLqCAzIQrORFnHE9Fz63mUZfRkyZLFatSo4R5LiqDXGEnPV7lyZZdlFH1VFlSBa0rLmjWrvfjii/bnn3/GvGSVwBEAAACAy2ZpTGLBggVdcPLTTz9FnaJDWbeEGsYk1DhG96vxi0eB3PHjx+2vv/4KBZTRKON3xhlnhDKakX7//XdXnvrbb78FPndQyWi04DjoNUajrOP06dPt8OHDNnXqVFfmmlrSqmSVwBEAAABAWHClclSN7VMG8vvvv0/03lGZ6uLFi8Pu+/XXX10208vibdu2zZ588klXAqoS1V69etn+/fujBytZs1qrVq3ceEVNxxHpnXfesZ9//tl1HNVz//PPP2HZRQV72h4v+6fgdd++fWHrUJlpUmTJkiXefXodmjbkvffes+3bt6f69CXt27d3DYXUeChWCBwBAAAAxNOjRw8rXbq0PfLII/b3338nag9pXkVlEJ999lmXDVQXUq1HnVTVfVQ0Pq9YsWIucNT3CuQSmtxetJyybG3atHFloGqqo2Y3Cpr0s54rb968LtitWLGiK7FdsGCBe/5nnnnGBZIKtETjA1X2qjGPGzdudN1Pv/nmmyS9+3nz5g0FxF4QqlLWq666yt58803XbVVjIkWPK6ua0hS8qvttaqw7IczjCAAAAKSCksXzpevn0zjH/v37uyktNOH9sGHDTvg76pqqLOCgQYNcg5nT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h55x48a5jlJ169YN3acgU91W1VjnnHPOcVlOAAAAADgV0VU1nWM6DgAAAACpjYwjAAAAACAQgSMAAAAAIBCBIwAAAAAgEIEjAAAAACAQgSMAAAAAgMARAAAAAJB8ZBwBAAAAAIEIHAEAAAAAgQgcAQAAAACBCBwBAAAAAIEIHAEAAAAAgQgcAQAAAACBCBwBAAAAAIEIHAEAAAAABI4A0saXX35pzZo1s+rVq1vLli1t8eLF8ZbZunWrde7c2WrVqmX16tWzN954I/TYxIkTrU6dOtawYUP79ttvQ/e/8847Nnr06Ji9DgAAgMyOjCOAVLFhwwbr1auXPfnkk7Zo0SK788477T//+Y/t3bs3bLlHH33USpYsafPmzbMxY8bYpEmTbOrUqe6xfv362ahRo+yJJ56wgQMHuvt2795tM2bMsFtvvZV3DgAAIEYIHAGkii1bttgtt9ziMolZs2a166+/3t2/bt260DLHjx+3nDlzuoyjviqAbNy4sf3000/u8Rw5crivcXFxli1bNvf90KFD7a677rLs2bPzzgEAAMQIZ14AUoUCRt08CgYPHDhg5513Xug+BZQKBD1HjhxxJam33367+7lPnz7WoUMHy507tz3//PMuGF22bJn17NmTdw0AACCGssTpUj7SLWVnZNasWWm9KUCC1q9f74JBlavec889UZc5duyYCwjXrl1rH374octARurdu7e1aNHCfv/9d/voo4+sbNmy9txzz1mePHnY+wAAAKmIUlUAqUoZwtatW7uy1YSCxv3799t9993ngkY1vokWNK5cudJ27txp5cuXt+HDh9vYsWOtUKFCNn78eN5BAACAVEbgCCDVzJ07141HfOihh6xr165Rl1GzG2UjVbb6wQcfWOHChaMup+Y43bt3d013SpQo4bKMCiLXrFnDOwgAAJDKGOMIIFWoCc4DDzzgOqM2bdo0weUUDJ511lk2ePDgUAOcSD/88IPlz5/fKlSoYNu2bbONGzfaP//8YytWrLBSpUrxDgIAAKQyMo4AUsW4ceNcMxyNS6xWrVropqk5vK+rVq1yzXC++eYbq1GjRmgZTb/hN2TIEBeESrFixaxNmzbWqFEjF5wyLQcAAEDqozlOOkdzHAAAAACpjYwjAAAAACAQgSMAAAAAIBCBIwAAAAAgEIEjAAAAACAQgSMAAAAAIBCBIwAAAAAgEIEjgBR3/HhcpnpeAACAjC57Wm8AgIwna9Ys9sroxbbxz39i9pwli+ezHm0vidnzAQAAZCYEjgBShYLG3zftZu8CAABkAJSqAgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgCANPHll19as2bNrHr16tayZUtbvHhxvGUOHjxoDz/8sNWoUcPq169vEydODD02d+5cq1evntWtW9cmT54cun/69OnWv3//mL0OAMgMaI4DAABibsOGDdarVy976623XFD46aef2n/+8x+bNWuWnX766aHlBgwYYAcOHHBB4urVq61Dhw5WsWJFq1Chgg0cONCeeeYZO+uss6x9+/Z2ww032JEjR2zEiBH2zjvv8K4CQAoi4wgAAGJuy5Ytdsstt1itWrUsa9asdv3117v7161bF7acAsr77rvP8uTJY5UrV7bmzZvblClT3GM5cuRwX+Pi4ixbtmzu+/Hjx1uTJk2sQIECMX9NAJCRkXEEAAAxp4BRN89PP/3kMovnnXde6L7du3fbjh07rEyZMqH7SpcubfPmzXPfd+/e3fr27WtHjx51X/ft22cTJkywsWPHxvjVAEDGR+AIAADS1Pr1661r16724IMPhpWpKpAUZRs9uXPnduMepU6dOjZz5szQY6+99pq1bdvW5syZY0OHDrWiRYvaCy+8YEWKFInp6wGAjIhSVQAAkGaWLVtmrVu3dmWr99xzT9hjChLFCxS97/PmzRtvPdu3b3eZyOuuu86Nexw2bJgLLPUVAHDyCBwBAECaUMObu+66yx566CGXcYxUsGBBK1y4cNi4x7Vr17py1UhvvPGGderUyZW3ZsmSxWUby5cvb2vWrEn11wEAmQGBIwAAiDkFgw888IArJb355psTXE7TdQwZMsT27t1ry5cvd81y1CAncl0KEBs1amSFChWyQ4cO2ebNm23FihVWsmTJGLwaAMj4CBwBAEDMjRs3zo1h7N27t1WrVi10W7RoUeirKBupYLBx48bWpUsX69Onj5uOw0/TcnTr1s19nz17duvZs6ebF3LGjBnWsWNH3l0ASAFZ4tTDGumW/iMVzXsFnEq6DZhtv2/aHbPnK3t2ARv0UIOYPR8AAEBmQsYRAAAAABCIwBEAAAAAEIjAEQAAAAAQiMARAAAAAEDgCAAAAABIPjKOPrt27bInnnjC6tWrZ9WrV7fbbrst1A48mo0bN7rJhrXs5ZdfboMGDbJjx46FHtf8UZprSo/36tXLjhw5Enps//79Vr9+fVu1atVJvH0AAAAAkPoIHH00V9SSJUtswIABNmHCBDdP1D333OMmFY6kIFCPyYcffmhPPfWUjR071t54443QMgpCr7rqKvvoo49s5cqV9vHHH4ceGzFihNWtW9fOP//81H2HAQA4xRw/HpepnhcAMoLsab0Bp4r169fbt99+a2PGjLFLLrnE3de3b1+bO3euTZ061R588MGw5TWp8ObNm238+PFWoEABFwDu2LHD+vfvb507d7acOXPa6tWr7eWXX7YyZcq4jKSXXdRyo0ePtokTJ6bJawUAIC1lzZrFXhm92Db++U/MnrNk8XzWo+3//n8HACQdgeO/ChUqZMOHD7fKlSuHdk6WLFncbc+ePfF2nEpYL7zwQhc0eurUqWN79+61//73v1alShUrWbKkLV682H1dunSpK02V1157zW666SY788wzk/GWAQCQ/ilo/H3T7rTeDABAIhE4/it//vyhwM6fVVQm8tFHH42347Zu3Rov8CtWrJj7umXLFhc49unTx7p162ZPPvmk+7l169a2du1amzlzpn3++eeJfY+scePGCT6m5ypRokSi1wUAAAAASUXgmIAff/zRBX5NmjSxBg0axHv84MGDLtj0y5Url/t66NAh91Xlqd9//73LWBYpUsTd17t3b+vYsaNroqOSVmUnFbA+/vjjrrwVAAAAAE41BI5RfPnll9ajRw/XDfWVV16JuuNy585thw8fDrvPCxjz5s0bui9HjhyhoFHB6C+//OKa72gsZPHixW3IkCF2//33u8Y67du3j/pcs2bNSlY2EgAAAABSAl1VI3zwwQfWtWtXa9iwoQ0dOjSURYykMtVt27aF3ef9rIAwGgWLKl1VZnHBggXWqFEj972eK2jaDwAAAABISwSOPuqo+uyzz1rbtm1dVjCodLRmzZoue6hmOJ758+fbaaedZhUqVIi3/BdffOEylNddd93/dnzWrKE5HzW1x/Hjx1PyfQUAAACAFEPg+C81rXnhhRfcvIudOnWy7du3219//eVu//zzjwv69L1XnnrllVda0aJFXQbx119/deWtCjbvvvvueAHn0aNH7dVXX3Xlr+rSKlWrVnXzOmqOyE8//dSVxQIAAADAqYjA0ddBVZk/dTxVUxv/7fnnn7clS5a47/VVVML6zjvvuEzhLbfcYk8//bS1adPG/vOf/8TbyePGjXNTctStWzd0n8ph9+/fb61atbJzzjnHZTkBAAAA4FSUJS4uLi6tNwLJ5zXHCWqgA6SFbgNmx3SOtrJnF7BBD8XvgAzg1MRnBACkL2QcAQAAAACBCBwBAAAAAIEIHAEAAAAAgQgcAQAAAACBCBwBAAAAAASOAAAAAIDkI+MIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAAIHAEAAAAACQfGUcAAAAAQCACRwAAAABAIAJHAAAAAEAgAkcAAAAAQCACRwAAAABAIAJHAAAAAEAgAkcAAAAAQCACRwAAAAAAgSMAAAAAIPnIOAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAAIHAEAAAAAyUfGEQAAAAAQiMARAAAAABCIwBEAAAAAEIjAEQAAAAAQiMARAAAAABCIwBEAAAAAEIjAEQAAAAAQiMARAAAAAEDgCAAAAABIPjKOAAAAAIBABI4AAAAAgEAEjgAAAACAQASOAAAAAIBABI4AAAAAgEAEjgAAAACAQASOAAAAAIBABI4AAAAAgEAEjgAAAACAQASOCRg2bJjdcccdgTtvypQpdsEFF8S7bdy40T2+YcMGu/XWW61atWrWuXNn27NnT+h3jx8/bi1atLA5c+YEv0MAAAAAkMYIHKMYPXq0DRo06IQ7b+XKlVarVi2bN29e2K1EiRLu8ZdfftnKli1rkyZNsiNHjtjw4cPDgs78+fNb/fr1U/L9BAAAAIAUlz3lV5l+/fnnn/bkk0/aDz/8YOedd94Jl1+1apXLMBYtWjTq46tXr7Y+ffrYueeea1deeaV9/fXX7v5Dhw7ZkCFDbPDgwSn+GgAAAAAgpZFx9FmxYoXlyJHDZQOrVKmSqIyjMooJKVmypC1evNiVperr2Wef7e5///333forV66cEu8hAAAAAKQqMo4+jRo1crfE2L17t8tQLlq0yMaMGWM7d+60iy++2B555BErXbq0W6Zbt27WqVMnV6Kq+959913btWuXvffeezZu3LhEv0mNGzdO8LEtW7aESmMBAAAAIDWQcUym3377zX2Ni4uzF1980Y2JVAlqmzZtbPv27e6xSpUq2ezZs10DnGnTptmZZ55pb731ll177bVWrFgx69Wrlxvj+MADD4Q1zgEAAACAUwkZx2SqUaOGff/991aoUCHLkiWLu+/111+3Bg0a2CeffGL33nuvuy9btmyhMZDqtqoyWAWRylIq+zhz5kx77rnn3O8++uijUZ9r1qxZycpGAgAAAEBKION4EgoXLhwKGiVPnjxuXKNKWKMZOHCgtWvXzv3eggULrF69epYzZ04X/KnkFQAAAABORQSOyaQxirVr17b9+/eH7tu7d6+tW7fOypUrF2/55cuX28KFC+3OO+/8347PmtU1zRFN1eF9DwAAAACnGgLHRDp27Jj99ddfdvDgQfezsoUK9nr27OnGO/7888/WtWtXl01s2bJlvN/XnI56XFlJqVq1qk2dOtXWrFljEyZMsOrVq6fk+woAAAAAKYbAMZHUvfTyyy+3zz77zP2sTqYjR450GcfbbrvNZRLz5cvnptrIlStX2O+qOY6CTn9A2bZtW9csp1WrVnb06FHr0qVLyr2rAAAAAJCCaI6TgH79+oX9rLGLmrfR78ILL7QRI0accCerc6pufnnz5rUhQ4Yk/R0DAAAAgBgj4wgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROAIAAAAAAhE4AgAAIBTxnvvvWe9e/cOXGbDhg1Wo0aNsPsmTpxoderUsYYNG9q3334buv+dd96x0aNHp9r2ApkFgSMAIOY4MQQQ6dixYzZ8+HDr379/4M756aefrF27dvbPP/+E3d+vXz8bNWqUPfHEEzZw4EB33+7du23GjBl26623ssOBk0TgCACIGU4MASSkV69etnjxYrv55psTXGbevHn20EMPWYcOHeI9liNHDvc1Li7OsmXL5r4fOnSo3XXXXZY9e3Z2PHCSCBwBADHDiSGAhPTs2dOGDRtmRYsWTXCZCy+80D7//HOrX79+vMf69OnjAsqXXnrJHnnkEduyZYstW7bMrrnmGnY6kAK4/AIAiOmJYbFixey1116zTZs2BZ4Ybtu2LcETw9y5c9vzzz8fOjHUegGkb/psOJFChQol+FizZs3czaNxkl27drUxY8bYRx99ZGXLlrXnnnvO8uTJk2LbDGQmZBwBAKfciWHOnDmjPqaTwjlz5rgxS2qMMXjw4NCJYYsWLezhhx+2AwcOpMKWA0hPVq5caTt37rTy5cu7cZNjx451ny3jx49P600D0i0CRwBAusSJIYCEqDlO9+7dXffVEiVKuCyjgsg1a9aw04BkInAEAKRLnBgCiOaHH36w/PnzW4UKFeyss86yjRs3ug6sK1assJIlS7LTgGQicAQApDucGAKZR7Vq1WzRokWJXn7IkCH2wAMPhMrj27RpY40aNbJ169YxLQdwEmiOAwA4JU4M33777XgTegedGKpzYuSJYcWKFa1Hjx6pvLUAUpPGLfstWbIk3jLKHKpcPZrRo0eH/fyf//zH3QCcHAJHAEDMcWIIAED6QqkqAAAAACAQgSMAAAAAIBCBIwAAAAAgEIEjAAAAACAQgSMAAACAU9J7771nvXv3jvrYwYMH7eGHH3YduevXr28TJ04MPTZ37lyrV6+e1a1b1yZPnhy6f/r06da/f/+YbHtGQ+AIAACANHP8eFymel4kzrFjx2z48OGBQd6AAQPswIEDLkh8/fXXrV+/fvbrr7+6xwYOHGjPPPOMjRw50t0vR44csREjRlinTp14G5KB6TgAADE5QcuaNUuGf04ASae/01dGL7aNf/4Ts91Xsng+69H2kpg9H5KuV69e9s8//9jNN99shw8fjrrMp59+asOGDbM8efJY5cqVrXnz5jZlyhSrUKGC5ciRwy0TFxdn2bJlc9+PHz/emjRpYgUKFOAtSQYCRwBAhjsx5KQQSF/02fD7pt1pvRk4hfTs2dOKFStmr732mm3atCne47t377YdO3ZYmTJlQveVLl3a5s2b577v3r279e3b144ePeq+7tu3zyZMmGBjx46N6evISAgcAQAxwYkhACCxFDQGUYmqKNvoyZ07txv3KHXq1LGZM2eGHlMA2rZtW5szZ44NHTrUihYtai+88IIVKVKENyWRGOMIAAAAIF1RkCheoOh9nzdv3njLbt++3WUir7vuOjfuUeWtCiz1FYlH4AgAAAAgXSlYsKAVLlzY1q1bF7pv7dq1rlw10htvvOEa4qi8NUuWLC7bWL58eVuzZk2Mtzp9I3AEAAAAkO40a9bMhgwZYnv37rXly5e7ZjlqkOOnwFIBYqNGjaxQoUJ26NAh27x5s61YscJKliyZZtueHhE4AgAAAEgXqlWrZosWLXLfP/TQQy4YbNy4sXXp0sX69OljFStWDFte03J069bNfZ89e3bXdKdly5Y2Y8YM69ixY5q8hvSK5jgAAAAATkldu3YN+3nJkiWh7zWe8cUXXwz8/cGDB4f93KpVK3dD0pFxBAAAAAAEInAEAAAAAAQicAQAAAAAM1u6dKm1aNHCqlatam3atLE//vgj3n7Zu3evG09Zu3Zta9iwoY0ZMyb02Ny5c61evXpWt25dmzx5cuj+6dOnW//+/dP1PiZwBAAAAJDpqePq/fffbx06dLAFCxa44M9rrOP30ksv2caNG12Dnffff99GjBhhX375ZagZj+aKHDlypPXr18/dd+TIEbeMpgRJzwgcE6AJQe+4447Anbdz5057+OGHrWbNmlarVi17+umn7cCBA6HHN2zYYLfeeqvr/tS5c2fbs2dP6LHjx4+7qxlz5sxJqfcSAAAAQDLNnz/fzQ+pKT1y5sxp9913nzufX716ddhyChIVUGrZUqVKWevWrW3ixInusRw5crivcXFxli1bNvf9+PHjrUmTJlagQIF0/d4QOEYxevRoGzRo0Al33gMPPGDr1693VxTUsUlB4FNPPRV6/OWXX7ayZcvapEmT3JWG4cOHhx6bMmWK5c+f3+rXr59S7yUAAACAZFq7dq2VKVMm9LMCPwWGmgfSTwmgPHnyhC3nlbR2797dnn/+eZc06tu3r+3bt88mTJhg7dq1s/SOwNHnzz//dG/yK6+8Yuedd17gjlMrYKWwlaq+8MIL7dJLL3VpadUyaz2iqxPXXHONnXvuuXbllVfaqlWrQmlwTVb6yCOPpOZ7CwAAAKQrx4/Hpdnz7t+/33Lnzh12vwJEf0WhNGjQwJ3Lq5pQGcmPP/7YDh8+7B6rU6eOzZw5077++mtr2rSpK1Ft27atSzBp/kiVq+7YscPSI+Zx9FmxYoVLLysb+MYbb9imTZsS3HGaeLRo0aIuo+hRuWqWLFls8eLFdu2111rJkiXd95dddpn7evbZZ7vlVAtdpUoVq1y5cmq+twAAAEC6kjVrFntl9GLb+Oc/MXvOksXzWY+2l7gg8eDBg2GPKWg87bTTwu579NFH3RA1lZ+ec845bvjZ559/Hm+927dvt3nz5tmoUaOsUaNGrpz1008/dUPitI70hsDRR2+obomhrGKJEiXC7lMttGqdt2zZ4n5W7bOuKqhEtXTp0vbuu+/arl277L333rNx48al5PsIAAAAZAgKGn/ftDvmz6syVW+sohw7dsyVoOo8PjIgVOCYL18+9/OAAQOsQoUKFkmJKMUCu3fvdsklJZ3Kly9v3377raVHBI7JpKsPChQj5cqVy5WiSqVKlWz27Nn2999/uwNFXnzxRZeNLFasmPXq1csNwlX28bnnnnNjHqNp3LhxgtuhIDUygAUAAACQNJpeQ2Wk6k+i83Ulf5RR9FcYytChQ13Q+Nhjj7mKRTW/0X1+69atc2Mjn3zySTt69KiLDzZv3uyWV1ViesQYx2RS/bNXy+yngyJv3rxhg2W9oFFte1UG+5///MfN96Lso2qglaV8/fXXk7spAAAAAFLg/F5lpCotVRD53XffhRpmNmvWzJ3HS8+ePV2DTM2s0KNHD9cER/M++mlaDm8qj+zZs7vf0RhHTeHRsWPHdPlekXFMpjPPPDM0X4tHgaSCQWUTo9EBpI5KhQsXdo11NDmospbKKKora0JmzZqV4GNB2UgAAAAAiXfRRRe5LqiRpk2bFvpeSSENQQsSeW7fqlUrd0vPyDgmk64wbN261V1t8CgYlEsuuSTe8suXL7eFCxfanXfe+b8dnzWra+UrmqrD+x4AAAAATjUEjomkwbF//fVXqNOSxiVWr17dzdWybNkyN1bxiSeecF2VihcvHu/3Nadj165dQ3O+KJ09depUV/usqxpaFwAAAACciggcE0lNaC6//HL77LPP3M/qjKRxiRrc2r59e1fDrNLTp556Kt7vat4WBZ2qa/ZoPheVuyplrQGzXbp0San3FAAAAABSFGMcE9CvX7+wnxUgrly5Muy+IkWKuMk/T6R+/fru5qcGOon5XQAAAABIa2QcAQAAAACBCBwBAAAAAIEIHAEAAABkWgXz5bK4NJrhIC4dzazAGEcAAAAAmdbpeXJYlqxZbdukQXZ4x8aYPW/OIiWtWItull4QOAIAACDTWrp0qT355JO2bt06q1SpkmuQeM4554Qtozm3n3nmGZs5c6brrH/99ddbr1693Lzcc+fOtccee8x1ydd9N9xwg/ud6dOn288//2w9e/ZMo1eGpFLQeHjrWnZcAihVBQAAQKZ06NAhu//++61Dhw62YMECq1u3rptiLdKYMWNs8+bN9tVXX9m0adNs3rx5NnnyZPfYwIEDXVA5cuTIUFd+BZojRoywTp06xfw1AamFwBEAAACZ0vz5861gwYLWvHlzy5kzp9133322YcMGW716ddhy69evt2PHjtnxf8ejKdOYK1cu932OHDnc17i4OMuWLZv7fvz48dakSRMrUKBAzF8TkFooVQUAAECmtHbtWitTpkzoZwV+pUqVsjVr1li5cuVC999888129913W82aNV3wePXVV9u1117rHuvevbv17dvXlarq6759+2zChAk2duzYNHlNQGoh4wgAAIBMaf/+/ZY7d+6w+/LkyWMHDhwIu+/w4cN23XXXuQzlrFmz7Pfff7fRo0e7x+rUqePGPn799dfWtGlTV6Latm1bmzNnjrVs2dKVq+7YsSOmrwtIDQSOAAAAyJQUJB48eDDsPgWNp512Wth9ffr0ceWsKj0tWbKkde7c2T7++ON469u+fbsb/6ggU+Mehw0b5gJLfQXSOwJHAAAAZEoqU1U3VY/GMf7xxx9WunTpsOW2bt3qGt54smfP7m6R3njjDZdh3L17t+u+WrRoUStfvrwrfQXSOwJHAAAAZEq1a9d2ZaSTJk1y5ahvvfWWm4qjbNmyYctdccUVNnjwYPvnn3/sr7/+srffftuVpfopAFWA2KhRIytUqJDr2KpOrCtWrHBZSiC9I3AEAABApqTxjSojHTVqlAsiv/vuOxs0aJB7rFmzZjZlyhT3/dNPP23FihWzq666ym688UY3bcedd94Zti5Ny+FN5aFspOZv1BjHGTNmWMeOHdPg1QEpi66qiPkkuvog1hU4j0o/zj77bPfBqqty6k62c+dOV+qheZVk2bJlbrC592EOAACQEi666CLXBTWS5mv0aMqOV155JXA9ykj6tWrVyt2AjIKMI2I+ia4+iJcsWeJu33zzjZ155pnWu3dv95iu+rVv394+++wzVy6iltaRV/EAAAAAxBaBI2I+ia7fyy+/7LqNNWzY0P3sDTTXJLoaVK7b7Nmz7dxzz7XzzjuPdwsAAABIAwSOiMkkutFoDiRlHx966KHQfSpP/fDDD92YAJWsauyBMo9dunThnQIAAADSCGMcEfNJdD0jR450tf+FCxcO3XfBBRfY1KlTQz9/8skndtlll9n69evdnEla37PPPkv2EQAAAIghAkfEfBJdUctrjWNUdjFozOQHH3xg77//vrVp08ZefPFF27Rpkytv1TxJAAAAAGKDUlXEfBJd+fHHH+2MM85wk+ImRK2x1fL69NNPd2Ww559/PpPoAgAAAGmAwBExn0TXm16jatWqCa5r9+7dLiPZunVr97Mmzl2+fDmT6AIAAABpgMARMZ9EVzSPY9GiRRNc19ChQ+3uu++2HDlyuJ81XUfXrl3ttddec01zAAAAkqtgvlwWd/x4muzAtHpe4GQxxhExn0RXnnrqqcD19OrVK+zn+vXr27x581JoKwEAQGZ2ep4cliVrVts2aZAd3rExZs+bs0hJK9aCeamRPhE4AgAAIFNS0Hh469q03gwgXaBUFQAAAAAQiMARAAAAABCIwBEAAAAAEIjAEQAAAAAQiMARAAAAABCIwBEp4vjxuEz1vAAAAEBmwnQcSBFZs2axV0Yvto1//hOzPVqyeD7r0faSmD0fAAAAkFkROCLFKGj8fdNu9igAAACQwVCqCgAAAAAIROAIAAAAAAhE4AgAAAAACETgCAAAAAAIROCIDGHp0qXWokULq1q1qrVp08b++OOPeMvs3bvXKlasaNWqVQvd3nvvPffY3LlzrV69ela3bl2bPHly6HemT59u/fv3j+lrAQAAAE41dFVFunfo0CG7//77rXfv3takSRMbPny4devWzT755JOw5VauXGnly5e3KVOmxFvHwIED7ZlnnrGzzjrL2rdvbzfccIMdOXLERowYYe+8804MXw0AAABw6iHjiHRv/vz5VrBgQWvevLnlzJnT7rvvPtuwYYOtXr06bLlff/3VKlSoEHUdOXLkcF/j4uIsW7Zs7vvx48e7QLRAgQIxeBUAAADAqYvAEene2rVrrUyZMqGfFfiVKlXK1qxZEy/juG7dOmvatKldccUV1q9fPzt8+LB7rHv37vb8889b586drW/fvrZv3z6bMGGCtWvXLuavByeP0mUAAICUReCIdG///v2WO3fusPvy5MljBw4cCLsvb968VqtWLfv4449t3LhxtnDhQhs2bJh7rE6dOjZz5kz7+uuvXWCpEtW2bdvanDlzrGXLltapUyfbsWNHTF8XTq50uUOHDrZgwQI3blWly5G80uUlS5aEbnfddVdY6fLIkSPdBQbxSpd1LAAA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R7Nr1y4bPHhwvPu17/XcNWvWdM/tp32xbNkyW7JkiW3dutWOHz9uBQsWdO9brVq1LG/evMla/6BBg2z37t2B26vX1aBBA/deyJ133hl1uaeffjq0rH/dF110kd10001Rf+edd96xTZs2hX5v//79NmzYMPccOi4BAACQ9ggcY+z000+3W2+9NepjRYoUSXA5BQ179+61xYsX2xdffGHZs2d3J/+JWa8CoYS2Qes9ePCgrV+/3ubOnWu///67tWvXzq0/iAKoPXv2xAtuIn322WcuaKxXr541bNgw7LGvvvrKBZ6RwWBkUHbjjTfa0KFD7ZNPPrG77747FMhpuz/66CMrUaKENW7cOOz3brnlFsuXL1/YvlOw+v7771vHjh2tePHi7jEFNaNGjXLBioLPUqVK2dGjR23NmjX2+eef2/Lly92+yp07d7LWfyJXXHGFnX/++aH1KIj98ccfbcqUKXbs2DGrUaOGe0zf67X+9ttvbp8rwNd7pMD5hx9+cO/HbbfdFu95E7N+vT597xk3bpzbp3rPPPnz57fk0nu4atUqt18jjysFuAoa/RQA64KCAvT27du73wcAAEDaInCMMQVxJUuWTPZyCgKGDBniAgV/4JjY9Sa0bPny5d19Chq+++67sKAh0pEjR+zLL7+0a6+9NvCkfvr06bZw4UIXMEZbn4IIBQfKLAWtR1m1a665xmUiv/nmm1A2S7+r4FHBhT8rKAp89HuR92nfaZuaN2/uAikFY3o9nTp1sgIFCoTt5wsvvND+7//+z70OBa9JXX9iKGiOfC/KlCljr7/+usuCeoHjrFmzXNDYtm1b97h/WWVGlQnUa9Hr8GeME7N+bXfk8aHgLbHH04koGP/jjz/c9lesWDHsMQXmZ555psug+mm79F7/+uuv8X4HAAAAsccYx3RGJ/UKDFIjC1OhQgUXLCirGUSlksoeeZmsaJStW7BggStNTSgIVamqAgplzE6kSpUqriRTWVFlqLRuBRXXX399vAAuIVpOAZFXlqlARutSias/aPQHPHXq1HHloTt37kzy+pNL762COW89yoYqGFWm0R80+jPIV199te3YscMFYkldf2pTuanKeFUKHGnFihWujDXaRQUFjPPmzYvJNgIAACAYgWMa0Ni0yJuyX0HLKVBTWd+MGTNcgHDxxRcnar0JrTshCkxUgqrnSsjPP//s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"/>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[29]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> long = <span class="ansi-yellow-bg">df_pop</span>.melt(ignore_index=<span class="ansi-bold" style="color: rgb(0,135,0)">False</span>)
+<span class="ansi-green-fg">      3</span> long[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">pct_chg</span><span class="ansi-yellow-fg">"</span>] = long.groupby(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">variable</span><span class="ansi-yellow-fg">"</span>)[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">value</span><span class="ansi-yellow-fg">"</span>].pct_change(
+<span class="ansi-green-fg">      4</span>     periods=<span class="ansi-green-fg">1</span>, fill_method=<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-fg">      5</span> )
+<span class="ansi-green-fg">      7</span> <span style="color: rgb(95,135,135)"># Convert to wide format for plotting</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'df_pop' is not defined</pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=574c8060">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=574c8060">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_gdp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"knox_county_gdp"</span><span class="p">,</span> <span class="s2">"us_gdp"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># GDP Plot</span>
 
-<span class="n">df_gdp</span><span class="p">[</span><span class="s2">"us_gdp_qrt"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_gdp</span><span class="p">[</span><span class="s2">"us_gdp"</span><span class="p">]</span><span class="o">.</span><span class="n">div</span><span class="p">(</span>
-    <span class="mi">4</span>
-<span class="p">)</span>  <span class="c1"># us_gdp (GDPC1) is seasonally adjusted annual (quarterly x 4)</span>
-<span class="n">df_gdp</span><span class="p">[</span><span class="s2">"knox_county_gdp_ttm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_gdp</span><span class="p">[</span>
-    <span class="s2">"knox_county_gdp"</span>
-<span class="p">]</span>  <span class="c1"># not seasonally adjusted (TTM)</span>
-<span class="n">df_gdp</span><span class="p">[</span><span class="s2">"us_gdp_ttm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_gdp</span><span class="p">[</span><span class="s2">"us_gdp_qrt"</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="c1"># print(df_gdp.tail(20))</span>
-<span class="n">df_gdp</span> <span class="o">=</span> <span class="n">df_gdp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2020"</span><span class="p">:,</span> <span class="p">[</span><span class="s2">"knox_county_gdp_ttm"</span><span class="p">,</span> <span class="s2">"us_gdp_ttm"</span><span class="p">]]</span>
-<span class="c1"># print(df_gdp.tail(20))</span>
+<span class="n">gdp_us</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">"data/cleaned/GDPC1.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Date"</span>
+<span class="p">)</span>  <span class="c1"># , parse_dates=["Date"])</span>
+<span class="n">gdp_knox_co</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">"data/cleaned/REALGDPALL47093.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Date"</span>
+<span class="p">)</span>  <span class="c1"># , parse_dates=["Date"]</span>
 
-<span class="n">long</span> <span class="o">=</span> <span class="n">df_gdp</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">long</span><span class="p">[</span><span class="s2">"pct_chg"</span><span class="p">]</span> <span class="o">=</span> <span class="n">long</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"variable"</span><span class="p">)[</span><span class="s2">"value"</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span>
-    <span class="n">periods</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">fill_method</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
+<span class="n">gdp</span> <span class="o">=</span> <span class="n">gdp_us</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gdp_knox_co</span><span class="p">)</span>
+<span class="n">gdp</span> <span class="o">=</span> <span class="n">gdp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2020-12-31"</span><span class="p">:,</span> <span class="p">[</span><span class="s2">"GDP U.S. TTM"</span><span class="p">,</span> <span class="s2">"GDP Knox County TTM"</span><span class="p">]]</span>
 
-<span class="c1"># Convert to wide format for plotting</span>
+<span class="n">long</span> <span class="o">=</span> <span class="n">gdp</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">long</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">long</span><span class="p">[</span><span class="s2">"pct_chg"</span><span class="p">]</span> <span class="o">=</span> <span class="n">long</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"variable"</span><span class="p">)[</span><span class="s2">"value"</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="c1"># print(long)</span>
+<span class="c1"># long.dropna(inplace=True)</span>
 <span class="n">wide</span> <span class="o">=</span> <span class="n">long</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">long</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"variable"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"pct_chg"</span><span class="p">)</span>
-<span class="n">wide</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+<span class="n">wide</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">bar_plots</span><span class="o">.</span><span class="n">plot_bars</span><span class="p">(</span>
     <span class="n">df</span><span class="o">=</span><span class="n">wide</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">"knox_county_gdp_ttm"</span><span class="p">,</span> <span class="s2">"us_gdp_ttm"</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">"GDP Knox County TTM"</span><span class="p">,</span> <span class="s2">"GDP U.S. TTM"</span><span class="p">],</span>
     <span class="n">footnote</span><span class="o">=</span><span class="s2">"FRED (REALGDPALL47093, GDPC1)"</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">"Economic Growth for Knox County, TN"</span><span class="p">,</span>
     <span class="n">subtitle</span><span class="o">=</span><span class="s2">"GDP growth over prior year"</span><span class="p">,</span>
-    <span class="n">date_format</span><span class="o">=</span><span class="s2">"%b. %Y"</span><span class="p">,</span>
+    <span class="n">date_format</span><span class="o">=</span><span class="s2">"%Y"</span><span class="p">,</span>
+    <span class="n">hide_yaxis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">bar_width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
     <span class="n">legend_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Knox County, TN"</span><span class="p">,</span> <span class="s2">"U.S."</span><span class="p">],</span>
     <span class="n">file_name</span><span class="o">=</span><span class="s2">"gdp"</span><span class="p">,</span>
-    <span class="c1"># show=True,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
+<img alt="No description has been provided for this image" class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA40AAAH9CAYAAAC+6ZnRAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvwVt1zgAAAAlwSFlzAAAPYQAAD2EBqD+naQAAYvtJREFUeJzt3Qmc1vP+///XtBctliJl12IXpVR2CukocixJok5xhAg5jmM9nWRJ9hbRJkIiIdlKESJSCC1IJaFFtM//9nx/f5/r/57PXO+Z65pmn8f9dptbM9dcy2edPs/P671kZGZmZhoAAAAAAEmUS/YgAAAAAACERgAAAABAjqg0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIKiCpWHp0qV28sknW7reeustq1+/ftqvQ9hJJ51kP/30k/v+yiuvtN69exfa5tq6datNnz7dXn31Vfvyyy9t1apV9scff1i1atVszz33tCOOOMI6dOhghx12mJU2a9assdWrV9vee+9daPvjt99+swcffNDeffddt621nffZZx+76qqrrHXr1laUHnroIXv44YdzPdd//PFHu+CCC+yXX35JPNa0aVMbPny4Va1a1Uqzn3/+2Z599lmbOXOm2w5r1661HXbYwe3DY445xm2X3XbbzUqjuXPnFsnfgX79+tmLL76Y9us6duxoAwYMcN83atQo8bi+nzBhglWoUCHX/xdHjRplzZs3z/OyAwBQHFFpRFrmz5/vAmGvXr3s5Zdftu+++86FqC1btriLYf1+7Nixdu6559r1119vGzZsKBVbeNOmTfbUU0/Zqaeeap988kmhfa62a9euXW3cuHG2fPly27x5swuun3/+ufu+JPj111/tsssuyxIYFSSGDBlS6gOj1lHHzCOPPGKfffaZ2xbabzpn9PNjjz3mfj9mzBgrTXQD5brrrrO///3vVhosWLDARo8eXdSLAQBAyag0xtWrV8995aZy5crb8zFI4vDDD09s+1T2QX744IMPXFj0g6DuvO+3335WpUoVV0X5/fffE79TqFTA0YVzRkaGlVSq9J133nn2ww8/FEml5ptvvkn8XKtWLVehUsXxoIMOsuJOFegePXrY999/n3jswAMPdBXGHXfc0Uqz//znP67C6NO+q169ujuWdG7Ixo0b7c4777SKFSu646ykmzx5sqv06UZLUdHfpKOPPjrLY7ppsXjx4sTPjRs3tho1amR7XU5V9TPOOKPUVoUBACiw0KimPIXZLBL/v0GDBhV6Ezvt6ygwlitXzi6//HLr1q2buwiWzMxMe/PNN+3f//63q6TItGnTbNKkSfa3v/2txO6+devWFUlglBUrVmT5+fnnn3dNgEsChYYrrrjCVZ8j+++/v40YMcJq1qxppdlzzz2XJTAeeuih9r///c8aNGiQqCA/88wz1r9/f9fcWxQcTzzxRKtTp46VZLrJUZSBUf7xj3+4L5+al950002Jn//1r3+l1Yx0/fr19t///tc1FQcAoKyheSpScv/997vwFNHFk/rURYFRVE1UUztVFuMXa8gbVaF8JSUwbtu2zfr27Wsffvhh4rG99trLnnzySdt5552tNFNgGjx4cOJn9fFU0+YoMEYV+osuusiuvfbaxGNqtjp+/PhCX16kbsqUKfbee++xyQAAZc52VRq3t8/LyJEjbcaMGa6vlipXe+yxhxscQ9UrXWCGmrsphLz22muJJl66CNXgK+pHd+yxx2Z7jX+H+cgjj3T9w9555x13IacqiO70a6CD888/3/XXC9HgL3qvL774wlauXOn6Y6k5k4KSBrPQACU+XTBffPHF7nutz9SpU10lTp+rAWTKly/vlvuaa66xgw8+2F1sqgqjARyWLVtmO+20kx1//PF29dVX26677prWwCu6aNdANRMnTnTrqMCn99BydOrUyTWzSjaoQzKqGr7yyiuJn5s1a2Znn3128Plap1tuucU1P1QTMFWXfF26dLGPPvrIfX/XXXe55stq+qXjQPtSfSHbt2+fpT+RKjfvv/++e050Id6qVSvX369u3bqJ586ePds6d+6cCLEafGSXXXbJEn6jUKvtr33kB1+/SWGTJk1cc8L4gBo6lvSl5m+hfk46Th999FF7/fXX3bFSu3Ztt89UnY3vy2T8Y8cXDc7hD9ghOnbUHFj7aeHCha6ZsKp5hxxyiJ111ll22mmnuXMsp/Ni4MCBbv3VZ7NSpUpu+/rhJx233Xabu8CO6NzW+R5q2ucPqKN9f++997pjV+eqKldadlXrLrnkEjvhhBOSvoeOeW1vbQcdM2qOGB2Dp59+ujtm1QQ0Mm/ePHfOR31DtV90zkRVUB33Z555ZqIvppoG671za56o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0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAA5LNt2zJL1OeedNJJ9tBDD2V7/K677rIDDzzQXnzxRStKW7ZssZEjR9rZZ59tTZo0sRYtWtill15qs2bNKvRlyczMdNvj119/3a73+fDDD61Ro0Y5fk2YMCHxvAEDBiR9n+h5BalCgb47AAAAUAaVK5dh9479xJb+vK7QPrP+btWtb+ej8u39FBjHjRtn99xzj5155plWVDZu3GjdunWz5cuX21VXXeVC44YNG+yFF15wjw8cONDat29faMvz8ccfW79+/eytt97arvfResyYMSPx83//+19bsWJFlvBevXp1+/zzz933Cs1t2rSxI4880goboREAAAAoAAqMC39aUyK3rQLMM888Y/fff7+1bdu2SJdl8ODBtmDBAnvllVesbt26icdvvvlm++OPP1y4VaV0hx12KLRKY36oVKmS1a5dO/FzlSpVrGLFilke89WrV89uuukme+mll9xzCxPNUwEAAAAk9O/f3wXGBx98MFtgVDh74oknrHfv3q5S1rx5cxfa1Hw0MmfOHLv44ovtqKOOcr9X0Pn999/d71Q1O+igg2zEiBGJ5yuY6rk//vhjtr2wefNmV1FUs1Q/MEauueYaGzZsWCJErV692m6//XY7/vjj7bDDDrPzzz/fNe+MqIqndfDFH1Nzz+eff94uueQS9x6tW7e2hx9+2P1O76V1k5NPPtnGjx9vxxxzTOL3EW0/vc7fLtvrtttuc5VIba/CRmgEAAAA4KjfnJpBdu/ePVu48it/zZo1s5dfftluuOEGGzNmjKsCyty5c61Lly7WoEEDF6j0XAXFyy67zLZu3WqHH3649ezZ0wXSH374wWbPnu1Cn4Lennvume2zFCQVBENNMnfbbTcX7MqXL+/eX/0c9Z5qUqt+fg0bNnSfreVKx913320dO3a0yZMn20UXXeSCpZqlKihHzUefe+45+9vf/ua+tC18EydOdI9XqJB/DTv32Wcf69Onj40ePdqtY2EiNAIAAABwIU99GBXQFAR/+umnpFtFFTRV2xTyzjnnHGvcuLF9+umn7neqIKpSd8stt9j+++/vBqxRZWz+/PmJ/nv//Oc/3e/+/e9/u9DZoUOHYJ/JNWv+r3lvzZo1c91Den99zn333WdHH320HXDAAS6MKsCqOpoOLdNZZ53l1rFXr15Wo0YNt45qUhoty8477+wqnNoG33//vauwyuLFi933qo7mN233I444wv71r3/ZX3/9ZYWF0AgAAADA9Q8cOnSoPfbYYy4MXXfddUmbVyrw+TRYi5qRyjfffJOtKqhQqeeoX6Ko+qZKoEKYqoMKmCEKZqJqY2702focVRcjGRkZ1rRpU/e7dOS0jnH6vEMPPdRVF0X/qvqp0JrfypUrZ//73//s559/LtRmqoRGAAAAAK6KpT6ItWrVcsHks88+SzoNh6ptocFhQoPE6HEN8hJRiNu2bZv98ssviTCZjCp9u+66a6KSGbdw4ULXJPXbb7/N8bNzaiaaLBjntI7JqNr42muv2aZNm2zSpEmuaWtBKYpmqoRGAAAAAFmClZqgqi+fKo8ffPBByltHTVM/+eSTLI99/fXXrooZVe9Wrlxpt956q2v2qWapN954o/3555/Jw0q5ctapUyfXP1FTbsQNHz7cvvjiCzeyqD573bp1WaqKCnpanqjqp+C6fv36LO+hpqXpyMjIyPaY1kNTgzz55JO2atWqAp+ipGvXrm7wIA0yVBgIjQAAAACy6du3r+277752/fXX22+//ZbSFtK8iaoc3nnnna4KqNFG9T4aMVWjjIr649WpU8eFRn2vEBeauF70PFXXLrzwQtf0UwPoaGAbBSb9rM+qVq2aC7oHHniga1b70Ucfuc+/4447XIhUyBL1B1RTV/VxXLp0qRvldPr06Wnt/WrVqiXCcBRA1Xz11FNPtUcffdSNqqo+kKLfq5qa3xRcNcptQbx3MszTCAAAABSA+rtVL9Gfp36NAwcOdNNWaDL7IUOG5PoajY6q6t8DDzzgBpPZcccd7ZRTTnFBTlW+sWPH2vvvv2/PPvusawKqL/VpvPrqq91orSeccEK296xataobmEeD7Gik1WXLlrllUxBVE031WRSNoKrnaOTTK6+80jUVPeSQQ+ypp55yYVE0MI+mC9HzNILrcccdZ1dddZWNGjUq5e3SsGFDN6WHpvu49tprXfNY0cA3aprqD4Cjz9F0HDk1wc2rvffe232+5tQsaBmZ+TU7JQAAAABn27ZMK1cuezPG0vq5MNeEVn1A33rrLdesNqIQqd+VZFQaAQAAgHxWVMGNwFj45s+fb4sWLXKVS/UD9QOj5q9U9bWko9IIAAAAAHk0duxY14xXTWvvvffeLKPEqolsspFYSxpCIwAAAAAgiNFTAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgEAAAAAQYRGAAAAAEAQoREAAAAo47p06WL9+vVL+js9rt+HzJ0713r27GlHH320HXrooda2bVu777777I8//ijAJUZhIjQCAAAA+Sxz27Yy8bnffvutC5QHHHCAjR492l599VW77rrr7JVXXrErrriiUJcFBadCAb43AAAAUCZllCtnKyc+YJt+XVpon1lpl/pWp8M1VpgmTJhge++9t11//fWJx/bcc0+rUqWK9ejRw77++mtr3LhxoS4T8h+hEQAAACgACoybViwu1ds2IyPDfvrpJ/vuu+9ctTHSsmVLmzx5sguQKPlongoAAAAgT8477zyrUKGCnXnmmXb++efb/fffb++9955t3brVhcjKlSuzZUsBQiMAAACAPFHT1IkTJ7p+jStXrrQhQ4ZY9+7drXXr1jZ+/Hi2ailBaAQAAADKOFULtwUG0dHj+n1I3bp17eabb7a3337b3nzzTbvjjjtsjz32sFtuucWmTZtWgEuNwkJoBAAAAMq4GjVq2Nq1a5P+bs2aNVazZs2kvxs4cKB98MEHiZ/Vh1FNVp977jnbfffdCY2lBKERAAAAKOMOPvhgmzdvnm3atCnL4/pZ8zBq/sVkFBhHjBiR7fFKlSq5EVR32WWXAltmFB5CIwAAAFDGderUyTVDvfLKK23OnDluRNSPPvrIzbWopqn6vaxbt85+++23xOv69Olj77//vl199dX28ccfJ153ww032Pr1613VMQqfv/zyS7ZQipIhIzMzM7OoFwIAAAAobUraPI0//vijDR482GbNmmWrV6+2WrVquQFtFAjVb1H69evnQqH6L0Y+/fRTGzZsmH3++eeuiauasup1vXv3tvr167vnfPjhh3bxxRfbqFGjrHnz5vmwtihMhEYAAAAgn2Vu22YZ5cqVmc9F6UZoBAAAAAAEcRsCAAAAABBEaAQAAAAABBEaAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgEAAAAAQYRGAAAAAEAQoREAAAAAEERoBAAAAAAEERoBAAAAAEGERgAAAABAEKERAAAAABBEaAQAAAAABBEaAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgEAAAAAQYRGpGXatGnWrl07O/LII61Hjx62YsWKbM/RY7169bKjjz7ajjvuOHvkkUcSv3vxxRetRYsWduKJJ9rMmTMTjw8fPtzGjh3L3gAAAACKGUIjUvbjjz/a1VdfbVdddZV9+OGHLjhefvnllpmZmeV5//rXv6x+/fo2Y8YMe/rpp23ixIk2adIk97sBAwbY6NGj7T//+Y8NGjTIPbZmzRqbMmWKnXfeeewNAAAAoJghNCJl06dPtyZNmljbtm2tYsWK1rNnT1uyZIktWLAg8Zxt27ZZpUqVXKVR/yo8nnzyyfbZZ5+53+t1oqBZvnx59/3jjz9u3bp1swoVKrA3AAAAgGKG0IiUKRBWqVIl8XNGRoaVK1fOfvjhh///gCpXzoXAXXfd1f28efNm1wy1YcOG7uebbrrJunfvbnfffbddf/31tnz5cps7d66dfvrp7AkAAACgGCI0ImWtWrWyWbNm2XvvvefCoPohbtiwwTZu3Jj0+Vu3brV+/fq56mLHjh3dY+oPqX6Rao7atGlTGzx4sPXu3ds1Y+3QoYNdd9119tdff7FXAAAAgGKC0IiU7bfffq5PYv/+/e2EE06wTZs22f7772/Vq1fP9tw///zT9XdcvHixC5dqqhqnZq2///67NWjQwIYOHWrjxo2znXbaycaPH89eAQAAAIoJOpEhZX/88YcLia+99lri5yFDhljjxo2zPE8D26iPYp06dWzMmDFWrVq1pO+ngXD69OnjBtipW7euVa1a1QXIL7/8kr0CAAAAFBNUGpGyVatW2QUXXOAGv1ElceDAgda8eXPbfffdszxPQXCPPfZwU22EAqNGX61Ro4YLnHru0qVLbd26dTZ//nw3eA4AAACA4iEjMz5fApADNR1VGFy/fr21bNnS7rjjDqtVq5YbVXXYsGEuCLZv394qV66cGB1V9JieG+ncubMbDCcKiI8++qg9+eSTduCBB9rDDz/s3gcAAABA0SM0AgAAAACCaJ4KAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjaXEtm1Mt8k2AwAAAPIf8zSWIveO/cSW/ryuqBejRKi/W3Xr2/mool4MAAAAoNirUNQLgPyjwLjwpzVsUgAAAAD5huapAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgCAtN1999126KGHWpMmTdxX8+bNg8/98ccfrWnTplkee/HFF61FixZ24okn2syZMxOPDx8+3MaOHcseAYBipEJRLwAAACh5vv76a7v//vvt1FNPzfF5n332mfXp08fWrVuX5fEBAwbYmDFjbOnSpTZo0CBr1aqVrVmzxqZMmWLjxo0r4KUHAKSDSiMAAMhTaGzcuHGOz5kxY4Zde+211r1792y/q1ixovs3MzPTypcv775//PHHrVu3blahAve0AaA44a8yAABIy8qVK2316tXWv39/mzNnju211172r3/9y4444ogszzv44IPt9ddfd8+Pu+mmm1yYrFKliv33v/+15cuX29y5c+2GG25gbwBAMUNoBAAAafn999/t6KOPtn/84x8uGL700kvWs2dPFxB32mmnxPP87+PatWvnviL9+vWz3r1729NPP23PPfec7b///nbXXXdZ1apV2TsAUMRongoAANLSqFEjGzlypBsAp1KlSnbuuedanTp17NNPP83TllywYIELog0aNLChQ4e6Po0KnOPHj2fPAEAxQGgEAABp+eSTT1xF0Ldp0yarXLlynrakBsLRYDkaZbVu3bquuqgAuWjRIvYMABQDhEYAAJAWVRfvuecemz17tm3ZssVGjRrlQmOzZs3S3pIffvih1ahRww2qs8cee7jRVDXS6vz5861+/frsGQAoBgiNAAAgLZqf8dZbb3WD2Wj+xVdffdWNfKpKo5qsKkym6sEHH7SrrrrKfa8mrhdeeKGddNJJtmTJEjvvvPPYMwBQDGRkaqxrlArX3P+uLfxpTVEvRomwf72a9sC1JxT1YgAAAADFHpVGAAAAAEAQoREAAAAAEERoBAAAAAAEERoBAAAAAEGERgAAAABAEKERAAAAABBEaAQAoBTZto2ZtNhuAJC/KuTz+wEAgCJUrlyG3Tv2E1v68zr2Q4rq71bd+nY+iu0FAAGERgAAShkFxoU/rSnqxQAAlBI0TwUAAAAABBEaAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgEAAAAAQYRGAAAAAEAQoREAAAAAEERoBAAAAAAEERoBAAAAAEGERgAAAABAEKERAAAAABBEaAQAAAAABBEaAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgEAAAAAQYRGAAAAAEAQoREAAAAAEERoBAAAAAAEERoBAAAAAEGERgAAAABAEKERAAAAABBEaASANE2ZMsVOO+00a9KkiZ1zzjk2Z86cbM9p166d+330dcghh1jbtm3d7+bPn29t2rSxZs2a2fDhwxOvmTt3rl1zzTXsDwAAUKwQGgEgDUuXLrV+/frZ3Xff7cLihRdemDToTZ482f1eX9OnT7fdd9/dvU6GDBliXbt2tVdffdUee+wxW79+vXt80KBBhEYAAFDsVCjqBQCAkqR+/fo2Y8YM22GHHWzTpk22evVqq1WrVo6vueeee6xFixZ24oknup8rVPi/P72ZmZmWkZHhvt59913be++9bZ999imU9QAAAEgVoREA0qTAuGDBAuvQoYOVL1/eVQ5DFi5c6KqOU6dOTTzWs2dP69u3r6sy9unTx6pUqeK+f+SRR9gXAACg2CE0AkAe7Lfffq4P4ssvv2y9e/e2N99803beeedsz3vqqaesU6dOWX7XqFEjmzRpUuLnCRMmWKtWrez777+3Xr16WdWqVe3OO++k6ggAAIoF+jQCQB5UrFjRfWkgnHr16tnHH3+c7Tlqvqp+iwqNIRs3brQxY8bYpZdearfffrv76tKli2vSCgAAUBwQGgEgDe+//75169YtWzisUaNGtud++umntuuuu1qDBg2C7zd69Gjr2LGj7bjjjrZ48WJr2LChe/6iRYvYLwAAoFggNAJAGho3buymzFA/xS1btrgq4datW920GnFqvnrEEUcE32vNmjWuEnn++ecnBtmZN2+ee399DwAAUBwQGgEgDeqb+Oijj9qwYcPciKhvvPGGDR061A1mo7kZ1ccxsmzZMqtdu3bwvR5//HHXLFXNXEVTcqh/5EMPPeQGyAEAACgOMjI15jtKhWvuf9cW/rSmqBejRNi/Xk174NoTinoxAKBA8P9Bevg/AQByRqURAAAAABBEaAQAAAAABBEaAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgGUGtu2MYMQ2wwACs+UKVPstNNOsyZNmtg555xjc+bMyfacdevW2fXXX+/m9m3VqpXdddddtmnTJve79957z4477jhr2bKlvfTSS4nXvPbaazZw4EB2JYqNCkW9AACQX8qVy7B7x35iS39ex0ZNQf3dqlvfzkexrQAgD5YuXWr9+vWzp556yg4//HB74YUX7JprrrFp06ZleZ7C38aNG+2tt95y/15++eU2YsQI69Wrlw0aNMjuuOMO22OPPaxr16521lln2ebNm93vhw8fzn5BsUFoBFCqKDAu/GlNUS8GAKCUq1+/vs2YMcN22GEHVzlcvXq11apVK9vzMjMz7YorrnDP09eZZ55pM2fOdL+rWLFi4jnly5d3348fP97atGljNWvWLOQ1AsIIjQAAAEAeKAQuWLDAOnTo4ELfkCFDsj1HzVF9qkQedNBB7vs+ffrYLbfcYlu2bHH/rl+/3lUsx40bx/5AsUJoBAAAAPJov/32s7lz59rLL79svXv3tjfffNN23nnnpM+95557bNGiRe5fUT/HqVOnJn7/0EMPWefOnV2wfPzxx6127drWv39/22WXXdg/KFIMhAMAAADkkZqY6ksD4dSrV88+/vjjbM9RJfHmm292A+eoD+ROO+2U7TmrVq1yzV3bt2/v+jmqaqlQmax6CRQ2QiMAAACQpvfff9+6deuW5TH1baxRo0a2xzT4zTfffGPPPvus7bXXXknf75FHHrGePXvamjVrLCMjw1UZGzRo4CqTQFEjNAIAAABpaty4sc2fP98mT57sKoljxoyxrVu3uuk3fHfeeaetXbvWRo0aFWxmumTJEhcOTzrpJFeF1Ciry5Ytc++vAXeAokZoBAAAANKkfouPPvqoDRs2zDUjfeONN2zo0KFWpUoVa9eunevjqDkan3/+efvyyy/dXIwKlPrq3r17lvfS1BuarkMqVKhgN9xwg5199tmuOWuPHj3YNyhyDIQDAAAA5EHTpk1t4sSJ2R5X9THy1Vdf5fo+gwcPzvJzp06d3BdQXFBpBAAAAAAEERoBAAAAAEGERgAAAABAEKERAAAAABBEaAQAAAAABBEaAQAAAABBhEYAAACUKtu2ZRb1IpRIbDeEME8jAAAASpVy5TLs3rGf2NKf1xX1opQY9Xerbn07H1XUi4FiitAIAACAUkeBceFPa4p6MYBSgeapAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIFJInn3zS+vXrl+NzMjMzrUuXLvbQQw8lHnvvvffsuOOOs5YtW9pLL72UePy1116zgQMHFugyAwAAAIRGoIBt3brVhg4dmlLAGzlypM2ePTvLY4MGDbI77rjDnnrqKRswYIB7bPPmzTZixAjr2bNngS03AAAAIBXYDEDBuvHGG23dunV27rnn2qZNm4LPW7x4sY0fP95OPfXULI9XrFgxUYUsX768+17Pa9OmjdWsWbOAlx4AAABlHZVGoIDdcMMNNmTIEKtdu3aO1cibbrrJbrnlFqtWrVqW3/Xp08f++9//Wq9evdzv169fby+88IJdfPHF7DsAAAAUOEIjUMDq1KmT63OeeOIJa9iwoR1zzDHZfteiRQubOnWqvfPOO9a2bVvXLLVz5842bdo0O/vss10T1V9//bWAlh4AAABlHaERKGLffvutqxyqIpmbVatW2YwZM6x9+/aun6MqmAqV+hcAAAAoCPRpBIrYm2++aStXrrQTTjjB/bxhwwbLyMiwefPmZQuDjzzyiKssrlmzxj1HTV4bNGhgM2fOLKKlBwAAQGlHaASK2OWXX+6+IpqWo169eta7d+8sz1uyZIktWrTIbr31VtuyZYtt3LjRli1bZvPnz7f69esXwZIDAACgLKB5KlBEmjRpkm16jZxo6o1rrrnGfV+hQgXXnFV9GqdMmWI9evQowCUFAABAWUalESgk8crhnDlzkj4vmosxbvDgwVl+7tSpk/sCAAAAChKVRgAAAABAEKERAAAAABBEaAQAAAAABBEaAQAAAABBhEYAAAAAQBChEQAAAAAQRGgEAAAAAAQRGlEm1ape2TK3bSvqxSiR2G4AAABlS4WiXgCgKOxYtaJllCtnKyc+YJt+XcpOSFGlXepbnQ7XsL0AII8+//xzu/XWW23JkiV20EEH2YABA2yvvfbK8pzNmzfbHXfcYVOnTrWMjAz729/+ZjfeeKOVK1fO3nvvPbv55ptty5Yt7rGzzjrLvea1116zL774wm644Qb2DYB8R2hEmabAuGnF4qJeDABAGbBx40b75z//af369bM2bdrY0KFD7ZprrrEJEyZked7TTz9ty5Yts7fffts2bNhgXbp0scaNG1vHjh1t0KBBLlDuscce1rVrVxcaFTJHjBhhw4cPL7J1A1C60TwVAACgEMyaNctq1aplZ555plWqVMkuv/xy+/HHH+27777L8rzvv//etm7datv+XzcKVRgrV67svq9YsaL7NzMz08qXL+++Hz9+vAuhNWvWZD8CKBBUGgEAAArB4sWLbb/99kv8rNC355572qJFi+yAAw5IPH7uuefapZdeas2aNXPB8bTTTrMzzjjD/a5Pnz52yy23uOap+nf9+vX2wgsv2Lhx49iHAAoMlUYAAIBC8Oeff1qVKlWyPFa1alX766+/sjy2adMma9++vatMvvXWW7Zw4UIbO3as+12LFi1cX8d33nnH2rZt65qldu7c2aZNm2Znn3229ezZ03799Vf2J4B8RWgEAAAoBAqI6qPoU2DcYYcdsjx20003uSasam5av35969Wrlz3//PPZ3m/VqlU2Y8YMFzDVz3HIkCEuVOpfAMhPhEYAAIBCoKapGjU1on6LP/zwg+27775ZnrdixQo3uE2kQoUK7ivukUcecZXFNWvWuFFWa9eubQ0aNHDNXQEgPxEaAQAACkHz5s1d09GJEye6JqiPPfaYm25j//33z/K8Y4891gYPHmzr1q2zX375xYYNG+aaovoUPhUOTzrpJNtpp53cyKwacXX+/PmuOgkU96lnOnToYEcccYRdeOGF7uZJMk888YS1bt3a9e+97rrrEpV6Heca/EmP+6MGz507141IjPxHaAQAACgE6s+opqOjR492AfL999+3Bx54wP2uXbt29vLLL7vvb7/9dqtTp46deuqpbpqNli1b2iWXXJLlvTT1RnRxrCqk5mdUn8YpU6ZYjx492J8o9lPPdO/e3T766CN3fCcLeq+++qob4Elf7777rv3+++/uBoroPNKUM3qObr5oQKj4eYH8xeipAAAAheSQQw5xo53GTZ48OfG9puW49957c3wfVSJ9nTp1cl9ASZp6RjT1zMiRI93UM/4ows8995xdeeWVboRhGThwYKLSGDXX1tQzapqtLwXLvffe2/bZZ58iWa/SjkojAAAAgCKfesb31VdfuSbaGuipVatW9uijj7oKvKgv7zPPPOOq65qGRlV8VRwVMlEwCI0AAAAAitXUM2vXrnX9f9UkddKkSfbll18mRgZu1KiRe0yjB2vKGT1PwfL77793FfcuXbpkGXQK24/QCAAAAKBYTT1TsWJFF/52331323nnne3SSy9185Mm6yM5ZswY93v1B9aXXnfPPfcU+LqUJYRGAAAAAMVq6hn1Tfzjjz+yPE99GOM0sJQGjNpxxx1d09eGDRsy9UwBIDQCAAAAKFZTz5x11ln29NNP288//2y//fabjRgxwk2z4dMcpRpB9fzzz3c/a7qZefPmMfVMASA0AgCKxZxcGvBAAxocffTR1qJFC+vfv79t2bLF/Y45uQCgbE09o2lmNMKqAqHmKdXIw5dddlmW93r88cdds1Q1ZZV+/fpZ79697aGHHnL/nyD/MOUGAKBQ5uTSf+a6Szx06FA3j9aECROyPG/AgAFWrlw5mz59uuvvojm4XnzxRTv33HMTc3Lp9aeddppdcMEFrv+L5uS69dZb2YPYLrWqV7bMbdssoxz30tPBNkNBTj2j/w+uuOIK9xVy4403Zvn5+OOPd4PjIP8RGgEAxWJOrttuu831V6lUqZL98ssvLmzqde4/K+bkQgHasWpFFxhXTnzANv26lG2dgkq71Lc6HZhEHSgrCI0AgCKbk8sPjVHzoquuusqmTJlirVu3thNPPDExJ1ffvn1d3xd/Tq5HHnmEvYd8o8C4acVitigAxNAOAwBQLObkimiYdDUvWr16tQ0ePNg9xpxcAAAUHUIjAKBYzMkVqVy5stWuXdv+8Y9/2Lvvvpvt98zJBQBA4SI0AgCKxZxcaoLqh0QNxV69evVs78ecXAAAFC5CIwCgWMzJddBBB7nh0zXv1vLly90oq5qny8ecXAAAFD5CIwCgWMzJpVFVFRyjKTXat29vf//737O8F3NyAUDBTj2D9GSWkW3G6KkAgGIxJ5em2vjPf/7jvkKYkwsACgZTz6SvUhmaeobQCAAAAMBh6hkkQ/NUAAAAAEAQoREAAAAAEERoBAAAAAAEERoBAAAAAEGERgAAAABAEKERAMoo5uTKu7IyLxcAAMKUGwBQRjEnV96UpXm5AAAQQiMAlHHMyQUAAHJC81QAAAAAQBChEQAAAAAQRGgEAAAAAAQRGgEAAAAAQYRGAAAAAEAQoREAAAAAEJSRmZmZaWXYRRddZMuWLbPSsBnWrt9kW7Yy4XQqKlUs7+ao2/rnWrNtWwt835Qa5cpb+Wo1rDjjPEgd50EecR6UOpwLecB5UOpwHpTO8yAV9erVszFjxuT4HOZpVHLOyHBfJV2t6lWKehFKjOXLl9v6tWZ169Yt6kVBPuM8SB3nQenFeZAezoXSifMgPZwHyEmZrzSibDr55JPdv2+99VZRLwpQZDgPAM4FgP8TkAr6NAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIKbcAAAAAAAEUWkEAAAAAAQRGgEAAAAAQYRGAAAAAEAQoREAAAAAEERoRIm2evVq+89//mPHHXecHXnkkXbBBRfY7NmzE7//4IMP7Oyzz7bDDz/cTjvtNJs8eXKW1y9fvtyuvfZaa9WqlTVr1swuu+wy+/bbb5N+1ieffGIHHnhgga8TkK6CPg+2bdtmw4cPt7Zt29oRRxxh7dq1s+eee44dhTJ1HmzdutUefPBBO/HEE+2www5z7/Xuu+8W6joCxem6aNOmTda+fXvr168fO6YMIDSiRNMftjlz5tj9999vL7zwggt1+gO3aNEiW7hwofXs2dOOPfZYmzBhgp177rl2ww03uD+Y0R+7f/zjH/bLL7/Y448/bk8//bTtsMMO1rVrV/vtt9+yBcYrrrjCXTwDZe08GDJkiPu6+uqr7eWXX7aLL77YbrvtNps4cWIRrzlQeOfB4MGDbdy4cXbrrbe6C+1TTz3V/b8wb948dgPK3HWRDBw40L755psiWEsUiUyghFqyZElmw4YNM2fPnp14bNu2bZmnnHJK5gMPPJB5yy23ZHbq1CnLa6699trMSy+91H0/c+ZM9/oVK1Ykfr9hw4bMww8/PPO5555zP2/evDmzf//+mQcffHBmx44d3fOBsnYeHHvssZmPPvpolve46aabMi+88MICXjug+JwHAwYMyJw0aVKW92jatGnmsGHD2E0oM+dBZPr06ZktW7bMbNeuXeaNN95Y4OuGokelESXWTjvtZEOHDrVDDz008VhGRob7Wrt2rWuOccwxx2R5TYsWLVzVMDMz0xo0aOBev9tuuyV+X67c/50Ser38+eef9vHHH7umeRdddFGhrRtQXM4DVdfvvvtu69ixY5b30HOi8wQoC/8f3HjjjXbmmWe67zds2GCjR4+2v/76y5o3b15IawkU/XkgqjredNNNduedd7rPRNlAaESJVaNGDTv++OOtUqVKicemTJli33//vWt6sWLFCtt9992zvKZOnTruP/nff//dateu7V7v00WALgbUlj/6DDXh0B9VoCyeB7pg0EWG/x7Lli1zzfNat25dCGsIFI//DyJqoq2+vXfddZf16tUrywU6UBbOg5tvvtn17T3ppJMKYa1QXFQo6gUA8sunn37q7ny1adPGTjjhBPdHzv/DKdHParcfN3XqVLvvvvvskksusUaNGrFjUCIV9HmwatUq69Gjh+2yyy52+eWXF+CaAMXzPNDgIOrPO3PmTNdvbOedd7YLL7yQ3YUycR4888wzrm+kHkfZQqURpcKbb75pl156qbv7e++997rHKleunO2PYPRz1apVszyuwQ00yIdGAVOncKAkKujzQAMpnH/++a7Z9pNPPunuagNl7TyoW7euNW7c2A0ucs4559gTTzxRoOsDFJfzQP8H3HPPPW4AnGrVqrFjyhhCI0q8MWPGWO/evV1TCY32pT+K0X/sK1euzPJc/aw/dNWrV088pj+AGglSI0L+73//S7TfB0qSgj4P1OdFgVEXFrrTvOeeexbSmgFFfx5s2bLFXYSrabZP1Zeff/6ZXYQycR68+uqrtn79euvWrZs1adLEfamf5KRJk9z3KN1onooSTcNBqyN2ly5dXBt7dfaONG3a1D766KMsz581a5abtyj6A6g/jBrkRgMc6I4cUBIV9Hkwd+5c6969ux100EH22GOPUWFEmTsPypcvb7fccot16tTJrrvuusTjn3/+uR1wwAEFvm5AcTgPNCCgKo++vn37un6S+helG6ERJdbixYutf//+bq4szTukvlaRKlWquD+YGvFRzTL077Rp0+z11193fwzlww8/dN/refojqHmJIrrrprmJgLJ+HugOtS4G1IdxwIABtnHjxsRzdCGt/lxAWfj/QBfQDz/8sDVs2NANfvPGG2/YK6+8Yg899FCRrDNQ2OdBrVq13JdP76vzY++992aHlHIZmnejqBcCyAs1uRg0aFDS3+mPoS5wp0+f7u6aLVmyxOrXr++aa5xxxhnuObprPH78+KSvv/LKK91zfRpFVR3KFyxYwA5DmTkPNGLeBRdckPT39erVs7fffjsf1wYovv8faPqZUaNGuUrO8uXLbb/99nOPn3LKKew2lMnrIlHA1P8Fem+UboRGAAAAAEAQI34AAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMAAAAAIIjQCAAAAAAIIjQCAAAAAIIIjQAAAACAIEIjAAAAACCI0AgAAAAACCI0AgAAAACCCI0AAAAAgCBCIwAAAAAgiNAIAAAAAAgiNAIAAAAAggiNAAAAAIAgQiMA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"/>
 </div>
 </div>
 </div>
@@ -8250,7 +8396,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_list</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"median_list_price_knox_county"</span><span class="p">,</span> <span class="s2">"median_list_price_us"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -8293,7 +8439,7 @@ Population estimates are updated annually using current data on births, deaths, 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Demographics">Demographics<a class="anchor-link" href="#Demographics">¶</a></h2>
+<h2 id="Demographics">Demographics<a class="anchor-link" href="#Demographics">¶</a></h2><p>Knox county has experienced steady population growth over the past five years. Population growth ranged between 0.7 and 2.2% per year compared to U.S. growth between 0.1 and 0.9% per year. Economic growth in Knox county and relatively low taxes and affordable living has attracted a steady flow of new residents. The population of Knoxville, Tennessee grew at a higher rate than the national growth rate over each of the four years ending January 1, 2024.</p>
 </div>
 </div>
 </div>
@@ -8302,7 +8448,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -8332,7 +8478,6 @@ Population estimates are updated annually using current data on births, deaths, 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The population of Knoxville, Tennessee grew at a higher rate than the national growth rate for each of the four years ending January 1, 2024.</p>
 <h2 id="State-of-the-Economy">State of the Economy<a class="anchor-link" href="#State-of-the-Economy">¶</a></h2><h3 id="GDP">GDP<a class="anchor-link" href="#GDP">¶</a></h3>
 </div>
 </div>
@@ -8342,7 +8487,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -8381,7 +8526,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
@@ -8479,7 +8624,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
@@ -8608,7 +8753,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Years</span>
@@ -8683,7 +8828,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -8713,7 +8858,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
@@ -8822,7 +8967,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># # Multiple Regression</span>
@@ -8848,7 +8993,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># plot_data = df.loc["2020":, ["knox_pop", "us_pop"]].copy()</span>
@@ -8920,7 +9065,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># import pandas as pd</span>
@@ -8943,7 +9088,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Convert date column to datetime</span>
@@ -8959,7 +9104,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># # Drop unnecessary columns</span>
@@ -8986,7 +9131,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Find missing values</span>
@@ -9001,7 +9146,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [46]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># cremi = df[df["Variable"] == "CREMI"].copy()</span>
@@ -9017,7 +9162,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Show unique asset types</span>
@@ -9032,7 +9177,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Show unique geographic regions</span>
@@ -9047,7 +9192,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [49]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># cremi["Start_Date"] = cremi.groupby(["Geography_Name", "Asset_Type"])["Date"].transform(</span>
@@ -9070,7 +9215,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># import pandas as pd</span>
@@ -9203,7 +9348,7 @@ Population estimates are updated annually using current data on births, deaths, 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [51]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># out = con.execute(</span>
