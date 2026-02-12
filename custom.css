@@ -75,6 +75,7 @@ main {
     main {
         margin: 22rem 0;
         padding: 0 4px;
+        border: none;
     }
 }
 
