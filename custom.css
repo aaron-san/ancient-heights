@@ -446,7 +446,7 @@ jp-OutputPrompt.jp-OutputArea-prompt {
     border: 1px solid rgb(180,180,180);
     margin: 1rem 0;
     position: relative;
-    /* max-width: 500px; */
+    max-width: 500px;
 }
 
 .note-title {
@@ -460,12 +460,14 @@ jp-OutputPrompt.jp-OutputArea-prompt {
     font-weight: bold;
     font-size: 0.6rem;
     color: rgb(64, 64, 64);
+    z-index: 10;
 }
 
 .note-body {
     font-size: 0.75rem;
     color: rgb(70, 70, 70);
     line-height: 1.4em;
+    z-index: 1;
 }
 
 .jp-Notebook.jp-Cell:not(.jp-mod-active).jp-OutputPrompt {
@@ -494,4 +496,13 @@ div.jp-Cell-outputWrapper > div.jp-OutputArea.jp-Cell-outputArea > div > div.jp-
 
 .jp-OutputArea {
     overflow-x: visible !important;
+}
+
+/* div.jp-Cell-outputWrapper > div.jp-OutputArea */
+.jp-Cell-outputArea {
+    padding: 10px important!;
+}
+
+div:has(.note) {
+    padding: 4px 0;
 }
