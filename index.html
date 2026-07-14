@@ -7332,7 +7332,12 @@ a.anchor-link {
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs")).default;
+    const elkUrl = "https://cdnjs.cloudflare.com/ajax/libs/mermaid-layout-elk/0.1.9/mermaid-layout-elk.esm.min.mjs";
+    if(elkUrl) {
+      const elkLayouts = (await import(elkUrl)).default;
+      mermaid.registerLayoutLoaders(elkLayouts);
+    }
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -7429,7 +7434,8 @@ a.anchor-link {
      * Post-process to ensure mermaid diagrams contain only valid SVG and XHTML.
      */
     function cleanMermaidSvg(svg) {
-      return svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      svg = svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      return `${SVG_XML_HEADER}${svg}`;
     }
 
 
@@ -7455,6 +7461,285 @@ a.anchor-link {
       }
       return `<${tag} ${rest}>`;
     }
+
+
+  /**
+   * Named HTML entities with their decimal equivalent codes.
+   *
+   * @see https://www.w3.org/TR/WD-html40-970708/sgml/entities.html
+   * */
+  const HTML_ENTITIES = `<!ENTITY Aacute "&#193;">
+<!ENTITY aacute "&#225;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY acirc "&#226;">
+<!ENTITY acute "&#180;">
+<!ENTITY AElig "&#198;">
+<!ENTITY aelig "&#230;">
+<!ENTITY Agrave "&#192;">
+<!ENTITY agrave "&#224;">
+<!ENTITY alefsym "&#8501;">
+<!ENTITY Alpha "&#913;">
+<!ENTITY alpha "&#945;">
+<!ENTITY amp "&#38;">
+<!ENTITY and "&#8869;">
+<!ENTITY ang "&#8736;">
+<!ENTITY Aring "&#197;">
+<!ENTITY aring "&#229;">
+<!ENTITY asymp "&#8776;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY atilde "&#227;">
+<!ENTITY Auml "&#196;">
+<!ENTITY auml "&#228;">
+<!ENTITY bdquo "&#8222;">
+<!ENTITY Beta "&#914;">
+<!ENTITY beta "&#946;">
+<!ENTITY brvbar "&#166;">
+<!ENTITY bull "&#8226;">
+<!ENTITY cap "&#8745;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY cedil "&#184;">
+<!ENTITY cent "&#162;">
+<!ENTITY Chi "&#935;">
+<!ENTITY chi "&#967;">
+<!ENTITY circ "&#710;">
+<!ENTITY clubs "&#9827;">
+<!ENTITY cong "&#8773;">
+<!ENTITY copy "&#169;">
+<!ENTITY crarr "&#8629;">
+<!ENTITY cup "&#8746;">
+<!ENTITY curren "&#164;">
+<!ENTITY dagger "&#8224;">
+<!ENTITY Dagger "&#8225;">
+<!ENTITY darr "&#8595;">
+<!ENTITY dArr "&#8659;">
+<!ENTITY deg "&#176;">
+<!ENTITY Delta "&#916;">
+<!ENTITY delta "&#948;">
+<!ENTITY diams "&#9830;">
+<!ENTITY divide "&#247;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY eacute "&#233;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY egrave "&#232;">
+<!ENTITY empty "&#8709;">
+<!ENTITY emsp "&#8195;">
+<!ENTITY ensp "&#8194;">
+<!ENTITY epsilon "&#949;">
+<!ENTITY Epsilon "&#917;">
+<!ENTITY equiv "&#8801;">
+<!ENTITY Eta "&#919;">
+<!ENTITY eta "&#951;">
+<!ENTITY ETH "&#208;">
+<!ENTITY eth "&#240;">
+<!ENTITY Euml "&#203;">
+<!ENTITY euml "&#235;">
+<!ENTITY exist "&#8707;">
+<!ENTITY fnof "&#402;">
+<!ENTITY forall "&#8704;">
+<!ENTITY frac12 "&#189;">
+<!ENTITY frac14 "&#188;">
+<!ENTITY frac34 "&#190;">
+<!ENTITY frasl "&#8260;">
+<!ENTITY Gamma "&#915;">
+<!ENTITY gamma "&#947;">
+<!ENTITY ge "&#8805;">
+<!ENTITY gt "&#62;">
+<!ENTITY harr "&#8596;">
+<!ENTITY hArr "&#8660;">
+<!ENTITY hearts "&#9829;">
+<!ENTITY hellip "&#8230;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY iacute "&#237;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iexcl "&#161;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY igrave "&#236;">
+<!ENTITY image "&#8465;">
+<!ENTITY infin "&#8734;">
+<!ENTITY int "&#8747;">
+<!ENTITY Iota "&#921;">
+<!ENTITY iota "&#953;">
+<!ENTITY iquest "&#191;">
+<!ENTITY isin "&#8712;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY iuml "&#239;">
+<!ENTITY Kappa "&#922;">
+<!ENTITY kappa "&#954;">
+<!ENTITY Lambda "&#923;">
+<!ENTITY lambda "&#955;">
+<!ENTITY lang "&#9001;">
+<!ENTITY laquo "&#171;">
+<!ENTITY larr "&#8592;">
+<!ENTITY lArr "&#8656;">
+<!ENTITY lceil "&#8968;">
+<!ENTITY ldquo "&#8220;">
+<!ENTITY le "&#8804;">
+<!ENTITY lfloor "&#8970;">
+<!ENTITY lowast "&#8727;">
+<!ENTITY loz "&#9674;">
+<!ENTITY lrm "&#8206;">
+<!ENTITY lsaquo "&#8249;">
+<!ENTITY lsquo "&#8216;">
+<!ENTITY lt "&#60;">
+<!ENTITY macr "&#175;">
+<!ENTITY mdash "&#8212;">
+<!ENTITY micro "&#181;">
+<!ENTITY middot "&#183;">
+<!ENTITY minus "&#8722;">
+<!ENTITY Mu "&#924;">
+<!ENTITY mu "&#956;">
+<!ENTITY nabla "&#8711;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY ndash "&#8211;">
+<!ENTITY ne "&#8800;">
+<!ENTITY ni "&#8715;">
+<!ENTITY not "&#172;">
+<!ENTITY notin "&#8713;">
+<!ENTITY nsub "&#8836;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY Nu "&#925;">
+<!ENTITY nu "&#957;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY oacute "&#243;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY OElig "&#338;">
+<!ENTITY oelig "&#339;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oline "&#8254;">
+<!ENTITY Omega "&#937;">
+<!ENTITY omega "&#969;">
+<!ENTITY Omicron "&#927;">
+<!ENTITY omicron "&#959;">
+<!ENTITY oplus "&#8853;">
+<!ENTITY or "&#8870;">
+<!ENTITY ordf "&#170;">
+<!ENTITY ordm "&#186;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY oslash "&#248;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY otilde "&#245;">
+<!ENTITY otimes "&#8855;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY ouml "&#246;">
+<!ENTITY para "&#182;">
+<!ENTITY part "&#8706;">
+<!ENTITY permil "&#8240;">
+<!ENTITY perp "&#8869;">
+<!ENTITY Phi "&#934;">
+<!ENTITY phi "&#966;">
+<!ENTITY Pi "&#928;">
+<!ENTITY pi "&#960;">
+<!ENTITY piv "&#982;">
+<!ENTITY plusmn "&#177;">
+<!ENTITY pound "&#163;">
+<!ENTITY prime "&#8242;">
+<!ENTITY Prime "&#8243;">
+<!ENTITY prod "&#8719;">
+<!ENTITY prop "&#8733;">
+<!ENTITY Psi "&#936;">
+<!ENTITY psi "&#968;">
+<!ENTITY quot "&#34;">
+<!ENTITY radic "&#8730;">
+<!ENTITY rang "&#9002;">
+<!ENTITY raquo "&#187;">
+<!ENTITY rarr "&#8594;">
+<!ENTITY rArr "&#8658;">
+<!ENTITY rceil "&#8969;">
+<!ENTITY rdquo "&#8221;">
+<!ENTITY real "&#8476;">
+<!ENTITY reg "&#174;">
+<!ENTITY rfloor "&#8971;">
+<!ENTITY Rho "&#929;">
+<!ENTITY rho "&#961;">
+<!ENTITY rlm "&#8207;">
+<!ENTITY rsaquo "&#8250;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY sbquo "&#8218;">
+<!ENTITY Scaron "&#352;">
+<!ENTITY scaron "&#353;">
+<!ENTITY sdot "&#8901;">
+<!ENTITY sect "&#167;">
+<!ENTITY shy "&#173;">
+<!ENTITY Sigma "&#931;">
+<!ENTITY sigma "&#963;">
+<!ENTITY sigmaf "&#962;">
+<!ENTITY sim "&#8764;">
+<!ENTITY spades "&#9824;">
+<!ENTITY sub "&#8834;">
+<!ENTITY sube "&#8838;">
+<!ENTITY sum "&#8721;">
+<!ENTITY sup "&#8835;">
+<!ENTITY sup1 "&#185;">
+<!ENTITY sup2 "&#178;">
+<!ENTITY sup3 "&#179;">
+<!ENTITY supe "&#8839;">
+<!ENTITY szlig "&#223;">
+<!ENTITY Tau "&#932;">
+<!ENTITY tau "&#964;">
+<!ENTITY there4 "&#8756;">
+<!ENTITY Theta "&#920;">
+<!ENTITY theta "&#952;">
+<!ENTITY thetasym "&#977;">
+<!ENTITY thinsp "&#8201;">
+<!ENTITY THORN "&#222;">
+<!ENTITY thorn "&#254;">
+<!ENTITY tilde "&#732;">
+<!ENTITY times "&#215;">
+<!ENTITY trade "&#8482;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY uacute "&#250;">
+<!ENTITY uarr "&#8593;">
+<!ENTITY uArr "&#8657;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uml "&#168;">
+<!ENTITY upsih "&#978;">
+<!ENTITY Upsilon "&#933;">
+<!ENTITY upsilon "&#965;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY uuml "&#252;">
+<!ENTITY weierp "&#8472;">
+<!ENTITY Xi "&#926;">
+<!ENTITY xi "&#958;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY yacute "&#253;">
+<!ENTITY yen "&#165;">
+<!ENTITY Yuml "&#376;">
+<!ENTITY yuml "&#255;">
+<!ENTITY Zeta "&#918;">
+<!ENTITY zeta "&#950;">
+<!ENTITY zwj "&#8205;">
+<!ENTITY zwnj "&#8204;">`.replace(/\n/g, ' ');
+
+  /**
+   * A reasonably strict xml declaration.
+   */
+  const XML_DECL = '<?xml version="1.0" standalone="no"?>';
+
+  /**
+   * The beginning of the XML doctype declaration.
+   */
+  const DOCTYPE_START = `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [`;
+
+  /**
+   * The end of the XML docype declaration.
+   */
+  const DOCTYPE_END = ']>';
+
+  /**
+   * A full header for an SVG XML document.
+   */
+  const SVG_XML_HEADER = `${XML_DECL}
+    ${DOCTYPE_START}${HTML_ENTITIES}${DOCTYPE_END}`;
 
     void Promise.all([...diagrams].map(renderOneMarmaid));
   });
@@ -7529,7 +7814,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -7593,7 +7878,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
@@ -7636,7 +7921,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># from IPython.display import HTML, display</span>
@@ -7679,7 +7964,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
@@ -7716,7 +8001,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="custom.css" rel="stylesheet"/>
@@ -7743,7 +8028,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># %load_ext autoreload</span>
@@ -7785,12 +8070,34 @@ a.anchor-link {
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dbc2997d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="The-Data">The Data<a class="anchor-link" href="#The-Data">¶</a></h2><p>Several macroeconomic data variables were used to assess the economic outlook of the Knoxville, Tennessee Metro area relative to the U.S. overall. Namely, the following data series was used:</p>
+<ol>
+<li>U.S. Total Population</li>
+<li>Resident Population in Knox County, TN</li>
+<li>All-Transactions House Price Index for the United States</li>
+<li>All-Transactions House Price Index for Knox County, TN</li>
+<li>Real Gross Domestic Product: U.S.</li>
+<li>Real Gross Domestic Product: All Industries in Knox County, TN</li>
+<li>Housing Inventory: Median Listing Price in the United States</li>
+<li>Housing Inventory: Median Listing Price in Knox County, TN</li>
+</ol>
+<p>The data was sourced from the <a href="https://fred.stlouisfed.org/">St. Louis Federal Reserve's data</a> bank. The metadata for each series used is presented in the table below.</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d622b319">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># "knox_county_pop": "TNKNOX5POP",</span>
@@ -7808,7 +8115,7 @@ a.anchor-link {
 <span class="p">]</span>
 
 
-<span class="n">df_metadata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"../data/fred_series_metadata.xlsx"</span><span class="p">)</span>
+<span class="n">df_metadata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"./data/raw/fred_series_metadata.xlsx"</span><span class="p">)</span>
 <span class="c1"># print(df_metadata)</span>
 
 <span class="c1"># df_metadata = df_metadata.loc[:, ~df_metadata.columns.str.startswith("Unnamed")]</span>
@@ -7861,24 +8168,24 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_7bb16 table {
+#T_b3ac1 table {
   table-layout: auto;
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
-#T_7bb16 th {
+#T_b3ac1 th {
   font-size: 12px;
   text-align: left;
   padding: 8px;
   white-space: normal;
   box-sizing: border-box;
 }
-#T_7bb16 td {
+#T_b3ac1 td {
   font-size: 12px;
   text-align: left;
   padding: 6px;
@@ -7886,14 +8193,14 @@ a.anchor-link {
   word-break: break-word;
   box-sizing: border-box;
 }
-#T_7bb16_row0_col0, #T_7bb16_row0_col2, #T_7bb16_row0_col3, #T_7bb16_row0_col4, #T_7bb16_row0_col5, #T_7bb16_row0_col6, #T_7bb16_row0_col7, #T_7bb16_row1_col0, #T_7bb16_row1_col2, #T_7bb16_row1_col3, #T_7bb16_row1_col4, #T_7bb16_row1_col5, #T_7bb16_row1_col6, #T_7bb16_row1_col7, #T_7bb16_row2_col0, #T_7bb16_row2_col2, #T_7bb16_row2_col3, #T_7bb16_row2_col4, #T_7bb16_row2_col5, #T_7bb16_row2_col6, #T_7bb16_row2_col7, #T_7bb16_row3_col0, #T_7bb16_row3_col2, #T_7bb16_row3_col3, #T_7bb16_row3_col4, #T_7bb16_row3_col5, #T_7bb16_row3_col6, #T_7bb16_row3_col7, #T_7bb16_row4_col0, #T_7bb16_row4_col2, #T_7bb16_row4_col3, #T_7bb16_row4_col4, #T_7bb16_row4_col5, #T_7bb16_row4_col6, #T_7bb16_row4_col7, #T_7bb16_row5_col0, #T_7bb16_row5_col2, #T_7bb16_row5_col3, #T_7bb16_row5_col4, #T_7bb16_row5_col5, #T_7bb16_row5_col6, #T_7bb16_row5_col7, #T_7bb16_row6_col0, #T_7bb16_row6_col2, #T_7bb16_row6_col3, #T_7bb16_row6_col4, #T_7bb16_row6_col5, #T_7bb16_row6_col6, #T_7bb16_row6_col7, #T_7bb16_row7_col0, #T_7bb16_row7_col2, #T_7bb16_row7_col3, #T_7bb16_row7_col4, #T_7bb16_row7_col5, #T_7bb16_row7_col6, #T_7bb16_row7_col7 {
+#T_b3ac1_row0_col0, #T_b3ac1_row0_col2, #T_b3ac1_row0_col3, #T_b3ac1_row0_col4, #T_b3ac1_row0_col5, #T_b3ac1_row0_col6, #T_b3ac1_row0_col7, #T_b3ac1_row1_col0, #T_b3ac1_row1_col2, #T_b3ac1_row1_col3, #T_b3ac1_row1_col4, #T_b3ac1_row1_col5, #T_b3ac1_row1_col6, #T_b3ac1_row1_col7, #T_b3ac1_row2_col0, #T_b3ac1_row2_col2, #T_b3ac1_row2_col3, #T_b3ac1_row2_col4, #T_b3ac1_row2_col5, #T_b3ac1_row2_col6, #T_b3ac1_row2_col7, #T_b3ac1_row3_col0, #T_b3ac1_row3_col2, #T_b3ac1_row3_col3, #T_b3ac1_row3_col4, #T_b3ac1_row3_col5, #T_b3ac1_row3_col6, #T_b3ac1_row3_col7, #T_b3ac1_row4_col0, #T_b3ac1_row4_col2, #T_b3ac1_row4_col3, #T_b3ac1_row4_col4, #T_b3ac1_row4_col5, #T_b3ac1_row4_col6, #T_b3ac1_row4_col7, #T_b3ac1_row5_col0, #T_b3ac1_row5_col2, #T_b3ac1_row5_col3, #T_b3ac1_row5_col4, #T_b3ac1_row5_col5, #T_b3ac1_row5_col6, #T_b3ac1_row5_col7, #T_b3ac1_row6_col0, #T_b3ac1_row6_col2, #T_b3ac1_row6_col3, #T_b3ac1_row6_col4, #T_b3ac1_row6_col5, #T_b3ac1_row6_col6, #T_b3ac1_row6_col7, #T_b3ac1_row7_col0, #T_b3ac1_row7_col2, #T_b3ac1_row7_col3, #T_b3ac1_row7_col4, #T_b3ac1_row7_col5, #T_b3ac1_row7_col6, #T_b3ac1_row7_col7 {
   max-width: 200px;
   min-width: 80px;
   white-space: normal;
   word-break: break-word;
   line-height: 1.3;
 }
-#T_7bb16_row0_col1, #T_7bb16_row1_col1, #T_7bb16_row2_col1, #T_7bb16_row3_col1, #T_7bb16_row4_col1, #T_7bb16_row5_col1, #T_7bb16_row6_col1, #T_7bb16_row7_col1 {
+#T_b3ac1_row0_col1, #T_b3ac1_row1_col1, #T_b3ac1_row2_col1, #T_b3ac1_row3_col1, #T_b3ac1_row4_col1, #T_b3ac1_row5_col1, #T_b3ac1_row6_col1, #T_b3ac1_row7_col1 {
   max-width: 200px;
   min-width: 80px;
   white-space: normal;
@@ -7901,7 +8208,7 @@ a.anchor-link {
   line-height: 1.3;
   min-width: 50px;
 }
-#T_7bb16_row0_col8, #T_7bb16_row1_col8, #T_7bb16_row2_col8, #T_7bb16_row3_col8, #T_7bb16_row4_col8, #T_7bb16_row5_col8, #T_7bb16_row6_col8, #T_7bb16_row7_col8 {
+#T_b3ac1_row0_col8, #T_b3ac1_row1_col8, #T_b3ac1_row2_col8, #T_b3ac1_row3_col8, #T_b3ac1_row4_col8, #T_b3ac1_row5_col8, #T_b3ac1_row6_col8, #T_b3ac1_row7_col8 {
   max-width: 200px;
   min-width: 80px;
   white-space: normal;
@@ -7910,115 +8217,115 @@ a.anchor-link {
   min-width: 400px;
 }
 </style>
-<table id="T_7bb16">
+<table id="T_b3ac1">
 <thead>
 <tr>
-<th class="col_heading level0 col0" id="T_7bb16_level0_col0">Series Id</th>
-<th class="col_heading level0 col1" id="T_7bb16_level0_col1">Title</th>
-<th class="col_heading level0 col2" id="T_7bb16_level0_col2">Units</th>
-<th class="col_heading level0 col3" id="T_7bb16_level0_col3">Frequency</th>
-<th class="col_heading level0 col4" id="T_7bb16_level0_col4">Seasonal Adjustment</th>
-<th class="col_heading level0 col5" id="T_7bb16_level0_col5">Last Updated</th>
-<th class="col_heading level0 col6" id="T_7bb16_level0_col6">Start Date</th>
-<th class="col_heading level0 col7" id="T_7bb16_level0_col7">End Date</th>
-<th class="col_heading level0 col8" id="T_7bb16_level0_col8">Notes</th>
+<th class="col_heading level0 col0" id="T_b3ac1_level0_col0">Series Id</th>
+<th class="col_heading level0 col1" id="T_b3ac1_level0_col1">Title</th>
+<th class="col_heading level0 col2" id="T_b3ac1_level0_col2">Units</th>
+<th class="col_heading level0 col3" id="T_b3ac1_level0_col3">Frequency</th>
+<th class="col_heading level0 col4" id="T_b3ac1_level0_col4">Seasonal Adjustment</th>
+<th class="col_heading level0 col5" id="T_b3ac1_level0_col5">Last Updated</th>
+<th class="col_heading level0 col6" id="T_b3ac1_level0_col6">Start Date</th>
+<th class="col_heading level0 col7" id="T_b3ac1_level0_col7">End Date</th>
+<th class="col_heading level0 col8" id="T_b3ac1_level0_col8">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="data row0 col0" id="T_7bb16_row0_col0">POPTHM</td>
-<td class="data row0 col1" id="T_7bb16_row0_col1">Population</td>
-<td class="data row0 col2" id="T_7bb16_row0_col2">Thousands</td>
-<td class="data row0 col3" id="T_7bb16_row0_col3">Monthly</td>
-<td class="data row0 col4" id="T_7bb16_row0_col4">Not Seasonally Adjusted</td>
-<td class="data row0 col5" id="T_7bb16_row0_col5">2026-01-22 10:29:41-06</td>
-<td class="data row0 col6" id="T_7bb16_row0_col6">1959-01-01</td>
-<td class="data row0 col7" id="T_7bb16_row0_col7">2025-11-01</td>
-<td class="data row0 col8" id="T_7bb16_row0_col8">Population includes resident population plus armed forces overseas. The monthly estimate is the average of estimates for the first of the month and the first of the following month.
+<td class="data row0 col0" id="T_b3ac1_row0_col0">POPTHM</td>
+<td class="data row0 col1" id="T_b3ac1_row0_col1">Population</td>
+<td class="data row0 col2" id="T_b3ac1_row0_col2">Thousands</td>
+<td class="data row0 col3" id="T_b3ac1_row0_col3">Monthly</td>
+<td class="data row0 col4" id="T_b3ac1_row0_col4">Not Seasonally Adjusted</td>
+<td class="data row0 col5" id="T_b3ac1_row0_col5">2026-01-22 10:29:41-06</td>
+<td class="data row0 col6" id="T_b3ac1_row0_col6">1959-01-01</td>
+<td class="data row0 col7" id="T_b3ac1_row0_col7">2025-11-01</td>
+<td class="data row0 col8" id="T_b3ac1_row0_col8">Population includes resident population plus armed forces overseas. The monthly estimate is the average of estimates for the first of the month and the first of the following month.
 BEA Account Code:... <a href="https://fred.stlouisfed.org/series/POPTHM">More</a></td>
 </tr>
 <tr>
-<td class="data row1 col0" id="T_7bb16_row1_col0">TNKNOX5POP</td>
-<td class="data row1 col1" id="T_7bb16_row1_col1">Resident Population in Knox County, TN</td>
-<td class="data row1 col2" id="T_7bb16_row1_col2">Thousands of Persons</td>
-<td class="data row1 col3" id="T_7bb16_row1_col3">Annual</td>
-<td class="data row1 col4" id="T_7bb16_row1_col4">Not Seasonally Adjusted</td>
-<td class="data row1 col5" id="T_7bb16_row1_col5">2025-03-14 11:43:58-05</td>
-<td class="data row1 col6" id="T_7bb16_row1_col6">1970-01-01</td>
-<td class="data row1 col7" id="T_7bb16_row1_col7">2024-01-01</td>
-<td class="data row1 col8" id="T_7bb16_row1_col8">Data for "Resident Population" are estimates as of July 1. Data for 1970, 1980, 1990, and 2000 are annual census.
+<td class="data row1 col0" id="T_b3ac1_row1_col0">TNKNOX5POP</td>
+<td class="data row1 col1" id="T_b3ac1_row1_col1">Resident Population in Knox County, TN</td>
+<td class="data row1 col2" id="T_b3ac1_row1_col2">Thousands of Persons</td>
+<td class="data row1 col3" id="T_b3ac1_row1_col3">Annual</td>
+<td class="data row1 col4" id="T_b3ac1_row1_col4">Not Seasonally Adjusted</td>
+<td class="data row1 col5" id="T_b3ac1_row1_col5">2025-03-14 11:43:58-05</td>
+<td class="data row1 col6" id="T_b3ac1_row1_col6">1970-01-01</td>
+<td class="data row1 col7" id="T_b3ac1_row1_col7">2024-01-01</td>
+<td class="data row1 col8" id="T_b3ac1_row1_col8">Data for "Resident Population" are estimates as of July 1. Data for 1970, 1980, 1990, and 2000 are annual census.
 
 Population estimates are updated annually using current data on births, deaths, and m... <a href="https://fred.stlouisfed.org/series/TNKNOX5POP">More</a></td>
 </tr>
 <tr>
-<td class="data row2 col0" id="T_7bb16_row2_col0">ATNHPIUS47093A</td>
-<td class="data row2 col1" id="T_7bb16_row2_col1">All-Transactions House Price Index for Knox County, TN</td>
-<td class="data row2 col2" id="T_7bb16_row2_col2">Index 2000=100</td>
-<td class="data row2 col3" id="T_7bb16_row2_col3">Annual</td>
-<td class="data row2 col4" id="T_7bb16_row2_col4">Not Seasonally Adjusted</td>
-<td class="data row2 col5" id="T_7bb16_row2_col5">2025-03-25 09:28:53-05</td>
-<td class="data row2 col6" id="T_7bb16_row2_col6">1975-01-01</td>
-<td class="data row2 col7" id="T_7bb16_row2_col7">2024-01-01</td>
-<td class="data row2 col8" id="T_7bb16_row2_col8">As stated by the source, these annual county indexes should be considered developmental. As with the standard FHFA HPIs, revisions to these indexes may reflect the impact of new data or technical adju... <a href="https://fred.stlouisfed.org/series/ATNHPIUS47093A">More</a></td>
+<td class="data row2 col0" id="T_b3ac1_row2_col0">ATNHPIUS47093A</td>
+<td class="data row2 col1" id="T_b3ac1_row2_col1">All-Transactions House Price Index for Knox County, TN</td>
+<td class="data row2 col2" id="T_b3ac1_row2_col2">Index 2000=100</td>
+<td class="data row2 col3" id="T_b3ac1_row2_col3">Annual</td>
+<td class="data row2 col4" id="T_b3ac1_row2_col4">Not Seasonally Adjusted</td>
+<td class="data row2 col5" id="T_b3ac1_row2_col5">2025-03-25 09:28:53-05</td>
+<td class="data row2 col6" id="T_b3ac1_row2_col6">1975-01-01</td>
+<td class="data row2 col7" id="T_b3ac1_row2_col7">2024-01-01</td>
+<td class="data row2 col8" id="T_b3ac1_row2_col8">As stated by the source, these annual county indexes should be considered developmental. As with the standard FHFA HPIs, revisions to these indexes may reflect the impact of new data or technical adju... <a href="https://fred.stlouisfed.org/series/ATNHPIUS47093A">More</a></td>
 </tr>
 <tr>
-<td class="data row3 col0" id="T_7bb16_row3_col0">USSTHPI</td>
-<td class="data row3 col1" id="T_7bb16_row3_col1">All-Transactions House Price Index for the United States</td>
-<td class="data row3 col2" id="T_7bb16_row3_col2">Index 1980:Q1=100</td>
-<td class="data row3 col3" id="T_7bb16_row3_col3">Quarterly</td>
-<td class="data row3 col4" id="T_7bb16_row3_col4">Not Seasonally Adjusted</td>
-<td class="data row3 col5" id="T_7bb16_row3_col5">2025-11-25 09:05:09-06</td>
-<td class="data row3 col6" id="T_7bb16_row3_col6">1975-01-01</td>
-<td class="data row3 col7" id="T_7bb16_row3_col7">2025-07-01</td>
-<td class="data row3 col8" id="T_7bb16_row3_col8">Estimated using sales prices and appraisal data.</td>
+<td class="data row3 col0" id="T_b3ac1_row3_col0">USSTHPI</td>
+<td class="data row3 col1" id="T_b3ac1_row3_col1">All-Transactions House Price Index for the United States</td>
+<td class="data row3 col2" id="T_b3ac1_row3_col2">Index 1980:Q1=100</td>
+<td class="data row3 col3" id="T_b3ac1_row3_col3">Quarterly</td>
+<td class="data row3 col4" id="T_b3ac1_row3_col4">Not Seasonally Adjusted</td>
+<td class="data row3 col5" id="T_b3ac1_row3_col5">2025-11-25 09:05:09-06</td>
+<td class="data row3 col6" id="T_b3ac1_row3_col6">1975-01-01</td>
+<td class="data row3 col7" id="T_b3ac1_row3_col7">2025-07-01</td>
+<td class="data row3 col8" id="T_b3ac1_row3_col8">Estimated using sales prices and appraisal data.</td>
 </tr>
 <tr>
-<td class="data row4 col0" id="T_7bb16_row4_col0">REALGDPALL47093</td>
-<td class="data row4 col1" id="T_7bb16_row4_col1">Real Gross Domestic Product: All Industries in Knox County, TN</td>
-<td class="data row4 col2" id="T_7bb16_row4_col2">Thousands of Chained 2017 U.S. Dollars</td>
-<td class="data row4 col3" id="T_7bb16_row4_col3">Annual</td>
-<td class="data row4 col4" id="T_7bb16_row4_col4">Not Seasonally Adjusted</td>
-<td class="data row4 col5" id="T_7bb16_row4_col5">2026-02-05 08:59:59-06</td>
-<td class="data row4 col6" id="T_7bb16_row4_col6">2001-01-01</td>
-<td class="data row4 col7" id="T_7bb16_row4_col7">2024-01-01</td>
-<td class="data row4 col8" id="T_7bb16_row4_col8">GDP by county is a measure of the market value of final goods and services produced within a county area in a particular period. While other measures of county economies rely mainly on labor market da... <a href="https://fred.stlouisfed.org/series/REALGDPALL47093">More</a></td>
+<td class="data row4 col0" id="T_b3ac1_row4_col0">REALGDPALL47093</td>
+<td class="data row4 col1" id="T_b3ac1_row4_col1">Real Gross Domestic Product: All Industries in Knox County, TN</td>
+<td class="data row4 col2" id="T_b3ac1_row4_col2">Thousands of Chained 2017 U.S. Dollars</td>
+<td class="data row4 col3" id="T_b3ac1_row4_col3">Annual</td>
+<td class="data row4 col4" id="T_b3ac1_row4_col4">Not Seasonally Adjusted</td>
+<td class="data row4 col5" id="T_b3ac1_row4_col5">2026-02-05 08:59:59-06</td>
+<td class="data row4 col6" id="T_b3ac1_row4_col6">2001-01-01</td>
+<td class="data row4 col7" id="T_b3ac1_row4_col7">2024-01-01</td>
+<td class="data row4 col8" id="T_b3ac1_row4_col8">GDP by county is a measure of the market value of final goods and services produced within a county area in a particular period. While other measures of county economies rely mainly on labor market da... <a href="https://fred.stlouisfed.org/series/REALGDPALL47093">More</a></td>
 </tr>
 <tr>
-<td class="data row5 col0" id="T_7bb16_row5_col0">GDPC1</td>
-<td class="data row5 col1" id="T_7bb16_row5_col1">Real Gross Domestic Product</td>
-<td class="data row5 col2" id="T_7bb16_row5_col2">Billions of Chained 2017 Dollars</td>
-<td class="data row5 col3" id="T_7bb16_row5_col3">Quarterly</td>
-<td class="data row5 col4" id="T_7bb16_row5_col4">Seasonally Adjusted Annual Rate</td>
-<td class="data row5 col5" id="T_7bb16_row5_col5">2026-01-22 07:46:36-06</td>
-<td class="data row5 col6" id="T_7bb16_row5_col6">1947-01-01</td>
-<td class="data row5 col7" id="T_7bb16_row5_col7">2025-07-01</td>
-<td class="data row5 col8" id="T_7bb16_row5_col8">BEA Account Code: A191RX
+<td class="data row5 col0" id="T_b3ac1_row5_col0">GDPC1</td>
+<td class="data row5 col1" id="T_b3ac1_row5_col1">Real Gross Domestic Product</td>
+<td class="data row5 col2" id="T_b3ac1_row5_col2">Billions of Chained 2017 Dollars</td>
+<td class="data row5 col3" id="T_b3ac1_row5_col3">Quarterly</td>
+<td class="data row5 col4" id="T_b3ac1_row5_col4">Seasonally Adjusted Annual Rate</td>
+<td class="data row5 col5" id="T_b3ac1_row5_col5">2026-01-22 07:46:36-06</td>
+<td class="data row5 col6" id="T_b3ac1_row5_col6">1947-01-01</td>
+<td class="data row5 col7" id="T_b3ac1_row5_col7">2025-07-01</td>
+<td class="data row5 col8" id="T_b3ac1_row5_col8">BEA Account Code: A191RX
 
 Real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States.For more information see the... <a href="https://fred.stlouisfed.org/series/GDPC1">More</a></td>
 </tr>
 <tr>
-<td class="data row6 col0" id="T_7bb16_row6_col0">MEDLISPRI47093</td>
-<td class="data row6 col1" id="T_7bb16_row6_col1">Housing Inventory: Median Listing Price in Knox County, TN</td>
-<td class="data row6 col2" id="T_7bb16_row6_col2">U.S. Dollars</td>
-<td class="data row6 col3" id="T_7bb16_row6_col3">Monthly</td>
-<td class="data row6 col4" id="T_7bb16_row6_col4">Not Seasonally Adjusted</td>
-<td class="data row6 col5" id="T_7bb16_row6_col5">2026-02-06 17:24:43-06</td>
-<td class="data row6 col6" id="T_7bb16_row6_col6">2016-07-01</td>
-<td class="data row6 col7" id="T_7bb16_row6_col7">2026-01-01</td>
-<td class="data row6 col8" id="T_7bb16_row6_col8">The median listing price in a given market during the specified month.
+<td class="data row6 col0" id="T_b3ac1_row6_col0">MEDLISPRI47093</td>
+<td class="data row6 col1" id="T_b3ac1_row6_col1">Housing Inventory: Median Listing Price in Knox County, TN</td>
+<td class="data row6 col2" id="T_b3ac1_row6_col2">U.S. Dollars</td>
+<td class="data row6 col3" id="T_b3ac1_row6_col3">Monthly</td>
+<td class="data row6 col4" id="T_b3ac1_row6_col4">Not Seasonally Adjusted</td>
+<td class="data row6 col5" id="T_b3ac1_row6_col5">2026-02-06 17:24:43-06</td>
+<td class="data row6 col6" id="T_b3ac1_row6_col6">2016-07-01</td>
+<td class="data row6 col7" id="T_b3ac1_row6_col7">2026-01-01</td>
+<td class="data row6 col8" id="T_b3ac1_row6_col8">The median listing price in a given market during the specified month.
 
 With the release of its September 2022 housing trends report, Realtor.com® incorporated a new and improved methodology for captu... <a href="https://fred.stlouisfed.org/series/MEDLISPRI47093">More</a></td>
 </tr>
 <tr>
-<td class="data row7 col0" id="T_7bb16_row7_col0">MEDLISPRIUS</td>
-<td class="data row7 col1" id="T_7bb16_row7_col1">Housing Inventory: Median Listing Price in the United States</td>
-<td class="data row7 col2" id="T_7bb16_row7_col2">U.S. Dollars</td>
-<td class="data row7 col3" id="T_7bb16_row7_col3">Monthly</td>
-<td class="data row7 col4" id="T_7bb16_row7_col4">Not Seasonally Adjusted</td>
-<td class="data row7 col5" id="T_7bb16_row7_col5">2026-02-06 17:11:49-06</td>
-<td class="data row7 col6" id="T_7bb16_row7_col6">2016-07-01</td>
-<td class="data row7 col7" id="T_7bb16_row7_col7">2026-01-01</td>
-<td class="data row7 col8" id="T_7bb16_row7_col8">The median listing price in a given market during the specified month.
+<td class="data row7 col0" id="T_b3ac1_row7_col0">MEDLISPRIUS</td>
+<td class="data row7 col1" id="T_b3ac1_row7_col1">Housing Inventory: Median Listing Price in the United States</td>
+<td class="data row7 col2" id="T_b3ac1_row7_col2">U.S. Dollars</td>
+<td class="data row7 col3" id="T_b3ac1_row7_col3">Monthly</td>
+<td class="data row7 col4" id="T_b3ac1_row7_col4">Not Seasonally Adjusted</td>
+<td class="data row7 col5" id="T_b3ac1_row7_col5">2026-02-06 17:11:49-06</td>
+<td class="data row7 col6" id="T_b3ac1_row7_col6">2016-07-01</td>
+<td class="data row7 col7" id="T_b3ac1_row7_col7">2026-01-01</td>
+<td class="data row7 col8" id="T_b3ac1_row7_col8">The median listing price in a given market during the specified month.
 
 With the release of its September 2022 housing trends report, Realtor.com® incorporated a new and improved methodology for captu... <a href="https://fred.stlouisfed.org/series/MEDLISPRIUS">More</a></td>
 </tr>
@@ -8033,7 +8340,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># df.reset_index(names="Date", inplace=True)</span>
@@ -8084,7 +8391,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="sd">"""Data Cleaning"""</span>
@@ -8177,21 +8484,6 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
     <span class="s2">"Dates changed to end-of-month."</span><span class="p">,</span>
     <span class="sa">f</span><span class="s2">"data/cleaned/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span>
 <span class="p">)</span>
-
-
-<span class="c1"># long = df.melt(ignore_index=False)</span>
-
-<span class="c1"># long["pct_chg"] = long.groupby("variable")["value"].pct_change(</span>
-<span class="c1">#     periods=1, fill_method=None</span>
-<span class="c1"># )</span>
-
-<span class="c1"># data = df.melt(id_vars="Date")</span>
-<span class="c1">#     long = long.sort_values(["variable", long.index.name])</span>
-
-<span class="c1">#     # Convert to wide format for plotting</span>
-<span class="c1">#     wide = long.pivot_table(</span>
-<span class="c1">#         index=long.index, columns="variable", values="pct_chg"</span>
-<span class="c1">#     ).dropna(how="all")</span>
 </pre></div>
 </div>
 </div>
@@ -8230,7 +8522,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Rental Vacancy Rates</span>
@@ -8281,24 +8573,24 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_00255 table {
+#T_945e9 table {
   table-layout: auto;
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
-#T_00255 th {
+#T_945e9 th {
   font-size: 12px;
   text-align: left;
   padding: 8px;
   white-space: normal;
   box-sizing: border-box;
 }
-#T_00255 td {
+#T_945e9 td {
   font-size: 12px;
   text-align: left;
   padding: 6px;
@@ -8306,7 +8598,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
   word-break: break-word;
   box-sizing: border-box;
 }
-#T_00255_row0_col0, #T_00255_row0_col1, #T_00255_row0_col2, #T_00255_row1_col0, #T_00255_row1_col1, #T_00255_row1_col2, #T_00255_row2_col0, #T_00255_row2_col1, #T_00255_row2_col2, #T_00255_row3_col0, #T_00255_row3_col1, #T_00255_row3_col2, #T_00255_row4_col0, #T_00255_row4_col1, #T_00255_row4_col2 {
+#T_945e9_row0_col0, #T_945e9_row0_col1, #T_945e9_row0_col2, #T_945e9_row1_col0, #T_945e9_row1_col1, #T_945e9_row1_col2, #T_945e9_row2_col0, #T_945e9_row2_col1, #T_945e9_row2_col2, #T_945e9_row3_col0, #T_945e9_row3_col1, #T_945e9_row3_col2, #T_945e9_row4_col0, #T_945e9_row4_col1, #T_945e9_row4_col2 {
   max-width: 120px;
   min-width: 80px;
   white-space: normal;
@@ -8314,39 +8606,39 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
   line-height: 1.3;
 }
 </style>
-<table id="T_00255">
+<table id="T_945e9">
 <thead>
 <tr>
-<th class="col_heading level0 col0" id="T_00255_level0_col0"></th>
-<th class="col_heading level0 col1" id="T_00255_level0_col1">Year</th>
-<th class="col_heading level0 col2" id="T_00255_level0_col2">Growth</th>
+<th class="col_heading level0 col0" id="T_945e9_level0_col0"></th>
+<th class="col_heading level0 col1" id="T_945e9_level0_col1">Year</th>
+<th class="col_heading level0 col2" id="T_945e9_level0_col2">Growth</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="data row0 col0" id="T_00255_row0_col0">Tennessee</td>
-<td class="data row0 col1" id="T_00255_row0_col1">2020</td>
-<td class="data row0 col2" id="T_00255_row0_col2">8.3%</td>
+<td class="data row0 col0" id="T_945e9_row0_col0">Tennessee</td>
+<td class="data row0 col1" id="T_945e9_row0_col1">2020</td>
+<td class="data row0 col2" id="T_945e9_row0_col2">8.3%</td>
 </tr>
 <tr>
-<td class="data row1 col0" id="T_00255_row1_col0">Tennessee</td>
-<td class="data row1 col1" id="T_00255_row1_col1">2021</td>
-<td class="data row1 col2" id="T_00255_row1_col2">7.4%</td>
+<td class="data row1 col0" id="T_945e9_row1_col0">Tennessee</td>
+<td class="data row1 col1" id="T_945e9_row1_col1">2021</td>
+<td class="data row1 col2" id="T_945e9_row1_col2">7.4%</td>
 </tr>
 <tr>
-<td class="data row2 col0" id="T_00255_row2_col0">Tennessee</td>
-<td class="data row2 col1" id="T_00255_row2_col1">2022</td>
-<td class="data row2 col2" id="T_00255_row2_col2">7.3%</td>
+<td class="data row2 col0" id="T_945e9_row2_col0">Tennessee</td>
+<td class="data row2 col1" id="T_945e9_row2_col1">2022</td>
+<td class="data row2 col2" id="T_945e9_row2_col2">7.3%</td>
 </tr>
 <tr>
-<td class="data row3 col0" id="T_00255_row3_col0">Tennessee</td>
-<td class="data row3 col1" id="T_00255_row3_col1">2023</td>
-<td class="data row3 col2" id="T_00255_row3_col2">7.8%</td>
+<td class="data row3 col0" id="T_945e9_row3_col0">Tennessee</td>
+<td class="data row3 col1" id="T_945e9_row3_col1">2023</td>
+<td class="data row3 col2" id="T_945e9_row3_col2">7.8%</td>
 </tr>
 <tr>
-<td class="data row4 col0" id="T_00255_row4_col0">Tennessee</td>
-<td class="data row4 col1" id="T_00255_row4_col1">2024</td>
-<td class="data row4 col2" id="T_00255_row4_col2">8.2%</td>
+<td class="data row4 col0" id="T_945e9_row4_col0">Tennessee</td>
+<td class="data row4 col1" id="T_945e9_row4_col1">2024</td>
+<td class="data row4 col2" id="T_945e9_row4_col2">8.2%</td>
 </tr>
 </tbody>
 </table>
@@ -8359,7 +8651,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tables</span><span class="o">.</span><span class="n">pretty_table</span><span class="p">(</span>
@@ -8378,24 +8670,24 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_7d2bd table {
+#T_9a4f5 table {
   table-layout: auto;
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
-#T_7d2bd th {
+#T_9a4f5 th {
   font-size: 12px;
   text-align: left;
   padding: 8px;
   white-space: normal;
   box-sizing: border-box;
 }
-#T_7d2bd td {
+#T_9a4f5 td {
   font-size: 12px;
   text-align: left;
   padding: 6px;
@@ -8403,7 +8695,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
   word-break: break-word;
   box-sizing: border-box;
 }
-#T_7d2bd_row0_col0, #T_7d2bd_row0_col1, #T_7d2bd_row0_col2, #T_7d2bd_row1_col0, #T_7d2bd_row1_col1, #T_7d2bd_row1_col2 {
+#T_9a4f5_row0_col0, #T_9a4f5_row0_col1, #T_9a4f5_row0_col2, #T_9a4f5_row1_col0, #T_9a4f5_row1_col1, #T_9a4f5_row1_col2 {
   max-width: 120px;
   min-width: 80px;
   white-space: normal;
@@ -8411,24 +8703,24 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
   line-height: 1.3;
 }
 </style>
-<table id="T_7d2bd">
+<table id="T_9a4f5">
 <thead>
 <tr>
-<th class="col_heading level0 col0" id="T_7d2bd_level0_col0"></th>
-<th class="col_heading level0 col1" id="T_7d2bd_level0_col1">Year</th>
-<th class="col_heading level0 col2" id="T_7d2bd_level0_col2">Growth</th>
+<th class="col_heading level0 col0" id="T_9a4f5_level0_col0"></th>
+<th class="col_heading level0 col1" id="T_9a4f5_level0_col1">Year</th>
+<th class="col_heading level0 col2" id="T_9a4f5_level0_col2">Growth</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="data row0 col0" id="T_7d2bd_row0_col0">Knoxville, TN</td>
-<td class="data row0 col1" id="T_7d2bd_row0_col1">2023</td>
-<td class="data row0 col2" id="T_7d2bd_row0_col2">4.2%</td>
+<td class="data row0 col0" id="T_9a4f5_row0_col0">Knoxville, TN</td>
+<td class="data row0 col1" id="T_9a4f5_row0_col1">2023</td>
+<td class="data row0 col2" id="T_9a4f5_row0_col2">4.2%</td>
 </tr>
 <tr>
-<td class="data row1 col0" id="T_7d2bd_row1_col0">Knoxville, TN</td>
-<td class="data row1 col1" id="T_7d2bd_row1_col1">2024</td>
-<td class="data row1 col2" id="T_7d2bd_row1_col2">4.0%</td>
+<td class="data row1 col0" id="T_9a4f5_row1_col0">Knoxville, TN</td>
+<td class="data row1 col1" id="T_9a4f5_row1_col1">2024</td>
+<td class="data row1 col2" id="T_9a4f5_row1_col2">4.0%</td>
 </tr>
 </tbody>
 </table>
@@ -8441,7 +8733,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># GDP Plot</span>
@@ -8526,7 +8818,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Population Plot</span>
@@ -8589,7 +8881,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># from IPython.display import Image, display</span>
@@ -8616,7 +8908,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -8655,7 +8947,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
@@ -8744,7 +9036,8 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Unemployment in Knoxville Metro edged lower while the national unemployment rate increased, indicating an improving employment environment in Knoxville compared to the average state nationally. Employment growth was driven mostly by gains in education, health care and government jobs.</p>
-<h3 id="Wages">Wages<a class="anchor-link" href="#Wages">¶</a></h3><p>The average hourly wage was 15% lower in Knoxville compared to the national average. Average househould expenditures were 12% lower in Knoxville compared to the national average. This suggests households earn lower discretionary income than the average household nationwide. With wage and salary growth in the East South Central Region growing faster than the national average, household discretionary spending of Knoxville residents likely grew relative to the average household in the U.S.</p>
+<h3 id="Wages">Wages<a class="anchor-link" href="#Wages">¶</a></h3><p>Knoxville households earn and spend less than the national average in absolute terms — hourly wages run 15% below the U.S. average and annual household expenditures run 12% below. Because expenditures haven't fallen as much as wages, Knoxville households are devoting a larger share of income to spending than the average U.S. household, implying less discretionary income today, not more.</p>
+<p>The offsetting signal is trajectory, not level: wage and salary growth in the East South Central region (+4.3% TTM) is outpacing the U.S. average (+3.6% TTM). If that spread persists, the income gap narrows over the hold period, which supports gradual rent growth — but it does not support assuming above-market rent increases near-term. The base case should treat Knoxville as a market where rent growth tracks slightly behind national averages in years 1–2 and converges toward it by years 3–5, rather than assuming outperformance from day one.</p>
 </div>
 </div>
 </div>
@@ -8753,7 +9046,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
@@ -8893,7 +9186,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Median List Price Plot</span>
@@ -9042,7 +9335,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">med_price_us</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -9165,7 +9458,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># from IPython.display import Image, display</span>
@@ -9183,7 +9476,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
@@ -9292,7 +9585,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># # Multiple Regression</span>
@@ -9318,7 +9611,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># plot_data = df.loc["2020":, ["knox_pop", "us_pop"]].copy()</span>
@@ -9390,7 +9683,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># import pandas as pd</span>
@@ -9413,7 +9706,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Convert date column to datetime</span>
@@ -9429,7 +9722,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># # Drop unnecessary columns</span>
@@ -9456,7 +9749,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Find missing values</span>
@@ -9471,7 +9764,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># cremi = df[df["Variable"] == "CREMI"].copy()</span>
@@ -9487,7 +9780,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Show unique asset types</span>
@@ -9502,7 +9795,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Show unique geographic regions</span>
@@ -9517,7 +9810,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># cremi["Start_Date"] = cremi.groupby(["Geography_Name", "Asset_Type"])["Date"].transform(</span>
@@ -9540,7 +9833,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># import pandas as pd</span>
@@ -9673,7 +9966,7 @@ With the release of its September 2022 housing trends report, Realtor.com® inco
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># out = con.execute(</span>
